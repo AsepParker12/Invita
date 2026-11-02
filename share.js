@@ -64,7 +64,7 @@
       '<title>' + I.esc(title) + '</title><meta name="description" content="' + I.esc('Anda diundang: ' + title) + '">' +
       '<meta property="og:title" content="' + I.esc(title) + '"><meta property="og:type" content="website">' +
       '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
-      '<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Serif+Display&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">' +
+      '<link href="https://fonts.googleapis.com/css2?family=Allura&family=Amiri:wght@400;700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Serif+Display&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Jost:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600&family=Parisienne&family=Pinyon+Script&family=Playfair+Display:wght@400;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">' +
       '<style>html,body{margin:0;height:100%;background:#1a1a1a}#root{height:100vh;height:100dvh;max-width:480px;margin:0 auto;background:#fff}</style>' +
       '<style>' + css + '</style></head><body><div id="root"></div>' +
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"><\/script>' +

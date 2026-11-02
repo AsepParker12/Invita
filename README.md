@@ -10,10 +10,7 @@ Pembuat undangan digital gratis. HTML, CSS, dan JavaScript murni, tanpa framewor
 
 Untuk mencoba di komputer sendiri jalankan `python3 -m http.server 8000` di folder ini lalu buka `http://localhost:8000`. Jangan buka `index.html` langsung dari file, karena ekspor HTML butuh `fetch`.
 
-## Struktur (versi rata, semua file satu level)
-Semua file ada di satu folder tanpa subfolder, supaya mudah diunggah dari HP lewat web GitHub.
-
-## Struktur lama
+## Struktur
 ```
 index.html          aplikasi (beranda, template, dashboard, editor)
 view.html           penampil undangan publik (membaca data dari tautan)

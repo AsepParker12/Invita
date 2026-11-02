@@ -150,7 +150,7 @@
       I.TEMPLATES.filter(t => cat === 'all' || t.cat === cat).forEach(t => {
         const card = document.createElement('article');
         card.className = 'tpl';
-        card.innerHTML = '<div class="thumb"></div><div class="meta"><b>' + esc(t.name) + '</b><span>' + esc(t.catLabel) + '</span></div>' +
+        card.innerHTML = '<div class="thumb"></div><div class="meta"><b>' + esc(t.name) + '</b><span>' + esc(t.catLabel) + ' &middot; ' + I.FLOW_LABEL[t.flow] + ' &middot; ' + I.ANIM_LABEL[t.anim] + '</span></div>' +
           '<div class="acts"><button class="btn btn-sm" data-pv>Preview</button><button class="btn btn-sm btn-primary" data-use>Gunakan</button></div>';
         grid.appendChild(card);
         cleanups.push(miniThumb($('.thumb', card), { id: 'tpl-' + t.id, data: demoData(t) }));
@@ -335,6 +335,7 @@
       return '<label class="fld"><span>' + label + '</span>' + inp + (o.hint ? '<em>' + o.hint + '</em>' : '') + '<small class="err" data-err="' + path + '"></small></label>';
     };
     const SW = (label, path) => '<label class="sw"><input type="checkbox" data-k="' + path + '"' + (getP(p, path) ? ' checked' : '') + '>' + label + '</label>';
+    const SEL = (label, path, opts) => '<label class="fld"><span>' + label + '</span><select data-k="' + path + '">' + opts.map(o => '<option value="' + o[0] + '"' + (getP(p, path) === o[0] ? ' selected' : '') + '>' + o[1] + '</option>').join('') + '</select></label>';
     const COL = (label, path) => '<label class="fld"><span>' + label + '</span><input type="color" data-k="' + path + '" value="' + esc(getP(p, path)) + '"></label>';
     const tplOpts = I.CATEGORIES.map(c => '<optgroup label="' + esc(c.label) + '">' + I.TEMPLATES.filter(t => t.cat === c.id).map(t => '<option value="' + t.id + '"' + (t.id === p.templateId ? ' selected' : '') + '>' + esc(t.name) + '</option>').join('') + '</optgroup>').join('');
     const fontOpts = Object.keys(I.FONTS).map(k => '<option value="' + k + '"' + (k === d.font ? ' selected' : '') + '>' + esc(I.FONTS[k].label) + '</option>').join('');
@@ -348,7 +349,9 @@
       F('Nama pengundang / penyelenggara', 'data.host', { ph: 'Contoh: Rina & Dimas' }) +
       F('Nama tamu undangan', 'guest', { ph: 'Contoh: Bapak Ahmad', hint: 'Tampil di sampul pembuka pada pratinjau dan jadi nama awal saat membuat tautan.' }) +
       F('Kalimat pembuka', 'data.opening', { type: 'textarea', rows: 3 }) +
-      F('Deskripsi / isi undangan', 'data.description', { type: 'textarea', rows: 4 }) + '</div></details>' +
+      F('Deskripsi / isi undangan', 'data.description', { type: 'textarea', rows: 4 }) +
+      F('Kalimat penutup', 'data.closing', { type: 'textarea', rows: 3 }) +
+      '<div><button type="button" class="btn btn-sm" data-act="next-text">Ganti dengan contoh kalimat lain</button></div></div></details>' +
       '<details class="grp" open><summary>Waktu acara</summary><div class="grp-body"><div class="row2">' + F('Tanggal', 'data.date', { type: 'date' }) +
       '<label class="fld"><span>Zona waktu</span><select data-k="data.tz">' + ['WIB', 'WITA', 'WIT'].map(z => '<option' + (z === d.tz ? ' selected' : '') + '>' + z + '</option>').join('') + '</select></label></div>' +
       '<div class="row2">' + F('Jam mulai', 'data.start', { type: 'time' }) + F('Jam selesai (opsional)', 'data.end', { type: 'time' }) + '</div></div></details>' +
@@ -362,7 +365,12 @@
       '<label class="fld"><span>Template</span><select id="tplSel">' + tplOpts + '</select></label>' +
       '<div class="row3">' + COL('Warna utama', 'data.theme.primary') + COL('Aksen', 'data.theme.accent') + COL('Latar', 'data.theme.bg') + COL('Teks', 'data.theme.text') + COL('Latar lembut', 'data.theme.soft') + '</div>' +
       '<div><button type="button" class="btn btn-sm" data-act="reset-colors">Kembalikan warna template</button></div>' +
-      '<label class="fld"><span>Jenis font</span><select data-k="data.font">' + fontOpts + '</select></label></div></details>' +
+      '<label class="fld"><span>Jenis font</span><select data-k="data.font">' + fontOpts + '</select></label>' +
+      '<div class="row2">' + SEL('Cara membuka undangan', 'data.flow', [['scroll', 'Gulir ke bawah'], ['tap', 'Ketuk untuk pindah halaman']]) +
+      SEL('Animasi', 'data.anim', [['rise', 'Naik'], ['slide', 'Geser'], ['zoom', 'Zoom'], ['fade', 'Pudar']]) + '</div>' +
+      '<div class="row2">' + SEL('Pola latar', 'data.pat', [['none', 'Tanpa pola'], ['star', 'Bintang islami'], ['confetti', 'Konfeti'], ['dots', 'Titik'], ['lines', 'Garis'], ['sparkle', 'Kilau'], ['leaf', 'Daun']]) +
+      SEL('Posisi foto utama', 'data.coverPos', [['center', 'Tengah'], ['top', 'Atas (agar wajah tidak terpotong)'], ['bottom', 'Bawah']]) + '</div>' +
+      SW('Hiasan daun di sampul', 'data.flora') + SW('Tampilkan basmalah (tulisan Arab)', 'data.bism') + '</div></details>' +
       '<details class="grp"><summary>Fitur undangan</summary><div class="grp-body">' +
       SW('Hitung mundur', 'data.features.countdown') + SW('RSVP lewat WhatsApp', 'data.features.rsvp') + SW('Buku tamu (ucapan)', 'data.features.guestbook') +
       SW('QR Code', 'data.features.qr') + SW('Tombol bagikan &amp; salin tautan', 'data.features.share') + SW('Simpan ke kalender', 'data.features.calendar') +
@@ -391,8 +399,9 @@
     }
     function drawPreview(cover) {
       const scr = $('#pvScreen'); const old = $('.inv', scr); const top = old ? old.scrollTop : 0;
+      const page = pv && pv.page ? pv.page() : 0;
       if (pv) pv.destroy();
-      pv = renderInvitation(scr, { id: p.id, data: p.data }, { mode: 'preview', cover: !!cover, guest: p.guest || 'Nama Tamu', notify: toast, getShareUrl: () => I.share.buildLink(p, '').then(x => x.url) });
+      pv = renderInvitation(scr, { id: p.id, data: p.data }, { mode: 'preview', cover: !!cover, page: cover ? 0 : page, guest: p.guest || 'Nama Tamu', notify: toast, getShareUrl: () => I.share.buildLink(p, '').then(x => x.url) });
       if (!cover) { const n = $('.inv', scr); n.style.scrollBehavior = 'auto'; n.scrollTop = top; requestAnimationFrame(() => { n.style.scrollBehavior = ''; }); }
     }
     async function doSave() {
@@ -424,6 +433,7 @@
       if (a === 'cover-clear') { p.data.cover = ''; refreshMedia(); }
       else if (a === 'gal-del') { p.data.gallery.splice(+b.dataset.i, 1); refreshMedia(); }
       else if (a === 'music-clear') { p.data.music = { src: '', name: '' }; refreshMedia(); }
+      else if (a === 'next-text') nextText();
       else if (a === 'test-map') {
         const mu = I.mapUrls(p.data);
         if (mu.view) window.open(mu.view, '_blank', 'noopener'); else toast('Isi nama tempat, alamat, atau link Google Maps dulu', 'error');
@@ -434,6 +444,16 @@
         touch();
       }
     });
+    async function nextText() {
+      const t = I.templateById(p.templateId), vs = I.textVariants(t ? t.cat : 'lainnya');
+      const keys = ['title', 'opening', 'description', 'closing'];
+      const cur = vs.findIndex(v => keys.every(k => v[k] === p.data[k]));
+      const edited = cur < 0 && keys.some(k => String(p.data[k]).trim());
+      if (edited && !(await confirmDialog({ title: 'Ganti kalimat?', text: 'Judul, kalimat pembuka, isi, dan penutup akan diganti dengan contoh lain. Perubahan manual Anda pada keempat kolom itu akan hilang.', ok: 'Ganti' }))) return;
+      const v = vs[(cur + 1) % vs.length];
+      keys.forEach(k => { p.data[k] = v[k]; const inp = $('[data-k="data.' + k + '"]', form); if (inp) inp.value = v[k]; });
+      showErrors(); touch();
+    }
     function refreshMedia() { $('#mediaBox').innerHTML = mediaHTML(p); touch(); }
     form.addEventListener('change', async e => {
       const t = e.target;
@@ -464,7 +484,7 @@
         } else if (t.id === 'tplSel') {
           const nt = I.templateById(t.value), old = I.templateById(p.templateId);
           if (!(await confirmDialog({ title: 'Ganti template?', text: 'Warna, font, dan gaya akan mengikuti template baru. Isi undangan Anda tidak berubah.', ok: 'Ganti' }))) { t.value = p.templateId; return; }
-          ['title', 'opening', 'description'].forEach(k => { if (!p.data[k] || (old && p.data[k] === old.defaults[k])) p.data[k] = nt.defaults[k]; });
+          ['title', 'opening', 'description', 'closing'].forEach(k => { if (!p.data[k] || (old && p.data[k] === old.defaults[k])) p.data[k] = nt.defaults[k]; });
           I.applyTemplate(p.data, nt); p.templateId = nt.id;
           dirty = true; await doSave(); route();
         }
