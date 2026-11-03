@@ -138,16 +138,16 @@
   function mountGallery(el) {
     el.innerHTML = '<div class="chips" role="group" aria-label="Kategori undangan"></div><div class="tpl-grid"></div>';
     const chips = $('.chips', el), grid = $('.tpl-grid', el);
-    const cats = [{ id: 'all', label: 'Semua' }].concat(I.CATEGORIES);
+    const cats = I.CATEGORIES;
     chips.innerHTML = cats.map(c => '<button class="chip" data-c="' + c.id + '">' + esc(c.label) + '</button>').join('');
-    let cat = 'all', cleanups = [];
+    let cat = cats[0].id, cleanups = [];
     const clear = () => { cleanups.forEach(f => f()); cleanups = []; };
     onLeave(clear);
     function draw() {
       clear();
       $$('.chip', chips).forEach(b => b.classList.toggle('on', b.dataset.c === cat));
       grid.innerHTML = '';
-      I.TEMPLATES.filter(t => cat === 'all' || t.cat === cat).forEach(t => {
+      I.TEMPLATES.filter(t => t.cat === cat).forEach(t => {
         const card = document.createElement('article');
         card.className = 'tpl';
         card.innerHTML = '<div class="thumb"></div><div class="meta"><b>' + esc(t.name) + '</b><span>' + esc(t.catLabel) + ' &middot; ' + I.FLOW_LABEL[t.flow] + ' &middot; ' + I.ANIM_LABEL[t.anim] + '</span></div>' +
@@ -180,7 +180,7 @@
     view.innerHTML =
       '<section class="hero-app"><div class="wrap hero-grid"><div>' +
       '<span class="pill">Gratis &middot; tanpa akun &middot; siap GitHub Pages</span>' +
-      '<h1>Undangan digital yang <em>elegan</em>, dibuat dalam hitungan menit</h1>' +
+      '<h1>Bukan Sekadar Undangan, Melainkan <em>Awal Sebuah Kenangan</em></h1>' +
       '<p class="lead">Pilih template, isi detail acara, pasang peta Google Maps, hitung mundur, RSVP lewat WhatsApp, dan QR Code. Bagikan lewat tautan yang bisa dibuka siapa saja di HP.</p>' +
       '<div class="cta-row"><a class="btn btn-primary" href="#/new">Buat Undangan</a><a class="btn" href="#templates">Lihat Template</a></div>' +
       '<div class="hero-stats"><div><b>' + I.TEMPLATES.length + '</b><span>desain template</span></div><div><b>' + I.CATEGORIES.length + '</b><span>kategori acara</span></div><div><b>0</b><span>biaya server</span></div></div></div>' +
@@ -657,3 +657,4 @@
   }
   init();
 })();
+
