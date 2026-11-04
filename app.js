@@ -320,8 +320,8 @@
       '<label class="dz"><input type="file" id="galFile" accept="image/*" multiple>Tambah foto galeri</label></div>' +
       '<div class="fld"><span>Musik latar (opsional)</span>' +
       (d.music.src ? '<div class="mini-note">Musik: ' + esc(d.music.name || 'dari tautan') + ' <button type="button" class="btn btn-sm" data-act="music-clear" style="margin-left:8px">Hapus</button></div>' : '') +
-      '<label class="dz"><input type="file" id="musicFile" accept="audio/*">Unggah file audio (maks 5 MB)</label>' +
-      '<input type="url" id="musicUrl" placeholder="atau tempel URL langsung ke file .mp3" value="' + (d.music.src && !isData(d.music.src) ? esc(d.music.src) : '') + '" style="margin-top:8px">' +
+      '<label class="dz"><input type="file" id="musicFile" accept="audio/*">Unggah file audio (maks 5 MB). Musik unggahan tidak ikut di tautan bagikan. Pakai URL atau file di repo supaya tamu bisa mendengar.</label>' +
+      '<input type="text" id="musicUrl" placeholder="atau URL file .mp3, atau nama file di repo (contoh: lagu.mp3)" value="' + (d.music.src && !isData(d.music.src) ? esc(d.music.src) : '') + '" style="margin-top:8px">' +
       '<em>Musik mulai saat tamu menekan "Buka Undangan", sesuai aturan browser. Tamu bisa mematikannya.</em></div>' +
       '<p class="mini-note" id="sizeNote"></p>';
   }
@@ -480,7 +480,8 @@
           const v = t.value.trim();
           if (!v) { if (!p.data.music.src.startsWith('data:')) { p.data.music = { src: '', name: '' }; refreshMedia(); } }
           else if (/^https?:\/\/\S+$/i.test(v)) { p.data.music = { src: v, name: '' }; refreshMedia(); }
-          else toast('URL musik harus diawali http:// atau https://', 'error');
+          else if (/^[\w][\w .()%-]*\.(mp3|m4a|ogg|wav|aac)$/i.test(v)) { p.data.music = { src: new URL(encodeURI(v), location.href).href, name: v }; refreshMedia(); toast('Pastikan file ' + v + ' sudah diunggah ke repo GitHub Anda', 'ok'); }
+          else toast('Isi URL lengkap (https://...) atau nama file musik di repo, contoh: lagu.mp3', 'error');
         } else if (t.id === 'tplSel') {
           const nt = I.templateById(t.value), old = I.templateById(p.templateId);
           if (!(await confirmDialog({ title: 'Ganti template?', text: 'Warna, font, dan gaya akan mengikuti template baru. Isi undangan Anda tidak berubah.', ok: 'Ganti' }))) { t.value = p.templateId; return; }
@@ -658,3 +659,4 @@
   init();
 })();
 
+ 
