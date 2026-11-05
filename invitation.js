@@ -81,6 +81,20 @@
     o.flora = !!o.flora;
     o.bism = !!o.bism;
     if (!ART[o.art]) o.art = 'lainnya';
+    // Perjalanan Kami: disimpan sebagai data.story. Format lama (penanda di dalam deskripsi) dimigrasi dan dibersihkan
+    let st = Array.isArray(d.story) ? d.story : null;
+    const mk = String(o.description == null ? '' : o.description).match(/\[\[INVITA_STORY:([^\]]*)\]\]/);
+    if (!st && mk) { try { st = JSON.parse(decodeURIComponent(escape(atob(mk[1])))); } catch (e) { st = null; } }
+    o.description = String(o.description == null ? '' : o.description).replace(/\s*\[\[INVITA_STORY:[^\]]*(?:\]\])?/g, '').trim();
+    const cut = (v, n) => String(v == null ? '' : v).slice(0, n);
+    o.story = (Array.isArray(st) ? st : []).slice(0, 8).map(x => x && typeof x === 'object' ? { date: cut(x.date, 40), title: cut(x.title, 80), text: cut(x.text, 400), photo: safeUrl(x.photo) } : null)
+      .filter(x => x && (x.date || x.title || x.text || x.photo));
+    // gaya gerak dan tampilan per template (bisa dari data.mo, cadangannya dihitung dari gaya undangan)
+    const MR = { sk: 7, hv: 8, fx: 12, op: 8, lt: 5, bd: 4, au: 4 };
+    const hs = [o.style, o.font, o.pat, o.anim, o.art, o.flow].join('|'); let hh = 0;
+    for (let i = 0; i < hs.length; i++) hh = (hh * 31 + hs.charCodeAt(i)) >>> 0;
+    const m0 = d.mo && typeof d.mo === 'object' ? d.mo : {}; o.mo = {}; let kk = 3;
+    Object.keys(MR).forEach(key => { const v = parseInt(m0[key], 10); o.mo[key] = v >= 0 && v < MR[key] ? v : ((hh >>> 3) * (kk++) + kk) % MR[key]; });
     ['title', 'host', 'opening', 'description', 'date', 'start', 'end', 'venue', 'address', 'mapsLink', 'wa', 'kicker', 'closing']
       .forEach(k => { o[k] = String(o[k] == null ? '' : o[k]).slice(0, 4000); });
     return o;
@@ -222,6 +236,7 @@
     wrap.dataset.anim = d.anim;
     wrap.dataset.pat = d.pat;
     wrap.dataset.flora = d.flora ? '1' : '0';
+    Object.keys(d.mo).forEach(k => { wrap.dataset[k === 'sk' ? 'sk' : k] = d.mo[k]; });
     wrap.style.setProperty('--p', d.theme.primary);
     wrap.style.setProperty('--a', d.theme.accent);
     wrap.style.setProperty('--bg', d.theme.bg);
@@ -249,6 +264,12 @@
         h += '<section class="sec'+RV+'"><div class="divd">' + ORN.divider + '</div>' +
           (d.bism ? '<p class="bism" lang="ar" dir="rtl">' + BISM + '</p>' : '') + '<p class="open">' + T(d.opening, 'Kalimat pembuka undangan') + '</p>' +
           '<p class="desc">' + T(d.description, 'Deskripsi atau isi undangan') + '</p></section>';
+      }
+      if (d.story.length) {
+        h += '<section class="sec jr' + RV + '"><p class="eyebrow">Perjalanan Kami</p><h3>Bab yang membawa kami ke hari ini</h3><div class="jr-list">' +
+          d.story.map((x, i) => '<article class="jr-i" style="--i:' + i + '">' +
+            (x.photo ? '<figure><img loading="lazy" alt="' + esc(x.title || 'Momen kami') + '" src="' + esc(x.photo) + '"></figure>' : '<figure class="empty"><span>&#10022;</span></figure>') +
+            '<div class="jr-t"><time>' + esc(x.date) + '</time><h4>' + esc(x.title || 'Momen Kami') + '</h4><p>' + nl(x.text) + '</p></div></article>').join('') + '</div></section>';
       }
       h += '<section class="sec alt'+RV+'"><p class="eyebrow">Waktu &amp; Tempat</p><h3>Informasi Acara</h3><div class="ev-grid">' +
         '<div class="ev-card">' + ICON.cal + '<h4>Tanggal</h4><p>' + P(dateL, 'Tanggal acara') + '</p></div>' +
@@ -494,3 +515,4 @@
 
   Object.assign(Invita, { PATS, POS, FLOWS, ANIMS, FONTS, STYLES, BASE_THEME, esc, safeUrl, normPhone, baseData, withDefaults, parseDate, dateLong, mapUrls, qrSvg, renderInvitation });
 })(window);
+ 
