@@ -38,6 +38,7 @@
     const before = d.gallery.length;
     d.gallery = d.gallery.filter(u => !u.startsWith('data:'));
     if (before !== d.gallery.length) dropped.push((before - d.gallery.length) + ' foto galeri');
+    if (Array.isArray(d.story)) { let n = 0; d.story = d.story.map(x => { if (x && typeof x.photo === 'string' && x.photo.startsWith('data:')) { n++; return Object.assign({}, x, { photo: '' }); } return x; }); if (n) dropped.push(n + ' foto cerita'); }
     if (d.music.src.startsWith('data:')) { d.music = { src: '', name: '' }; dropped.push('musik'); }
     return { payload: { v: 1, id: inv.id, data: d }, dropped };
   }
