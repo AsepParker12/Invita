@@ -634,3 +634,97 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 .m-mini.has-scene .hero .kicker,.m-mini.has-scene .hero .h-date{display:none}
 .m-mini.has-scene .hero h1.h-title{font-size:24px}
 .m-mini.has-scene .sc-cp{width:82%}
+
+/* ===== v7: buku, tiket, polaroid, bioskop, balon, lampion ===== */
+/* warna teks hero */
+[data-scene=buku] .hero,[data-scene=tiket] .hero,[data-scene=polaroid] .hero,[data-scene=balon] .hero{color:#3a3028}
+[data-scene=buku] .hero h1,[data-scene=buku] .hero h2{color:#2f5d62}
+[data-scene=tiket] .hero h1,[data-scene=tiket] .hero h2{color:#1f3a5f}
+[data-scene=polaroid] .hero h1,[data-scene=polaroid] .hero h2{color:#5a3a2a}
+[data-scene=balon] .hero h1,[data-scene=balon] .hero h2{color:#245077}
+[data-scene=bioskop] .hero,[data-scene=lampion] .hero{color:#f5e6d0}
+[data-scene=bioskop] .hero h1,[data-scene=bioskop] .hero h2,[data-scene=bioskop] .hero .v3-render-names strong,[data-scene=lampion] .hero h1,[data-scene=lampion] .hero h2,[data-scene=lampion] .hero .v3-render-names strong{color:#f6d98a;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+[data-scene=bioskop] .hero .v3-render-names i,[data-scene=lampion] .hero .v3-render-names i{color:#ffb45a;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=buku] .hero .v3-render-names strong,[data-scene=tiket] .hero .v3-render-names strong,[data-scene=polaroid] .hero .v3-render-names strong,[data-scene=balon] .hero .v3-render-names strong{color:inherit}
+[data-scene=bioskop] .hero{padding-top:78px}[data-scene=lampion] .hero{padding-top:120px}[data-scene=buku] .hero{padding-top:84px}
+.m-mini[data-scene=lampion] .hero{padding-top:92px}.m-mini[data-scene=bioskop] .hero{padding-top:44px}
+/* teks sampul */
+[data-scene=buku] .cover,[data-scene=bioskop] .cover,[data-scene=lampion] .cover{color:#f7e6b8}
+[data-scene=buku] .cover h1,[data-scene=buku] .cover h2,[data-scene=buku] .cover .v3-render-names strong,[data-scene=bioskop] .cover h1,[data-scene=bioskop] .cover h2,[data-scene=bioskop] .cover .v3-render-names strong,[data-scene=lampion] .cover h1,[data-scene=lampion] .cover h2,[data-scene=lampion] .cover .v3-render-names strong{color:#f6d98a;text-shadow:0 2px 12px rgba(0,0,0,.55)}
+[data-scene=buku] .cover .v3-render-names i,[data-scene=bioskop] .cover .v3-render-names i,[data-scene=lampion] .cover .v3-render-names i{color:#ffcf7a;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=buku] .cover .cover-guest,[data-scene=bioskop] .cover .cover-guest,[data-scene=lampion] .cover .cover-guest{background:rgba(0,0,0,.35);color:#f6e3b0}
+[data-scene=tiket] .cover,[data-scene=polaroid] .cover,[data-scene=balon] .cover{color:#2c2a30}
+[data-scene=tiket] .cover h1,[data-scene=tiket] .cover h2,[data-scene=tiket] .cover .v3-render-names strong{color:#1f3a5f}
+[data-scene=polaroid] .cover h1,[data-scene=polaroid] .cover h2,[data-scene=polaroid] .cover .v3-render-names strong{color:#5a3a2a}
+[data-scene=balon] .cover h1,[data-scene=balon] .cover h2,[data-scene=balon] .cover .v3-render-names strong{color:#245077}
+[data-scene=tiket] .cover .v3-render-names i,[data-scene=polaroid] .cover .v3-render-names i,[data-scene=balon] .cover .v3-render-names i{color:#e8913a;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=tiket] .cover .cover-guest,[data-scene=polaroid] .cover .cover-guest,[data-scene=balon] .cover .cover-guest{background:rgba(255,255,255,.7);color:#2c2a30}
+[data-scene=tiket] .cover small,[data-scene=polaroid] .cover small,[data-scene=balon] .cover small,[data-scene=tiket] .cover .kicker,[data-scene=polaroid] .cover .kicker,[data-scene=balon] .cover .kicker{color:#5a5560}
+[data-scene=tiket] .cover .seal,[data-scene=polaroid] .cover .seal,[data-scene=balon] .cover .seal{display:none}
+/* 7. buku */
+.sc-bk{position:absolute;top:2.5%;bottom:2.5%;left:3%;right:3%;transform-origin:0 50%;transition:transform 1.5s cubic-bezier(.6,0,.2,1)}
+.sc-bk.a{background:linear-gradient(90deg,rgba(0,0,0,.4),transparent 8%),linear-gradient(160deg,#2f6f73,#1c4348);border-radius:4px 14px 14px 4px;box-shadow:inset 0 0 0 10px #1c4348,inset 0 0 0 12px #c9a24a,inset 0 0 0 26px rgba(0,0,0,.12),0 20px 50px rgba(0,0,0,.45)}
+.sc-bk.b{background:repeating-linear-gradient(180deg,#fdf7e8 0 30px,#eadfc2 30px 31px);border-radius:4px 12px 12px 4px;box-shadow:inset 8px 0 14px rgba(0,0,0,.14);transition-delay:.55s}
+.opened .sc-bk.a{transform:rotateY(-172deg)}.opened .sc-bk.b{transform:rotateY(-168deg)}
+/* 8. tiket */
+.sc-tk{position:absolute;left:0;right:0;background:#fbf3e2;transition:transform 1.3s cubic-bezier(.65,0,.25,1) .2s}
+.sc-tk.a{top:0;height:61%;box-shadow:inset 0 16px 0 #1f3a5f,inset 0 -2px 0 rgba(0,0,0,.08);-webkit-mask:radial-gradient(circle 16px at 0 100%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 100%,transparent 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 100%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 100%,transparent 98%,#000) right/51% 100% no-repeat}
+.sc-tk.a::after{content:"";position:absolute;left:18px;right:18px;bottom:0;border-bottom:3px dashed rgba(31,58,95,.5)}
+.sc-tk.b{top:61%;bottom:0;background:repeating-linear-gradient(90deg,#1f3a5f 0 3px,transparent 3px 7px,#1f3a5f 7px 8px,transparent 8px 14px) 50% 78%/70% 22% no-repeat,#fbf3e2;-webkit-mask:radial-gradient(circle 16px at 0 0,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 0,transparent 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 0,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 0,transparent 98%,#000) right/51% 100% no-repeat}
+.opened .sc-tk.a{transform:translateY(-105%) rotate(-2deg)}.opened .sc-tk.b{transform:translateY(105%) rotate(2deg)}
+/* 9. polaroid */
+.sc-pl{position:absolute;left:11%;right:11%;top:8%;bottom:10%;background:linear-gradient(#fffdf8,#fffdf8);box-shadow:0 14px 34px rgba(60,30,10,.4);transform:rotate(var(--tr));z-index:var(--z);transition:transform 1.3s cubic-bezier(.6,0,.3,1) calc(var(--z)*.07s),opacity .9s .5s}
+.sc-pl::before{content:"";position:absolute;left:6%;right:6%;top:5%;bottom:20%;background:linear-gradient(150deg,#f7c9b3,#b8d4c8 60%,#f2e0a8)}
+.sc-pl:nth-child(2n)::before{background:linear-gradient(150deg,#c9d9f0,#f4c7d4 60%,#fbe8b8)}
+.sc-pl::after{content:"";position:absolute;left:38%;right:38%;top:-14px;height:26px;background:rgba(242,227,168,.85);transform:rotate(-3deg)}
+.opened .sc-pl{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}
+[data-scene=polaroid] .cover-in{padding-bottom:0}
+/* 10. bioskop */
+.sc-cur.red{background:repeating-linear-gradient(90deg,#4a0b13 0,#b3202e 20px,#4a0b13 40px),#4a0b13;box-shadow:inset 0 -90px 100px rgba(0,0,0,.5)}
+.sc-val{position:absolute;left:0;right:0;top:0;height:46px;background:radial-gradient(circle at 20px 0,#8f1522 22px,transparent 23px) 0 0/40px 100%,#6b0f1b;border-bottom:3px solid #d9a93a;transition:transform 1.2s cubic-bezier(.6,0,.3,1) .4s}
+.opened .sc-val{transform:translateY(-110%)}
+/* 11. balon */
+.sc-ball{transform-box:fill-box;animation:ballBob 7s ease-in-out infinite alternate}
+@keyframes ballBob{to{translate:0 -16px}}
+.sc-sky{position:absolute;inset:0;background:linear-gradient(#8fc3ee,#d6ebfa 60%,#ffe9d6);transition:opacity 1.2s .5s}
+.opened .sc-sky{opacity:0}
+.sc-cl{position:absolute;width:78%;aspect-ratio:1.4;border-radius:50%;background:radial-gradient(ellipse at 40% 40%,#fff,#fff 40%,rgba(255,255,255,.55) 68%,transparent 72%);filter:blur(1px);box-shadow:0 0 40px rgba(255,255,255,.8);transition:transform 1.6s cubic-bezier(.6,0,.3,1) .2s,opacity 1s .8s}
+.opened .sc-cl{transform:translate(var(--x),var(--y));opacity:0}
+/* 12. lampion */
+.sc-night{position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,#5a2a4a,#2a1a4a 45%,#0b0f2e);transition:opacity 1.4s .7s}
+.sc-night::before{content:"";position:absolute;inset:0;background:radial-gradient(1.2px 1.2px at 20% 15%,#fff,transparent),radial-gradient(1px 1px at 70% 25%,#fff,transparent),radial-gradient(1.4px 1.4px at 45% 8%,#fff,transparent),radial-gradient(1px 1px at 85% 60%,#fff,transparent),radial-gradient(1.2px 1.2px at 10% 70%,#fff,transparent),radial-gradient(1px 1px at 55% 45%,#fff,transparent)}
+.opened .sc-night{opacity:0}
+.sc-lt{position:absolute;width:40px;height:54px;border-radius:42% 42% 34% 34%;background:linear-gradient(#ffcf7a,#ff9a3c 55%,#e0701a);box-shadow:0 0 26px 8px rgba(255,170,70,.55);animation:ltBob 5s ease-in-out infinite alternate;transition:transform 2.6s cubic-bezier(.4,0,.6,1) var(--d),opacity 1.6s calc(var(--d) + .9s)}
+.sc-lt::before{content:"";position:absolute;left:50%;top:-8px;width:12px;height:8px;margin-left:-6px;background:#8a5a2a;border-radius:2px}
+@keyframes ltBob{to{translate:0 -12px}}
+.opened .sc-lt{transform:translateY(-190vh) scale(.7);opacity:0}
+.sc-lan{transform-origin:50% 0;animation:swayT 4.6s ease-in-out infinite alternate}
+@media(prefers-reduced-motion:reduce){.sc-ball,.sc-lt,.sc-lan{animation:none!important}.sc-bk,.sc-tk,.sc-pl,.sc-cl,.sc-sky,.sc-night,.sc-val{transition:none!important}}
+.sc-cv{z-index:1}
+[data-scene=tiket] .hero{padding-top:52px}[data-scene=lampion] .hero{padding-top:92px}
+/* v8: pasangan lebih besar, rangkaian bunga lebih rendah */
+.sc-fg{height:47%}.sc-cp{width:64%;bottom:3%}.sc-fl{height:22%}
+.cp .csk,.cp .chj,.cp .ckb,.cp .cjk,.cp .ckn,.cp .ca,.cp .ct{fill:currentColor}
+.m-mini.has-scene .sc-cp{width:70%}
+[data-scene=candi] .hero{padding-top:142px}
+/* putar otomatis */
+.auto-pill{display:none;position:absolute;top:14px;right:14px;z-index:45;align-items:center;gap:8px;max-width:calc(100% - 28px);padding:8px 14px 8px 11px;border:0;border-radius:99px;background:rgba(20,20,24,.62);color:#fff;font:600 11.5px var(--fb,system-ui);letter-spacing:.02em;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.3);transition:opacity .3s,padding .3s}
+.auto-on .auto-pill{display:inline-flex;animation:routeIn .5s both}
+.auto-pill i{width:12px;height:12px;flex:none;border-left:3.5px solid #fff;border-right:3.5px solid #fff;box-sizing:border-box}
+.auto-pill .a2{display:none}
+.auto-hold .auto-pill .a1,.auto-off .auto-pill .a1{display:none}
+.auto-hold .auto-pill .a2,.auto-off .auto-pill .a2{display:inline}
+.auto-off .auto-pill i,.auto-hold .auto-pill i{border:0;border-left:11px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent;width:0;height:0}
+.auto-min:not(.auto-hold):not(.auto-off) .auto-pill .a1{display:none}
+.auto-min:not(.auto-hold):not(.auto-off) .auto-pill{padding:9px;opacity:.6}
+.m-mini .auto-pill{display:none!important}
+.has-scene .hero{align-items:flex-start!important}
+.has-scene .hero{justify-content:flex-start!important}
+[data-scene=candi] .hero{padding-top:162px}.m-mini[data-scene=candi] .hero{padding-top:118px}
+/* v9: pasangan setengah badan dengan karangan bunga samping */
+.sc-fg{height:52%}.sc-cp{width:94%;bottom:0;height:100%}.sc-fl{height:18%}
+.sc-fb{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%}
+.sc-cp svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.2))}
+.m-mini.has-scene .sc-cp{width:100%}
+[data-scene=candi] .hero{padding-top:150px}
+[data-scene=candi] .hero{padding-top:150px!important}.m-mini[data-scene=candi] .hero{padding-top:118px!important}
