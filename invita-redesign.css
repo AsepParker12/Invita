@@ -799,3 +799,35 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 .sc-cp.ph{align-items:flex-end;justify-content:center}
 .sc-cp.ph i{display:block;height:100%;aspect-ratio:400/560;max-width:100%;background:url(couples.webp) no-repeat;background-size:400% 300%;-webkit-mask-image:radial-gradient(ellipse 50% 56% at 50% 54%,#000 66%,transparent 100%);mask-image:radial-gradient(ellipse 50% 56% at 50% 54%,#000 66%,transparent 100%)}
 .sc-cp.ph{filter:none}
+
+/* ===== v11: rumah adat (limas, krong bade, melayu, ballroom, taman) ===== */
+[data-scene=limas] .hero{color:#4a2a1a}[data-scene=limas] .hero h1,[data-scene=limas] .hero h2{color:#7a2418}[data-scene=limas] .hero .v3-render-names strong{color:#7a2418}[data-scene=limas] .hero .v3-render-names i,[data-scene=limas] .cover .v3-render-names i{color:#b8801f;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=limas] .cover{color:#f7e3b8}[data-scene=limas] .cover h1,[data-scene=limas] .cover h2,[data-scene=limas] .cover .v3-render-names strong{color:#f9e6b6;text-shadow:0 2px 12px rgba(0,0,0,.45)}[data-scene=limas] .cover .cover-guest{background:rgba(60,20,10,.5);color:#f9e6b6}
+[data-scene=krong] .hero{color:#f6e6cf}[data-scene=krong] .hero h1,[data-scene=krong] .hero h2{color:#f6d68a}[data-scene=krong] .hero .v3-render-names strong{color:#f6d68a}[data-scene=krong] .hero .v3-render-names i,[data-scene=krong] .cover .v3-render-names i{color:#f0a84a;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=krong] .cover{color:#f6e6cf}[data-scene=krong] .cover h1,[data-scene=krong] .cover h2,[data-scene=krong] .cover .v3-render-names strong{color:#f6d68a;text-shadow:0 2px 12px rgba(0,0,0,.45)}[data-scene=krong] .cover .cover-guest{background:rgba(20,6,20,.5);color:#f6d68a}
+[data-scene=melayu] .hero{color:#f6ead0}[data-scene=melayu] .hero h1,[data-scene=melayu] .hero h2{color:#f6d68a}[data-scene=melayu] .hero .v3-render-names strong{color:#f6d68a}[data-scene=melayu] .hero .v3-render-names i,[data-scene=melayu] .cover .v3-render-names i{color:#f0a867;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=melayu] .cover{color:#f6ead0}[data-scene=melayu] .cover h1,[data-scene=melayu] .cover h2,[data-scene=melayu] .cover .v3-render-names strong{color:#f6d68a;text-shadow:0 2px 12px rgba(0,0,0,.45)}[data-scene=melayu] .cover .cover-guest{background:rgba(6,30,34,.55);color:#f6d68a}
+[data-scene=ballroom] .hero{color:#3a2c32}[data-scene=ballroom] .hero h1,[data-scene=ballroom] .hero h2{color:#7a2f40}[data-scene=ballroom] .hero .v3-render-names strong{color:#7a2f40}[data-scene=ballroom] .hero .v3-render-names i,[data-scene=ballroom] .cover .v3-render-names i{color:#b8923f;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=ballroom] .cover{color:#f4e6c8}[data-scene=ballroom] .cover h1,[data-scene=ballroom] .cover h2,[data-scene=ballroom] .cover .v3-render-names strong{color:#f4e0a8;text-shadow:0 2px 12px rgba(0,0,0,.45)}[data-scene=ballroom] .cover .cover-guest{background:rgba(20,12,24,.5);color:#f4e0a8}
+[data-scene=taman] .hero{color:#33473a}[data-scene=taman] .hero h1,[data-scene=taman] .hero h2{color:#3f6a4a}[data-scene=taman] .hero .v3-render-names strong{color:#3f6a4a}[data-scene=taman] .hero .v3-render-names i,[data-scene=taman] .cover .v3-render-names i{color:#d0708a;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=taman] .cover{color:#33473a}[data-scene=taman] .cover h1,[data-scene=taman] .cover h2,[data-scene=taman] .cover .v3-render-names strong{color:#3f6a4a;text-shadow:0 2px 12px rgba(0,0,0,.45)}[data-scene=taman] .cover .cover-guest{background:rgba(255,255,255,.6);color:#3f6a4a}
+[data-scene=limas] .hero,[data-scene=krong] .hero,[data-scene=melayu] .hero,[data-scene=ballroom] .hero,[data-scene=taman] .hero{padding-top:70px}
+.m-mini[data-scene=limas] .hero,.m-mini[data-scene=krong] .hero,.m-mini[data-scene=melayu] .hero,.m-mini[data-scene=ballroom] .hero,.m-mini[data-scene=taman] .hero{padding-top:30px}
+/* limas: gerbang emas membuka atas dan bawah */
+.sc-gate{position:absolute;left:0;right:0;height:50.2%;background:radial-gradient(circle at 50% 100%,rgba(255,226,150,.5),transparent 40%),repeating-linear-gradient(45deg,rgba(240,200,110,.2) 0 2px,transparent 2px 18px),repeating-linear-gradient(-45deg,rgba(240,200,110,.2) 0 2px,transparent 2px 18px),linear-gradient(180deg,#7a2418,#5a1710);transition:transform 1.5s cubic-bezier(.65,0,.25,1) .2s}
+.sc-gate.t{top:0;box-shadow:inset 0 -6px 0 #e0b04f,inset 0 -12px 0 rgba(0,0,0,.25)}.sc-gate.b{bottom:0;box-shadow:inset 0 6px 0 #e0b04f,inset 0 12px 0 rgba(0,0,0,.25)}
+.opened .sc-gate.t{transform:translateY(-102%)}.opened .sc-gate.b{transform:translateY(102%)}
+/* krong bade: ubin tenun jatuh bergiliran */
+.sc-tl{position:absolute;top:0;bottom:0;width:12.6%;background:repeating-linear-gradient(180deg,transparent 0 38px,rgba(240,199,104,.5) 38px 40px),linear-gradient(180deg,#6d1a1e,#3a0d18);box-shadow:inset 0 0 0 2px rgba(240,199,104,.55);transition:transform 1.1s cubic-bezier(.6,0,.9,.4) calc(.1s + var(--i)*.09s),opacity .4s 1.5s}
+.opened .sc-tl{transform:translateY(105%) rotate(calc(var(--i)*1.2deg - 4deg))}
+/* melayu: tikar anyam digulung ke atas */
+.sc-roll{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 3px,transparent 3px 14px),repeating-linear-gradient(90deg,rgba(255,220,140,.25) 0 3px,transparent 3px 14px),linear-gradient(180deg,#8a5a2a,#5d3a1a);transform-origin:50% 0;transition:transform 1.6s cubic-bezier(.7,0,.25,1) .2s;box-shadow:inset 0 -14px 0 #e0b04f}
+.opened .sc-roll{transform:translateY(-101%) scaleY(.92)}
+/* ballroom: sorot lampu membesar */
+.sc-cv:has(.sc-spot){overflow:hidden}
+.sc-spot{position:absolute;left:50%;top:46%;width:26px;height:26px;margin:-13px;border-radius:50%;box-shadow:0 0 0 160vmax #1b1422,0 0 40px 20px rgba(255,226,170,.45);transform:scale(.4);transition:transform 1.7s cubic-bezier(.7,0,.2,1) .15s}
+.opened .sc-spot{transform:scale(60)}
+/* taman: jalusi membalik satu per satu */
+.sc-jl{position:absolute;left:0;right:0;height:14.4%;background:linear-gradient(180deg,#fff,#e9f1e2);box-shadow:inset 0 -3px 0 #cfe0c4;transform-origin:50% 50%;transition:transform .9s cubic-bezier(.6,0,.3,1) calc(.1s + var(--i)*.1s)}
+.opened .sc-jl{transform:rotateX(92deg)}
+[data-scene=taman] .cover .sc-jl{backface-visibility:hidden}
