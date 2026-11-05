@@ -75,9 +75,14 @@ const PALETTES=[
 ];
 const STYLES=['frame','arch','minimal','soft','bold','modern'];const FONTS=['romantic','signature','classic','luxe','parisienne','elegant','editorial','clean','modern','playful'];const ANIMS=['rise','fade','slide','zoom'];const PATS=['leaf','none','lines','dots','sparkle','star','confetti'];
 const HAS_TPL=Array.isArray(I.TEMPLATES);
-const counters={};(I.TEMPLATES||[]).forEach(t=>{const i=counters[t.cat]||0;counters[t.cat]=i+1;const p=PALETTES[i%PALETTES.length];t.name=(NAMES[t.cat]||NAMES.lainnya)[i%10];t.style=STYLES[i%STYLES.length];t.font=FONTS[i%FONTS.length];t.anim=ANIMS[i%ANIMS.length];t.pat=PATS[(i+(t.cat==='birthday'?6:0))%PATS.length];t.flora=['wedding','aqiqah','keluarga','pengajian'].includes(t.cat)&&i%3!==2;t.theme={primary:p[0],accent:p[1],bg:p[2],text:p[3],soft:p[4]};const c=(COPY[t.cat]||COPY.lainnya)[0];t.defaults={title:c[0],opening:c[1],description:c[2],closing:c[3]};});
+const FXL={wedding:[0,1,6,5,11,9],keluarga:[0,6,4,7],pengajian:[2,8,11,5],aqiqah:[2,4,7,0],khitanan:[2,8,5],wisuda:[2,3,9,5],birthday:[3,4,6,9,5],opening:[3,9,5,10],reuni:[3,4,8,10],lainnya:[3,5,4,11]};
+const counters={};(I.TEMPLATES||[]).forEach(t=>{const i=counters[t.cat]||0;counters[t.cat]=i+1;const p=PALETTES[i%PALETTES.length];t.name=(NAMES[t.cat]||NAMES.lainnya)[i%10];t.style=STYLES[i%STYLES.length];t.font=FONTS[i%FONTS.length];t.anim=ANIMS[i%ANIMS.length];t.pat=PATS[(i+(t.cat==='birthday'?6:0))%PATS.length];t.flora=['wedding','aqiqah','keluarga','pengajian'].includes(t.cat)&&i%3!==2;t.theme={primary:p[0],accent:p[1],bg:p[2],text:p[3],soft:p[4]};const c=(COPY[t.cat]||COPY.lainnya)[0];t.defaults={title:c[0],opening:c[1],description:c[2],closing:c[3]};const fl=FXL[t.cat]||FXL.lainnya;t.mo={sk:(i*3+(t.cat==='wedding'?0:2))%7,hv:(i*5+1)%8,fx:fl[i%fl.length],op:(i*3+2)%8,lt:(i*2+1)%5,bd:(i+1)%4,au:(i*3)%4};});
 if(HAS_TPL){I.textVariants=cat=>(COPY[cat]||COPY.lainnya).map(v=>({title:v[0],opening:v[1],description:v[2],closing:v[3]}));
-const oldSample=I.sampleData;I.sampleData=function(t){const d=oldSample(t);if(t.cat==='wedding')d.host='Ayla & Yaff';return d;};}
+const dStory=()=>[{date:'2021',title:'Pertama Bertemu',text:'Sebuah pertemuan sederhana yang membuka halaman pertama cerita kami.',photo:''},{date:'2023',title:'Memilih Bersama',text:'Dua perjalanan sepakat untuk berjalan menuju rumah yang sama.',photo:''},{date:'2026',title:'Hari Bahagia',text:'Kini kami ingin berbagi kebahagiaan ini bersama Anda.',photo:''}];I.__defStory=dStory;
+const stamp=(d,t)=>{d.mo=Object.assign({},t.mo);if(t.cat==='wedding'&&!Array.isArray(d.story))d.story=dStory();return d};
+const oldSample=I.sampleData;I.sampleData=function(t){const d=oldSample(t);if(t.cat==='wedding')d.host='Ayla & Yaff';return stamp(d,t)};
+const oldNew=I.newData;I.newData=function(t){return stamp(oldNew(t),t)};
+const oldApply=I.applyTemplate;I.applyTemplate=function(d,t){const r=oldApply(d,t);stamp(d,t);return r};}
 function enc(s){try{return btoa(unescape(encodeURIComponent(s)))}catch(e){return''}}function dec(s){try{return decodeURIComponent(escape(atob(s)))}catch(e){return''}}
 function pack(x){return '[[INVITA_STORY:'+enc(JSON.stringify(x))+']]'}function unpack(s){const m=String(s||'').match(/\[\[INVITA_STORY:([^\]]+)\]\]/);if(!m)return[];try{return JSON.parse(dec(m[1]))||[]}catch(e){return[]}}function clean(s){return String(s||'').replace(/\n?\[\[INVITA_STORY:[^\]]+\]\]/g,'').trim()}
 /* Memecah "Nama1 penghubung Nama2". Kalau tidak cocok: null (strict) atau nama contoh */
@@ -99,17 +104,15 @@ function installEditor(){const form=document.querySelector('#form');if(!form||fo
  const couple=document.createElement('section');couple.className='v3-couple-editor';couple.innerHTML='<div class="v3-head"><b>Nama Pasangan</b><small>Dua nama berdiri sendiri, kata penghubungnya bebas Anda tentukan.</small></div><div class="row2">'+fld('Nama pertama','v3n1',n1,'text','Contoh: Ayla')+fld('Nama kedua','v3n2',n2,'text','Contoh: Yaff')+'</div><div class="fld"><span>Kata penghubung</span><div class="v3-chips">'+chips+'</div></div><label class="fld v3-custom"'+(key==='custom'?'':' hidden')+'><span>Tulis penghubung sendiri</span><input id="v3sepc" maxlength="18" placeholder="Contoh: bersama, with, plus" value="'+esc(custom)+'"></label><div class="v3-couple-preview"><strong id="v3p1"></strong><i id="v3ps"></i><strong id="v3p2"></strong></div>';
  host.closest('.grp-body').insertBefore(couple,host.closest('.fld'));
  const q=s=>couple.querySelector(s);const curSep=()=>key==='custom'?(q('#v3sepc').value.trim()||'&'):SEP[key];
- let stories=unpack(desc.value);if(!stories.length)stories=[{date:'2021',title:'Pertama Bertemu',text:'Sebuah pertemuan sederhana yang membuka halaman pertama.',photo:''},{date:'2024',title:'Memilih Bersama',text:'Dua perjalanan sepakat menuju rumah yang sama.',photo:''}];
- const panel=document.createElement('details');panel.className='grp v3-story-editor';panel.open=true;panel.innerHTML='<summary>Perjalanan Kami</summary><div class="grp-body"><p class="mini-note">Setiap momen bisa memakai foto sendiri. Foto otomatis diperkecil agar tetap ringan.</p><div id="v3rows"></div><button type="button" class="btn btn-sm" id="v3add">+ Tambah cerita</button></div>';form.insertBefore(panel,form.querySelectorAll('.grp')[1]||null);const rows=panel.querySelector('#v3rows');
+ let stories;const legacy=unpack(desc.value);if(legacy.length&&!(ed&&Array.isArray(ed.story)))stories=legacy;else if(ed&&Array.isArray(ed.story))stories=ed.story.map(x=>({...x}));else stories=dStory();if(/\[\[INVITA_STORY:/.test(desc.value)){desc.value=clean(desc.value);desc.dispatchEvent(new Event('input',{bubbles:true}))}
+ const panel=document.createElement('details');panel.className='grp v3-story-editor';panel.open=true;panel.innerHTML='<summary>Perjalanan Kami</summary><div class="grp-body"><p class="mini-note">Setiap momen bisa memakai foto sendiri. Foto yang diunggah dari perangkat tidak ikut di tautan, tapi ikut di file HTML.</p><div id="v3rows"></div><button type="button" class="btn btn-sm" id="v3add">+ Tambah cerita</button></div>';form.insertBefore(panel,form.querySelectorAll('.grp')[1]||null);const rows=panel.querySelector('#v3rows');
  function names(init){const a=q('#v3n1').value.trim(),b=q('#v3n2').value.trim(),s=curSep();q('#v3p1').textContent=a||'Nama 1';q('#v3ps').textContent=s;q('#v3p2').textContent=b||'Nama 2';const val=(a&&b)?[a,s,b].join(' '):(a||b);const E=I.__edit;if(E){E.n1=a;E.n2=b;E.sep=s}if(host.value!==val){host.value=val;host.dispatchEvent(new Event('input',{bubbles:true}))}else if(!init&&E){host.dispatchEvent(new Event('input',{bubbles:true}))}}
- function sync(){desc.value=clean(desc.value)+'\n'+pack(stories);desc.dispatchEvent(new Event('input',{bubbles:true}))}
+ function sync(){const E=I.__edit;if(E)E.story=stories.map(x=>({...x}));host.dispatchEvent(new Event('input',{bubbles:true}))}
  function draw(){rows.innerHTML='';stories.forEach((x,i)=>{const r=document.createElement('article');r.className='v3-story-row';r.innerHTML='<div class="v3-photo">'+(x.photo?'<img src="'+esc(x.photo)+'" alt="Foto cerita">':'<span>Belum ada foto</span>')+'</div><div class="v3-story-fields">'+fld('Tahun / tanggal','v3d'+i,x.date)+fld('Judul cerita','v3t'+i,x.title)+'<label class="fld"><span>Cerita singkat</span><textarea id="v3x'+i+'" rows="3">'+esc(x.text||'')+'</textarea></label><label class="v3-upload">Pilih foto<input id="v3f'+i+'" type="file" accept="image/*"></label><button type="button" class="btn btn-sm btn-danger" id="v3r'+i+'">Hapus cerita</button></div>';rows.appendChild(r);['v3d','v3t','v3x'].forEach(id=>r.querySelector('#'+id+i).addEventListener('input',()=>{stories[i]={...stories[i],date:r.querySelector('#v3d'+i).value,title:r.querySelector('#v3t'+i).value,text:r.querySelector('#v3x'+i).value};sync()}));r.querySelector('#v3f'+i).addEventListener('change',async e=>{const d=await imgData(e.target.files[0]);if(d){stories[i].photo=d;draw();sync()}});r.querySelector('#v3r'+i).onclick=()=>{stories.splice(i,1);draw();sync()};});}
  couple.addEventListener('click',e=>{const b=e.target.closest('.v3-chip');if(!b)return;key=b.dataset.sep;couple.querySelectorAll('.v3-chip').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));q('.v3-custom').hidden=key!=='custom';if(key==='custom')q('#v3sepc').focus();names()});
  couple.querySelectorAll('#v3n1,#v3n2,#v3sepc').forEach(e=>e.addEventListener('input',()=>names()));panel.querySelector('#v3add').onclick=()=>{stories.push({date:'',title:'',text:'',photo:''});draw();sync()};names(true);draw();sync();}
 function textNodes(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const a=[];while(w.nextNode())a.push(w.currentNode);return a}
-function enhance(root){root.querySelectorAll('.inv').forEach(inv=>{if(inv.dataset.v3)return;inv.dataset.v3='1';let stories=[];textNodes(inv).forEach(n=>{if(n.nodeValue.includes('[[INVITA_STORY:')){stories=unpack(n.nodeValue);n.nodeValue=clean(n.nodeValue)}});
- if(stories.length){const sec=document.createElement('section');sec.className='v3-journey';sec.innerHTML='<div class="v3-kicker">Perjalanan Kami</div><h2>Bab yang membawa kami ke hari ini</h2><div class="v3-timeline">'+stories.map((x,i)=>'<article style="--i:'+i+'">'+(x.photo?'<figure><img src="'+esc(x.photo)+'" alt="Foto '+esc(x.title||'cerita')+'"></figure>':'<figure class="empty"><span>✦</span></figure>')+'<div><time>'+esc(x.date||'')+'</time><h3>'+esc(x.title||'Momen Kami')+'</h3><p>'+esc(x.text||'')+'</p></div></article>').join('')+'</div>';inv.appendChild(sec)}
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v3-in');io.unobserve(e.target)}}),{threshold:.12});inv.querySelectorAll('section,.event,.gallery,.v3-timeline article').forEach((el,i)=>{el.classList.add('v3-reveal');el.style.setProperty('--delay',(i%5)*70+'ms');io.observe(el)});});}
+function enhance(root){root.querySelectorAll('.inv').forEach(inv=>{if(inv.dataset.v3)return;inv.dataset.v3='1'; const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v3-in');io.unobserve(e.target)}}),{threshold:.12});inv.querySelectorAll('section,.event,.gallery,.v3-timeline article').forEach((el,i)=>{el.classList.add('v3-reveal');el.style.setProperty('--delay',(i%5)*70+'ms');io.observe(el)});});}
 /* Di halaman tamu (view.html) tidak ada templates.js: editor dan cerita ditangani file lain, jadi berhenti di sini */
 if(!HAS_TPL)return;
 let q=false;const mo=new MutationObserver(()=>{if(q)return;q=true;requestAnimationFrame(()=>{q=false;installEditor();enhance(document)})});mo.observe(document.documentElement,{subtree:true,childList:true});document.addEventListener('DOMContentLoaded',()=>{installEditor();enhance(document)});
@@ -119,7 +122,8 @@ let q=false;const mo=new MutationObserver(()=>{if(q)return;q=true;requestAnimati
 (function(){
 'use strict';
 const REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-const KIND={wedding:'petal',keluarga:'petal',pengajian:'star',aqiqah:'star',khitanan:'star',wisuda:'star',birthday:'confetti',opening:'confetti',reuni:'confetti'};
+const KINDS=['petal','leaf','star','confetti','bubble','sparkle','heart','snow','lantern','ribbon','drop','firefly'];
+const RISE={bubble:1,lantern:1,firefly:1,sparkle:1};
 const rnd=(a,b)=>a+Math.random()*(b-a);
 
 /* huruf demi huruf: kata dibungkus .w (tidak terpotong), tiap huruf .ch */
@@ -135,11 +139,14 @@ function kinetic(el,base){
  walk(el);el.classList.add('kin');el.setAttribute('aria-label',label);el.style.setProperty('--d',base+'s');
 }
 function particles(fx,kind,h){
- fx.style.setProperty('--h',(h+60)+'px');const cols=['var(--a)','var(--p)','#fff','var(--soft)'];
- for(let i=0;i<16;i++){const e=document.createElement('i');e.className='p '+kind;
-  e.style.setProperty('--x',rnd(0,100)+'%');e.style.setProperty('--s',rnd(kind==='dot'?5:8,kind==='dot'?16:17)+'px');
-  e.style.setProperty('--dur',rnd(9,17)+'s');e.style.setProperty('--dl',-rnd(0,16)+'s');e.style.setProperty('--dx',rnd(-70,70)+'px');
-  e.style.setProperty('--rot',rnd(240,720)+'deg');e.style.setProperty('--c',cols[i%4]);fx.appendChild(e)}
+ fx.style.setProperty('--h',(h+60)+'px');fx.dataset.k=kind;const cols=['var(--a)','var(--p)','#fff','var(--soft)'];
+ const n=kind==='drop'?22:kind==='firefly'?14:16;
+ for(let i=0;i<n;i++){const e=document.createElement('i');e.className='p k-'+kind;
+  const big=/heart|lantern|leaf|bubble/.test(kind);
+  e.style.setProperty('--x',rnd(0,100)+'%');e.style.setProperty('--s',(kind==='drop'?rnd(14,30):big?rnd(12,26):rnd(7,16))+'px');
+  e.style.setProperty('--dur',(kind==='drop'?rnd(4,8):kind==='firefly'?rnd(10,20):rnd(9,17))+'s');e.style.setProperty('--dl',-rnd(0,16)+'s');
+  e.style.setProperty('--dx',(kind==='drop'?rnd(-10,10):rnd(-70,70))+'px');
+  e.style.setProperty('--rot',(kind==='drop'?0:rnd(240,720))+'deg');e.style.setProperty('--c',cols[i%4]);if(RISE[kind])e.style.top='0';fx.appendChild(e)}
 }
 function burst(wrap){
  if(REDUCE)return;let fx=wrap.querySelector('.fxb');if(!fx){fx=document.createElement('div');fx.className='fxb';fx.setAttribute('aria-hidden','true');wrap.appendChild(fx)}if(!fx.animate)return;const ox=wrap.offsetWidth/2,oy=wrap.offsetHeight*.78,cols=['var(--a)','var(--p)','#fff','var(--soft)'];
@@ -160,11 +167,11 @@ window.__invMotion=function(wrap,opts,data){
  if(REDUCE)return;
  /* lapisan efek di atas isi undangan */
  const fx=document.createElement('div');fx.className='fx';fx.setAttribute('aria-hidden','true');wrap.appendChild(fx);
- particles(fx,KIND[d.art]||'dot',wrap.offsetHeight||700);
+ particles(fx,KINDS[+wrap.dataset.fx||0]||'petal',wrap.offsetHeight||700);
  /* aurora di belakang hero */
- if(hero&&d.style!=='modern'){const a=document.createElement('div');a.className='hero-aurora';a.setAttribute('aria-hidden','true');a.innerHTML='<i></i><i></i>';hero.insertBefore(a,hero.firstChild)}
+ if(hero){const hv=document.createElement('div');hv.className='hv-l';hv.setAttribute('aria-hidden','true');hv.innerHTML='<i></i><i></i><i></i>';hero.insertBefore(hv,hero.firstChild);if(d.style!=='modern'){const a=document.createElement('div');a.className='hero-aurora au-'+(wrap.dataset.au||0);a.setAttribute('aria-hidden','true');a.innerHTML='<i></i><i></i>';hero.insertBefore(a,hero.firstChild)}}
  /* band berjalan antar bagian (hanya mode gulir) */
- if(!tap&&hero&&scroller){const t=[d.title,String(d.host||'').trim()].filter(Boolean).join(' ✦ ')||(d.kicker||'Undangan');
+ if(!tap&&hero&&scroller&&wrap.dataset.bd!=='3'){const t=[d.title,String(d.host||'').trim()].filter(Boolean).join(' ✦ ')||(d.kicker||'Undangan');
   hero.after(band(t,'mq-a'));const sh=scroller.querySelector('#sec-share');if(sh)sh.before(band((d.kicker||'Undangan')+' ✦ '+(d.title||''),'mq-b'))}
  /* parallax saat menggulir */
  if(!tap&&scroller){let ticking=false;scroller.addEventListener('scroll',()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{ticking=false;wrap.style.setProperty('--sy',Math.min(scroller.scrollTop,900))})},{passive:true})}
@@ -200,3 +207,4 @@ function app(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',app);else app();
 })();
+ 
