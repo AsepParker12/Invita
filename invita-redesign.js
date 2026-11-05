@@ -448,12 +448,95 @@ const THEMES={
 };
 const NAMES={joglo:'Joglo Sepia',beludru:'Amplop Beludru',candi:'Candi Kabut',ulos:'Tenun Ulos',songket:'Songket Emas',senja:'Senja Taman',buku:'Buku Cerita',tiket:'Tiket Perjalanan',polaroid:'Album Polaroid',bioskop:'Layar Bioskop',balon:'Balon Udara',lampion:'Lampion Malam'};
 
+/* ---------- 13-17. Rumah adat: limas, krong bade, melayu, ballroom, taman ---------- */
+const Rc=(x,y,w,h,f,e)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+f+'" '+(e||'')+'/>';
+const Pl=(pts,f,e)=>'<polygon points="'+pts+'" fill="'+f+'" '+(e||'')+'/>';
+const Pa=(d,f,e)=>'<path d="'+d+'" fill="'+f+'" '+(e||'')+'/>';
+const sky=(id,a,b,c)=>'<defs><linearGradient id="k'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+a+'"/><stop offset=".55" stop-color="'+b+'"/><stop offset="1" stop-color="'+c+'"/></linearGradient></defs><rect width="390" height="800" fill="url(#k'+id+')"/>';
+const palm=(x,y,s,c)=>'<g class="sc-sway" transform="translate('+x+' '+y+') scale('+s+')"><path d="M0 0Q4 -60 -2 -130" stroke="#4a3320" stroke-width="7" fill="none"/>'+[-70,-35,0,35,70].map(a=>'<path d="M-2 -130Q'+(a*1.1)+' -170 '+(a*1.9)+' -118" stroke="'+c+'" stroke-width="9" fill="none" stroke-linecap="round" opacity=".95"/>').join('')+'</g>';
+const ripple=(y0,n,c)=>Array.from({length:n},(_,i)=>'<path d="M'+((i*97)%330)+' '+(y0+i*13)+'q18 -6 36 0t36 0" fill="none" stroke="'+c+'" stroke-width="1.3" opacity=".35"/>').join('');
+/* 13. Rumah Limas (Palembang): atap berundak, gerbang emas membuka atas dan bawah */
+SC.limas={couple:'g1',vc:'jawa2',fl:['#e7b44f','#fff0c2','#c4453f','#f4d36a'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#ffe6bd','#ffc98f','#fbe3b8')+
+  '<g class="sc-sun"><circle cx="300" cy="190" r="70" fill="#fff4cf" opacity=".6"/><circle cx="300" cy="190" r="34" fill="#fffaf0"/></g>'+
+  '<g class="sc-cloud"><ellipse cx="80" cy="150" rx="70" ry="12" fill="#fff" opacity=".6"/><ellipse cx="250" cy="260" rx="80" ry="11" fill="#fff" opacity=".5"/></g>'+
+  Rc(0,690,390,110,'#3f8c8f')+ripple(700,6,'#fff')+
+  [48,86,124,162,200,238,276,314].map(x=>Rc(x,640,10,80,'#4d2f1a')).join('')+Rc(30,630,330,14,'#6b4326')+
+  Rc(44,470,302,162,'#b87639')+[64,104,144,184,224,264,304].map(x=>Rc(x,474,3,154,'#7e4d22','opacity=".55"')).join('')+
+  Rc(44,470,302,12,'#e0b04f')+[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(i=>Pl((52+i*20)+',482 '+(62+i*20)+',482 '+(57+i*20)+',492','#7b2418')).join('')+
+  [70,170,270].map(x=>Rc(x,510,50,86,'#4a2c16')+Pa('M'+x+' 510a25 22 0 0 1 50 0','#4a2c16')+Rc(x+6,516,38,76,'#f2c26a','opacity=".85"')+Rc(x+24,516,2,76,'#4a2c16')).join('')+
+  Pl('4,472 386,472 332,416 58,416','#8c2f22')+Pl('4,472 386,472 380,480 10,480','#e0b04f')+
+  Pl('72,418 318,418 282,376 108,376','#9a3727')+Pl('72,418 318,418 312,426 78,426','#e0b04f')+
+  Pl('112,378 278,378 244,342 146,342','#a8412e')+Pl('112,378 278,378 272,385 118,385','#e0b04f')+
+  Rc(193,310,4,34,'#e0b04f')+'<circle cx="195" cy="306" r="6" fill="#e0b04f"/>'+
+  Pl('170,632 220,632 232,720 158,720','#7a4a28')+[640,656,672,688,704].map(y=>Rc(160,y,70,3,'#4d2f1a','opacity=".5"')).join('')+
+  '</svg>',
+ cover:'<div class="sc-gate t"></div><div class="sc-gate b"></div>'};
+/* 14. Rumah Krong Bade (Aceh): rumah panggung tinggi, ubin tenun jatuh */
+SC.krong={couple:'g5',vc:'melayu',fl:['#e7c35a','#fff0b8','#c9302c','#e0a53a'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#2a1230','#7a2a3e','#f2a05a')+
+  '<g class="sc-sun"><circle cx="195" cy="470" r="150" fill="#ffb86b" opacity=".35"/><circle cx="195" cy="470" r="60" fill="#ffd89a"/></g>'+
+  Pa('M-20 560Q80 480 190 540T410 520V800H-20Z','#3b1a2a','opacity=".9"')+palm(40,700,1.05,'#254a35')+palm(352,700,1.05,'#254a35')+
+  [60,104,148,192,236,280].map(x=>Rc(x,610,12,130,'#4a2415')+Rc(x-3,600,18,8,'#e0a53a')).join('')+
+  Rc(44,500,302,112,'#8a2326')+[0,1,2,3,4,5].map(i=>Pa('M'+(62+i*48)+' 520l18 20l-18 20l-18 -20z','none','stroke="#f0c768" stroke-width="2"')).join('')+
+  [0,1,2,3,4,5].map(i=>Pa('M'+(62+i*48)+' 580l18 -14l-18 -14','none','stroke="#f0c768" stroke-width="1.4" opacity=".7"')).join('')+
+  Rc(44,498,302,8,'#f0c768')+Rc(44,606,302,8,'#f0c768')+
+  Pl('14,502 376,502 332,440 58,440','#5d1519')+Pl('14,502 376,502 370,512 20,512','#f0c768')+
+  Pl('84,442 306,442 262,360 128,360','#6d1a1e')+Pl('84,442 306,442 298,452 92,452','#f0c768')+
+  Pl('128,362 262,362 240,330 150,330','#7b2024')+
+  [150,172,194,216,238].map(x=>Pa('M'+x+' 362L'+(x+10)+' 330','none','stroke="#f0c768" stroke-width="2"')).join('')+
+  Rc(193,296,4,36,'#f0c768')+Pl('195,286 203,300 187,300','#f0c768')+
+  Pl('170,612 220,612 236,740 154,740','#5a3018')+[622,640,658,676,694,712,730].map(y=>Rc(160,y,70,3,'#2a1208','opacity=".55"')).join('')+
+  '</svg>',
+ cover:'<i class="sc-tl" style="--i:0;left:0"></i><i class="sc-tl" style="--i:1;left:12.5%"></i><i class="sc-tl" style="--i:2;left:25%"></i><i class="sc-tl" style="--i:3;left:37.5%"></i><i class="sc-tl" style="--i:4;left:50%"></i><i class="sc-tl" style="--i:5;left:62.5%"></i><i class="sc-tl" style="--i:6;left:75%"></i><i class="sc-tl" style="--i:7;left:87.5%"></i>'};
+/* 15. Rumah Melayu: rumah panggung bersilang selembayung, tikar digulung */
+SC.melayu={couple:'g4',vc:'melayu',fl:['#f0c768','#fff2c8','#2f8f83','#e8884a'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#0f3d47','#2c7a7a','#f6c46e')+
+  '<g class="sc-sun"><circle cx="195" cy="520" r="120" fill="#ffd27a" opacity=".4"/><circle cx="195" cy="520" r="46" fill="#ffe4a0"/></g>'+
+  '<g class="sc-cloud"><ellipse cx="90" cy="170" rx="70" ry="11" fill="#fff" opacity=".28"/><ellipse cx="300" cy="230" rx="76" ry="10" fill="#fff" opacity=".22"/></g>'+
+  Rc(0,660,390,140,'#1d5b63')+ripple(676,6,'#ffe4a0')+palm(36,690,1.1,'#1d4a3a')+palm(356,690,1.1,'#1d4a3a')+
+  [64,112,160,208,256,304].map(x=>Rc(x,620,11,90,'#4a2e18')).join('')+Rc(40,606,310,14,'#6e4426')+
+  Rc(52,486,286,122,'#d6a24f')+[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17].map(i=>Pl((56+i*16)+',498 '+(72+i*16)+',498 '+(64+i*16)+',516','#8b3a1e')).join('')+
+  [76,160,244].map(x=>Rc(x,528,60,80,'#3a2412')+Pa('M'+x+' 528a30 26 0 0 1 60 0','#3a2412')+Rc(x+7,534,46,70,'#ffd98a')+Rc(x+29,534,2,70,'#3a2412')).join('')+
+  Pl('26,490 364,490 306,420 84,420','#2a4a4e')+Pl('26,490 364,490 356,500 34,500','#e0b04f')+
+  Pl('118,422 272,422 240,370 150,370','#33585c')+
+  Pa('M195 372L150 322Q146 316 152 314L195 350L238 314Q244 316 240 322Z','#e0b04f')+Pa('M195 372L174 300Q172 292 180 296L195 330L210 296Q218 292 216 300Z','#c4871f')+
+  Pl('172,606 218,606 228,720 162,720','#7a4a28')+[616,634,652,670,688,706].map(y=>Rc(164,y,60,3,'#3a2412','opacity=".5"')).join('')+
+  '</svg>',
+ cover:'<div class="sc-roll"></div>'};
+/* 16. Ballroom (modern barat): lengkungan, bokeh, sorot lampu membuka */
+SC.ballroom={couple:'g6',vc:'tuxIvory',fl:['#f5e6d3','#ffffff','#e9c6a8','#d9a5b3'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#f8f1e8','#eadfcf','#d8c8b2')+
+  [[26,150],[146,98],[266,98]].map(a=>'').join('')+
+  [20,148,276].map(x=>Pa('M'+x+' 640V470a47 47 0 0 1 94 0V640Z','#1b2442')+'<g fill="#fff" opacity=".7">'+[[10,30],[40,20],[70,52],[24,86],[60,100]].map(p=>'<circle cx="'+(x+p[0]+6)+'" cy="'+(440+p[1])+'" r="1.4"/>').join('')+'</g>'+Pa('M'+x+' 640V470a47 47 0 0 1 94 0V640','none','stroke="#c9a45c" stroke-width="5"')+Pa('M'+(x-8)+' 640V470a55 55 0 0 1 110 0V640','none','stroke="#e9d3a0" stroke-width="2"')+Rc(x+46,415,2,225,'#c9a45c','opacity=".6"')).join('')+
+  Rc(0,640,390,160,'#efe5d6')+Array.from({length:7},(_,i)=>Pl((i*70-20)+',640 '+(i*70+30)+',640 '+(i*70+60)+',800 '+(i*70-70)+',800',i%2?'#d9cbb5':'#f6eddf')).join('')+
+  '<g class="sc-cloud">'+Array.from({length:14},(_,i)=>'<circle cx="'+((i*61+30)%380)+'" cy="'+(300+((i*47)%320))+'" r="'+(5+i%4*3)+'" fill="#ffe9b0" opacity=".28"/>').join('')+'</g>'+
+  Pa('M0 0H70Q40 160 62 330H0Z','#8c3a4a','opacity=".85"')+Pa('M390 0H320Q350 160 328 330H390Z','#8c3a4a','opacity=".85"')+
+  '</svg>',
+ cover:'<div class="sc-spot"></div>'};
+/* 17. Taman modern: gazebo bunga, jalusi membuka */
+SC.taman={couple:'g7',vc:'pastel',fl:['#f7b6c2','#fff3f0','#cfe3c0','#f4d58a'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#d5e8f7','#f1f3ee','#e4eed8')+
+  '<g class="sc-cloud"><ellipse cx="80" cy="140" rx="70" ry="12" fill="#fff" opacity=".8"/><ellipse cx="300" cy="200" rx="80" ry="12" fill="#fff" opacity=".75"/></g>'+
+  Pa('M-20 560Q100 500 220 550T410 530V800H-20Z','#bcd9a4')+Pa('M-20 620Q120 570 250 615T410 600V800H-20Z','#9fc88a')+
+  Pa('M42 660V450a153 130 0 0 1 306 0V660','none','stroke="#fff" stroke-width="12"')+Pa('M42 660V450a153 130 0 0 1 306 0V660','none','stroke="#e8d9c4" stroke-width="3"')+
+  Pa('M62 660V455a133 112 0 0 1 266 0V660','none','stroke="#fff" stroke-width="5" opacity=".8"')+
+  '<g class="sc-sway">'+bunch(64,470,40,90,['#f7b6c2','#fff3f0','#f4d58a'],20,5)+bunch(326,470,40,90,['#f7b6c2','#fff3f0','#cfe3c0'],20,9)+bunch(195,336,80,26,['#fff3f0','#f7b6c2','#f4d58a'],22,13)+'</g>'+
+  '</svg>',
+ cover:'<i class="sc-jl" style="--i:0;top:0"></i><i class="sc-jl" style="--i:1;top:14.3%"></i><i class="sc-jl" style="--i:2;top:28.6%"></i><i class="sc-jl" style="--i:3;top:42.9%"></i><i class="sc-jl" style="--i:4;top:57.2%"></i><i class="sc-jl" style="--i:5;top:71.5%"></i><i class="sc-jl" style="--i:6;top:85.8%"></i>'};
+Object.assign(THEMES,{
+ limas:{theme:{primary:'#8c2f22',accent:'#c4871f',bg:'#fff1d8',text:'#4a2a1a',soft:'#fbe2b8'},font:'classic',style:'soft',flow:'scroll',anim:'rise',pat:'none',flora:false,mo:{sk:2,hv:0,fx:2,op:0,lt:3,bd:1,au:0}},
+ krong:{theme:{primary:'#f0c768',accent:'#e0a53a',bg:'#2a1230',text:'#f6e6cf',soft:'#3d1a3a'},font:'luxe',style:'soft',flow:'auto',anim:'zoom',pat:'none',flora:false,mo:{sk:5,hv:0,fx:8,op:0,lt:0,bd:1,au:0}},
+ melayu:{theme:{primary:'#f0c768',accent:'#e8884a',bg:'#0f3d47',text:'#f6ead0',soft:'#17525a'},font:'signature',style:'soft',flow:'auto',anim:'fade',pat:'none',flora:false,mo:{sk:4,hv:0,fx:4,op:0,lt:1,bd:3,au:0}},
+ ballroom:{theme:{primary:'#8c3a4a',accent:'#b8923f',bg:'#f8f1e8',text:'#3a2c32',soft:'#eadfcf'},font:'editorial',style:'soft',flow:'tap',anim:'fade',pat:'none',flora:false,mo:{sk:3,hv:0,fx:11,op:0,lt:2,bd:2,au:0}},
+ taman:{theme:{primary:'#4f7a5a',accent:'#d98aa0',bg:'#f3f8ee',text:'#33473a',soft:'#e3eed8'},font:'romantic',style:'soft',flow:'auto',anim:'rise',pat:'none',flora:false,mo:{sk:1,hv:0,fx:6,op:0,lt:4,bd:3,au:0}}});
+Object.assign(NAMES,{limas:'Rumah Limas Palembang',krong:'Krong Bade Aceh',melayu:'Rumah Melayu',ballroom:'Ballroom Barat',taman:'Taman Modern'});
 /* daftarkan ke galeri: tampil paling depan di kategori Pernikahan */
 if(Array.isArray(I.TEMPLATES)){const base=I.TEMPLATES.find(t=>t.cat==='wedding');
  if(base){const add=Object.keys(SC).map(k=>Object.assign({},base,THEMES[k],{id:'wedding-'+k,name:NAMES[k],scene:k,theme:Object.assign({},THEMES[k].theme),mo:Object.assign({},THEMES[k].mo),defaults:Object.assign({},base.defaults)}));
   const at=I.TEMPLATES.indexOf(base);I.TEMPLATES.splice(at,0,...add)}}
 
-const GP=/^g(\d|1[01])$/;const GL=['Gambar 1: Marun emas (Minang)','Gambar 2: Hijau emas (Bali)','Gambar 3: Hitam emas (Jawa)','Gambar 4: Marun berhijab','Gambar 5: Hijau berhijab','Gambar 6: Hitam emas berhijab','Gambar 7: Jas hitam dan gaun putih','Gambar 8: Navy Melayu','Gambar 9: Hitam emas modern','Gambar 10: Navy berhijab','Gambar 11: Jawa hitam berhijab','Gambar 12: Krem berhijab'];
+const GP=/^g(\d|1[01])$/;const GL=['Melayu: marun emas','Palembang: hijau emas','Jawa: hitam emas','Melayu: marun berhijab','Melayu: hijau berhijab','Aceh: hitam emas berhijab','Modern Barat: jas hitam gaun putih','Modern: navy','Jawa: hitam batik modern','Melayu: navy berhijab','Jawa: hitam berhijab','Modern: krem berhijab'];
 window.__invCouple={skins:SKT,gl:GL,keys:()=>GL.map((_,i)=>'g'+i).concat(Object.keys(V)),def:k=>SC[k]&&SC[k].couple};
 window.__invScene=function(wrap,data){
  if(!wrap||wrap.dataset.scene)return;const k=data&&data.scene;const S=SC[k];if(!S)return;
