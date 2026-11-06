@@ -21,12 +21,16 @@
   }
   async function encode(obj) {
     const bytes = new TextEncoder().encode(JSON.stringify(obj));
-    if (g.CompressionStream) return 'g.' + b64u(await pipe(bytes, new CompressionStream('gzip')));
-    return 'p.' + b64u(bytes);
+    const plain = 'p.' + b64u(bytes);
+    if (plain.length < 7000 || !g.CompressionStream || !g.DecompressionStream) return plain;
+    try { return 'g.' + b64u(await pipe(bytes, new CompressionStream('gzip'))); } catch (e) { return plain; }
   }
   async function decode(s) {
     let bytes = unb64u(s.slice(2));
-    if (s.slice(0, 2) === 'g.') bytes = await pipe(bytes, new DecompressionStream('gzip'));
+    if (s.slice(0, 2) === 'g.') {
+      if (!g.DecompressionStream) throw new Error('browser lama');
+      bytes = await pipe(bytes, new DecompressionStream('gzip'));
+    }
     return JSON.parse(new TextDecoder().decode(bytes));
   }
 
@@ -39,12 +43,21 @@
     d.gallery = d.gallery.filter(u => !u.startsWith('data:'));
     if (before !== d.gallery.length) dropped.push((before - d.gallery.length) + ' foto galeri');
     if (Array.isArray(d.story)) { let n = 0; d.story = d.story.map(x => { if (x && typeof x.photo === 'string' && x.photo.startsWith('data:')) { n++; return Object.assign({}, x, { photo: '' }); } return x; }); if (n) dropped.push(n + ' foto cerita'); }
+    if (d.film && typeof d.film.bg === 'string' && d.film.bg.startsWith('data:')) { d.film.bg = ''; dropped.push('latar film'); }
     if (typeof d.ci === 'string' && d.ci.startsWith('data:')) { d.ci = ''; dropped.push('gambar pasangan'); }
     if (d.music.src.startsWith('data:')) { d.music = { src: '', name: '' }; dropped.push('musik'); }
     return { payload: { v: 1, id: inv.id, data: d }, dropped };
   }
 
-  const viewerBase = () => new URL('view.html', location.href).href;
+  // Basis URL selalu folder tempat index.html berada (aman untuk /Invita tanpa garis miring)
+  const viewerBase = () => {
+    const u = new URL(location.href);
+    u.hash = ''; u.search = '';
+    let path = u.pathname;
+    if (!path.endsWith('/')) { const last = path.split('/').pop(); path = last.indexOf('.') > -1 ? path.slice(0, path.length - last.length) : path + '/'; }
+    u.pathname = path + 'view.html';
+    return u.href;
+  };
 
   async function buildLink(inv, guest) {
     const lp = linkPayload(inv);
