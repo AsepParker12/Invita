@@ -673,11 +673,11 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 .sc-tk.b{top:61%;bottom:0;background:repeating-linear-gradient(90deg,#1f3a5f 0 3px,transparent 3px 7px,#1f3a5f 7px 8px,transparent 8px 14px) 50% 78%/70% 22% no-repeat,#fbf3e2;-webkit-mask:radial-gradient(circle 16px at 0 0,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 0,transparent 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 0,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 0,transparent 98%,#000) right/51% 100% no-repeat}
 .opened .sc-tk.a{transform:translateY(-105%) rotate(-2deg)}.opened .sc-tk.b{transform:translateY(105%) rotate(2deg)}
 /* 9. polaroid */
-.sc-pl{position:absolute;left:11%;right:11%;top:8%;bottom:10%;background:linear-gradient(#fffdf8,#fffdf8);box-shadow:0 14px 34px rgba(60,30,10,.4);transform:rotate(var(--tr));z-index:var(--z);transition:transform 1.3s cubic-bezier(.6,0,.3,1) calc(var(--z)*.07s),opacity .9s .5s}
-.sc-pl::before{content:"";position:absolute;left:6%;right:6%;top:5%;bottom:20%;background:linear-gradient(150deg,#f7c9b3,#b8d4c8 60%,#f2e0a8)}
-.sc-pl:nth-child(2n)::before{background:linear-gradient(150deg,#c9d9f0,#f4c7d4 60%,#fbe8b8)}
-.sc-pl::after{content:"";position:absolute;left:38%;right:38%;top:-14px;height:26px;background:rgba(242,227,168,.85);transform:rotate(-3deg)}
-.opened .sc-pl{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}
+.sc-pil{position:absolute;left:11%;right:11%;top:8%;bottom:10%;background:linear-gradient(#fffdf8,#fffdf8);box-shadow:0 14px 34px rgba(60,30,10,.4);transform:rotate(var(--tr));z-index:var(--z);transition:transform 1.3s cubic-bezier(.6,0,.3,1) calc(var(--z)*.07s),opacity .9s .5s}
+.sc-pil::before{content:"";position:absolute;left:6%;right:6%;top:5%;bottom:20%;background:linear-gradient(150deg,#f7c9b3,#b8d4c8 60%,#f2e0a8)}
+.sc-pil:nth-child(2n)::before{background:linear-gradient(150deg,#c9d9f0,#f4c7d4 60%,#fbe8b8)}
+.sc-pil::after{content:"";position:absolute;left:38%;right:38%;top:-14px;height:26px;background:rgba(242,227,168,.85);transform:rotate(-3deg)}
+.opened .sc-pil{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}
 [data-scene=polaroid] .cover-in{padding-bottom:0}
 /* 10. bioskop */
 .sc-cur.red{background:repeating-linear-gradient(90deg,#4a0b13 0,#b3202e 20px,#4a0b13 40px),#4a0b13;box-shadow:inset 0 -90px 100px rgba(0,0,0,.5)}
@@ -699,7 +699,7 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 @keyframes ltBob{to{translate:0 -12px}}
 .opened .sc-lt{transform:translateY(-190vh) scale(.7);opacity:0}
 .sc-lan{transform-origin:50% 0;animation:swayT 4.6s ease-in-out infinite alternate}
-@media(prefers-reduced-motion:reduce){.sc-ball,.sc-lt,.sc-lan{animation:none!important}.sc-bk,.sc-tk,.sc-pl,.sc-cl,.sc-sky,.sc-night,.sc-val{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.sc-ball,.sc-lt,.sc-lan{animation:none!important}.sc-bk,.sc-tk,.sc-pil,.sc-cl,.sc-sky,.sc-night,.sc-val{transition:none!important}}
 .sc-cv{z-index:1}
 [data-scene=tiket] .hero{padding-top:52px}[data-scene=lampion] .hero{padding-top:92px}
 /* v8: pasangan lebih besar, rangkaian bunga lebih rendah */
@@ -795,9 +795,9 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 .sc-cp.custom img{max-width:100%;max-height:100%;object-fit:contain;object-position:bottom;display:block;filter:drop-shadow(0 8px 12px rgba(0,0,0,.25))}
 @media(prefers-reduced-motion:reduce){.divd,.ev-card svg,.gal .g-item img,.jr-i::after,.hero .h-date{animation:none!important}.inv-wrap .reveal{transition:none!important}}
 
-/* gambar pasangan dari atlas (couples.webp) */
+/* gambar pasangan dari atlas (couples.jpg) */
 .sc-cp.ph{align-items:flex-end;justify-content:center}
-.sc-cp.ph i{display:block;height:100%;aspect-ratio:400/560;max-width:100%;background:url(couples.webp) no-repeat;background-size:400% 300%;-webkit-mask-image:radial-gradient(ellipse 50% 56% at 50% 54%,#000 66%,transparent 100%);mask-image:radial-gradient(ellipse 50% 56% at 50% 54%,#000 66%,transparent 100%)}
+.sc-cp.ph i{display:block;height:100%;aspect-ratio:400/560;max-width:100%;background:url(couples.jpg) no-repeat;background-size:400% 300%;-webkit-mask-image:radial-gradient(ellipse 50% 56% at 50% 54%,#000 66%,transparent 100%);mask-image:radial-gradient(ellipse 50% 56% at 50% 54%,#000 66%,transparent 100%)}
 .sc-cp.ph{filter:none}
 
 /* ===== v11: rumah adat (limas, krong bade, melayu, ballroom, taman) ===== */
@@ -831,3 +831,29 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 .sc-jl{position:absolute;left:0;right:0;height:14.4%;background:linear-gradient(180deg,#fff,#e9f1e2);box-shadow:inset 0 -3px 0 #cfe0c4;transform-origin:50% 50%;transition:transform .9s cubic-bezier(.6,0,.3,1) calc(.1s + var(--i)*.1s)}
 .opened .sc-jl{transform:rotateX(92deg)}
 [data-scene=taman] .cover .sc-jl{backface-visibility:hidden}
+
+/* ===== v12: gadang, selaso, maimun, pendopo ===== */
+[data-scene=gadang] .hero{color:#3a2418;padding-top:70px}[data-scene=gadang] .hero h1,[data-scene=gadang] .hero h2{color:#7a2418}[data-scene=gadang] .hero .v3-render-names strong{color:#7a2418}[data-scene=gadang] .hero .v3-render-names i,[data-scene=gadang] .cover .v3-render-names i{color:#b8801f;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=gadang] .cover{color:#f7e3b8}[data-scene=gadang] .cover h1,[data-scene=gadang] .cover h2,[data-scene=gadang] .cover .v3-render-names strong{color:#f9e6b6;text-shadow:0 2px 12px rgba(0,0,0,.35)}[data-scene=gadang] .cover .cover-guest{background:rgba(50,20,10,.5);color:#f9e6b6}.m-mini[data-scene=gadang] .hero{padding-top:30px}
+[data-scene=selaso] .hero{color:#2e3a2a;padding-top:70px}[data-scene=selaso] .hero h1,[data-scene=selaso] .hero h2{color:#2f6a4a}[data-scene=selaso] .hero .v3-render-names strong{color:#2f6a4a}[data-scene=selaso] .hero .v3-render-names i,[data-scene=selaso] .cover .v3-render-names i{color:#c4871f;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=selaso] .cover{color:#fff4c8}[data-scene=selaso] .cover h1,[data-scene=selaso] .cover h2,[data-scene=selaso] .cover .v3-render-names strong{color:#fff1b8;text-shadow:0 2px 12px rgba(0,0,0,.35)}[data-scene=selaso] .cover .cover-guest{background:rgba(10,40,30,.5);color:#fff1b8}.m-mini[data-scene=selaso] .hero{padding-top:30px}
+[data-scene=maimun] .hero{color:#2a3a30;padding-top:70px}[data-scene=maimun] .hero h1,[data-scene=maimun] .hero h2{color:#2f6a3a}[data-scene=maimun] .hero .v3-render-names strong{color:#2f6a3a}[data-scene=maimun] .hero .v3-render-names i,[data-scene=maimun] .cover .v3-render-names i{color:#c4871f;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=maimun] .cover{color:#2a3a30}[data-scene=maimun] .cover h1,[data-scene=maimun] .cover h2,[data-scene=maimun] .cover .v3-render-names strong{color:#2f6a3a;text-shadow:0 2px 12px rgba(0,0,0,.35)}[data-scene=maimun] .cover .cover-guest{background:rgba(255,255,255,.65);color:#2f6a3a}.m-mini[data-scene=maimun] .hero{padding-top:30px}
+[data-scene=pendopo] .hero{color:#f8eed8;padding-top:70px}[data-scene=pendopo] .hero h1,[data-scene=pendopo] .hero h2{color:#f6d68a}[data-scene=pendopo] .hero .v3-render-names strong{color:#f6d68a}[data-scene=pendopo] .hero .v3-render-names i,[data-scene=pendopo] .cover .v3-render-names i{color:#f0a867;background:none;-webkit-text-fill-color:currentColor}
+[data-scene=pendopo] .cover{color:#f8eed8}[data-scene=pendopo] .cover h1,[data-scene=pendopo] .cover h2,[data-scene=pendopo] .cover .v3-render-names strong{color:#f6d68a;text-shadow:0 2px 12px rgba(0,0,0,.35)}[data-scene=pendopo] .cover .cover-guest{background:rgba(10,12,30,.55);color:#f6d68a}.m-mini[data-scene=pendopo] .hero{padding-top:30px}
+/* gadang: mosaik songket mengecil */
+.sc-mzg{position:absolute;inset:0;display:grid;grid-template:repeat(6,1fr)/repeat(4,1fr)}
+.sc-mzg i{background:linear-gradient(135deg,#8a2a22,#4a120f);box-shadow:inset 0 0 0 2px rgba(224,176,79,.7),inset 0 0 0 7px rgba(74,18,15,.9),inset 0 0 0 8px rgba(224,176,79,.5);transition:transform .8s cubic-bezier(.6,0,.3,1) calc(.05s + var(--i)*.1s),opacity .3s calc(.6s + var(--i)*.1s)}
+.opened .sc-mzg i{transform:scale(0) rotate(90deg);opacity:0}
+/* selaso: kipas menyapu searah jarum jam */
+@property --fa{syntax:'<angle>';inherits:false;initial-value:0deg}
+.sc-fan{position:absolute;inset:0;--fa:0deg;background:repeating-linear-gradient(45deg,rgba(255,236,160,.18) 0 2px,transparent 2px 16px),linear-gradient(180deg,#2f7a5a,#1f5a42);-webkit-mask:conic-gradient(from 0deg at 50% 52%,transparent var(--fa),#000 var(--fa));mask:conic-gradient(from 0deg at 50% 52%,transparent var(--fa),#000 var(--fa));transition:--fa 1.7s cubic-bezier(.6,0,.3,1) .2s}
+.opened .sc-fan{--fa:362deg}
+/* maimun: pilar naik turun bergantian */
+.sc-tiang{position:absolute;top:0;bottom:0;width:16.8%;background:linear-gradient(90deg,rgba(0,0,0,.18),transparent 20%,transparent 80%,rgba(0,0,0,.18)),repeating-linear-gradient(180deg,#f4d03f 0 36px,#e0b82a 36px 38px);box-shadow:inset 0 0 0 3px #2f6a3a;transition:transform 1.4s cubic-bezier(.65,0,.25,1) calc(.1s + var(--i)*.08s)}
+.sc-tiang:nth-child(odd){--d:-104%}.sc-tiang:nth-child(even){--d:104%}
+.opened .sc-tiang{transform:translateY(var(--d))}
+/* pendopo: gunungan membesar menelan layar */
+.sc-cv:has(.sc-gun){overflow:hidden}
+.sc-gun{position:absolute;left:50%;top:50%;width:58%;height:76%;margin:-38% 0 0 -29%;transform-origin:50% 55%;border-radius:50% 50% 8px 8px/70% 70% 8px 8px;background:radial-gradient(circle at 50% 45%,#f4d58a 0 6%,transparent 7%),repeating-linear-gradient(60deg,rgba(244,213,138,.3) 0 2px,transparent 2px 14px),linear-gradient(180deg,#4a2a1a,#2a140a);box-shadow:0 0 0 160vmax #2b1810,inset 0 0 0 4px #d9a441,inset 0 0 0 12px #2a140a,inset 0 0 0 14px rgba(217,164,65,.6);transition:transform 1.7s cubic-bezier(.7,0,.2,1) .15s}
+.opened .sc-gun{transform:scale(9)}
