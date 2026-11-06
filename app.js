@@ -322,7 +322,8 @@
       (d.music.src ? '<div class="mini-note">Musik: ' + esc(d.music.name || 'dari tautan') + ' <button type="button" class="btn btn-sm" data-act="music-clear" style="margin-left:8px">Hapus</button></div>' : '') +
       '<label class="dz"><input type="file" id="musicFile" accept="audio/*">Unggah file audio (maks 5 MB). Musik unggahan tidak ikut di tautan bagikan. Pakai URL atau file di repo supaya tamu bisa mendengar.</label>' +
       '<input type="text" id="musicUrl" placeholder="atau URL file .mp3, atau nama file di repo (contoh: lagu.mp3)" value="' + (d.music.src && !isData(d.music.src) ? esc(d.music.src) : '') + '" style="margin-top:8px">' +
-      '<em>Musik mulai saat tamu menekan "Buka Undangan", sesuai aturan browser. Tamu bisa mematikannya.</em></div>' +
+      '<label class="fld" style="margin-top:10px"><span>Musik bawaan (tanpa unggah, bebas hak cipta)</span><select id="bgmSel">' + [['auto', 'Otomatis sesuai template']].concat(window.__invMusic ? window.__invMusic.list() : []).concat([['off', 'Tanpa musik']]).map(o => '<option value="' + o[0] + '"' + ((d.bgm || 'auto') === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>').join('') + '</select></label>' +
+      '<em>Musik mulai saat tamu menekan "Buka Undangan", sesuai aturan browser. Tamu bisa menjeda, membisukan, dan mengatur volume. Musik bawaan dipakai kalau kamu tidak mengunggah musik sendiri.</em></div>' +
       '<p class="mini-note" id="sizeNote"></p>';
   }
 
@@ -471,6 +472,9 @@
           if (!v) { if (!p.data.cover.startsWith('data:')) { p.data.cover = ''; refreshMedia(); } }
           else if (/^https?:\/\/\S+$/i.test(v)) { p.data.cover = v; refreshMedia(); }
           else toast('URL foto harus diawali http:// atau https://', 'error');
+        } else if (t.id === 'bgmSel') {
+          if (t.value === 'auto') delete p.data.bgm; else p.data.bgm = t.value;
+          refreshMedia();
         } else if (t.id === 'musicFile' && t.files[0]) {
           const f = t.files[0];
           if (!/^audio\//.test(f.type)) throw new Error('File harus berupa audio (mp3, m4a, ogg)');
