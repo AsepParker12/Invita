@@ -26,7 +26,12 @@
     if (meta) meta.content = 'Anda diundang: ' + title;
 
     const shareUrl = () => location.href.split('&to=')[0].replace(/#to=.*/, '');
-    I.renderInvitation(root, { id: inv.id, data: d }, { mode: 'public', guest, getShareUrl: shareUrl });
+    try {
+      I.renderInvitation(root, { id: inv.id, data: d }, { mode: 'public', guest, getShareUrl: shareUrl });
+    } catch (e) {
+      try { root.innerHTML = ''; I.renderInvitation(root, { id: inv.id, data: d }, { mode: 'public', guest, getShareUrl: shareUrl, cover: true, safe: true }); }
+      catch (e2) { showError(root, 'Undangan gagal ditampilkan di browser ini. Coba buka lewat Chrome atau Safari.'); }
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
