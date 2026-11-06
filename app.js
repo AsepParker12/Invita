@@ -201,7 +201,7 @@
       '<p>Ucapan buku tamu hanya tersimpan di perangkat tamu yang menulisnya. Konfirmasi kehadiran sampai ke Anda lewat WhatsApp.</p></div></div></section>';
     const cl = [];
     const ph = (sel, id) => { const t = I.templateById(id); const r = renderInvitation($(sel), { id: 'demo-' + id, data: demoData(t) }, { mode: 'preview', cover: false, guest: 'Nama Tamu' }); cl.push(() => r.destroy()); };
-    ph('#phB', 'birthday-confetti'); ph('#phF', 'wedding-rosegold');
+    ph('#phB', 'wedding-amv-cinema'); ph('#phF', 'wedding-amv-neon');
     onLeave(() => cl.forEach(f => f()));
     mountGallery($('#gal'));
     $('a[href="#templates"]').onclick = e => { e.preventDefault(); $('#templates').scrollIntoView({ behavior: 'smooth' }); };
@@ -659,4 +659,3 @@
   init();
 })();
 
- 
