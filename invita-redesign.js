@@ -366,7 +366,7 @@ SC.joglo={couple:'g2',vc:'jawa',fl:['#8a1f2d','#c4453f','#f4e1c8','#a8324a'],
   '<path d="M26 0C70 60 14 120 58 210" fill="none" stroke="#c8a24a" stroke-width="3.5"/><path d="M364 0C320 60 376 120 332 210" fill="none" stroke="#c8a24a" stroke-width="3.5"/><g fill="#c8a24a"><circle cx="58" cy="214" r="5"/><circle cx="332" cy="214" r="5"/></g></svg>',
  cover:'<div class="sc-door l"></div><div class="sc-door r"></div>'};
 /* ---------- 2. Amplop beludru: tirai terbelah, kartu renda ---------- */
-SC.beludru={couple:'g8',vc:'gaun',fl:['#e7b7c2','#f4e6ea','#d98aa0','#f7d7cf'],
+SC.beludru={couple:'g7',vc:'gaun',fl:['#e7b7c2','#f4e6ea','#d98aa0','#f7d7cf'],
  bg:id=>{let f='';for(let i=0;i<15;i++)f+='<rect x="'+(i*27)+'" width="27" height="700" fill="url(#f'+id+')" opacity="'+(i%2?.9:.55)+'"/>';
   return '<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="f'+id+'" x1="0" x2="1"><stop offset="0" stop-color="#0b150b"/><stop offset=".5" stop-color="#2a3d22"/><stop offset="1" stop-color="#0b150b"/></linearGradient><linearGradient id="fl'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1c14"/><stop offset="1" stop-color="#080504"/></linearGradient></defs><rect width="390" height="800" fill="#0f180e"/>'+f+'<rect y="690" width="390" height="110" fill="url(#fl'+id+')"/><rect y="640" width="390" height="60" fill="#d8bfae" opacity=".28"/></svg>'},
  cover:'<div class="sc-cur l"></div><div class="sc-cur r"></div><div class="sc-env"><i class="fl"></i></div>'};
@@ -413,7 +413,7 @@ SC.tiket={couple:'g6',vc:'tuxIvory',fl:['#f7b267','#fff1dc','#8ec5e8','#f4845f']
 SC.polaroid={couple:'g9',vc:'pastelBlue',fl:['#f5b7a0','#fff2e2','#c8d9a8','#f2d27a'],
  bg:id=>{const card=(x,y,r,c1,c2)=>'<g transform="translate('+x+' '+y+') rotate('+r+')"><rect x="-46" y="-54" width="92" height="108" fill="#fffdf8" filter="drop-shadow(0 4px 5px rgba(60,30,10,.3))"/><rect x="-39" y="-47" width="78" height="76" fill="url(#p'+id+')"/><rect x="-14" y="-62" width="28" height="12" fill="#f2e3a8" opacity=".85" transform="rotate(-4)"/></g>';
   return '<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="p'+id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7c9b3"/><stop offset="1" stop-color="#b8d4c8"/></linearGradient></defs><rect width="390" height="800" fill="#d8b68c"/>'+[0,1,2,3,4,5,6,7,8,9,10,11,12,13].map(i=>'<rect x="'+(i*28)+'" width="2" height="800" fill="#9c7448" opacity=".25"/>').join('')+'<rect width="390" height="800" fill="#f3e2c6" opacity=".25"/>'+card(52,330,-9)+card(338,300,8)+card(46,500,6)+card(346,470,-7)+'</svg>'},
- cover:'<div class="sc-pl" style="--dx:-130%;--dy:-40%;--r:-40deg;--z:1;--tr:-6deg"></div><div class="sc-pl" style="--dx:130%;--dy:-30%;--r:36deg;--z:2;--tr:5deg"></div><div class="sc-pl" style="--dx:-120%;--dy:60%;--r:-30deg;--z:3;--tr:-3deg"></div><div class="sc-pl" style="--dx:0%;--dy:140%;--r:14deg;--z:4;--tr:2deg"></div>'};
+ cover:'<div class="sc-pil" style="--dx:-130%;--dy:-40%;--r:-40deg;--z:1;--tr:-6deg"></div><div class="sc-pil" style="--dx:130%;--dy:-30%;--r:36deg;--z:2;--tr:5deg"></div><div class="sc-pil" style="--dx:-120%;--dy:60%;--r:-30deg;--z:3;--tr:-3deg"></div><div class="sc-pil" style="--dx:0%;--dy:140%;--r:14deg;--z:4;--tr:2deg"></div>'};
 /* ---------- 10. Bioskop: tirai merah dan lampu sorot ---------- */
 SC.bioskop={couple:'g10',vc:'tuxRed',fl:['#d64545','#f2c94c','#f5e6d0','#8f1f2a'],
  bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="b'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6d8" stop-opacity=".55"/><stop offset="1" stop-color="#fff6d8" stop-opacity="0"/></linearGradient><pattern id="h'+id+'" width="28" height="30" patternUnits="userSpaceOnUse"><rect width="28" height="30" fill="#1b1013"/><rect x="8" y="8" width="12" height="14" rx="3" fill="#6b5a4a"/></pattern></defs><rect width="390" height="800" fill="#120709"/><path d="M110 0H280L390 560H0Z" fill="url(#b'+id+')" opacity=".7"/><path d="M0 0H120L60 480H0Z" fill="url(#b'+id+')" opacity=".35"/><rect x="0" width="30" height="800" fill="url(#h'+id+')"/><rect x="360" width="30" height="800" fill="url(#h'+id+')"/>'+
@@ -531,6 +531,61 @@ Object.assign(THEMES,{
  ballroom:{theme:{primary:'#8c3a4a',accent:'#b8923f',bg:'#f8f1e8',text:'#3a2c32',soft:'#eadfcf'},font:'editorial',style:'soft',flow:'tap',anim:'fade',pat:'none',flora:false,mo:{sk:3,hv:0,fx:11,op:0,lt:2,bd:2,au:0}},
  taman:{theme:{primary:'#4f7a5a',accent:'#d98aa0',bg:'#f3f8ee',text:'#33473a',soft:'#e3eed8'},font:'romantic',style:'soft',flow:'auto',anim:'rise',pat:'none',flora:false,mo:{sk:1,hv:0,fx:6,op:0,lt:4,bd:3,au:0}}});
 Object.assign(NAMES,{limas:'Rumah Limas Palembang',krong:'Krong Bade Aceh',melayu:'Rumah Melayu',ballroom:'Ballroom Barat',taman:'Taman Modern'});
+/* ---------- 18-21. Rumah Gadang, Selaso Riau, Istana Maimun, Pendopo Jawa ---------- */
+const gon=(x,y,w,h,f,g)=>Pa('M'+x+' '+y+'Q'+(x+w*.12)+' '+(y-h*.5)+' '+(x+w*.04)+' '+(y-h)+'Q'+(x+w*.3)+' '+(y-h*.5)+' '+(x+w*.5)+' '+(y-h*.45)+'Q'+(x+w*.7)+' '+(y-h*.5)+' '+(x+w*.96)+' '+(y-h)+'Q'+(x+w*.88)+' '+(y-h*.5)+' '+(x+w)+' '+y+'Z',f,g||'');
+SC.gadang={couple:'g0',vc:'melayu',fl:['#e7c35a','#fff0b8','#c9302c','#d98aa0'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#9ec9d8','#e8dcc0','#f3d9a2')+
+  '<g class="sc-cloud"><ellipse cx="90" cy="160" rx="70" ry="11" fill="#fff" opacity=".7"/><ellipse cx="290" cy="240" rx="80" ry="11" fill="#fff" opacity=".6"/></g>'+
+  Pa('M-20 520Q60 400 150 500T300 470T420 520V800H-20Z','#5f8a5a','opacity=".8"')+Pa('M-20 600Q120 540 250 600T420 580V800H-20Z','#487a3f')+
+  [70,118,166,214,262,310].map(x=>Rc(x,600,10,80,'#4a2a18')).join('')+Rc(40,586,310,16,'#6b3a1e')+
+  Pl('52,586 338,586 322,470 68,470','#8a2a22')+[84,130,176,222,268].map(x=>Rc(x,478,4,104,'#e0b04f','opacity=".7"')).join('')+
+  [0,1,2,3,4,5,6,7,8].map(i=>Pl((70+i*30)+',482 '+(84+i*30)+',482 '+(77+i*30)+',500','#e0b04f','opacity=".8"')).join('')+
+  gon(40,474,310,90,'#3a2418')+gon(110,420,170,64,'#4a2d1d')+
+  Pa('M40 474Q57 429 54 384','none','stroke="#e0b04f" stroke-width="3"')+Pa('M350 474Q333 429 336 384','none','stroke="#e0b04f" stroke-width="3"')+
+  Pl('170,600 220,600 232,700 158,700','#7a4a28')+[610,628,646,664,682].map(y=>Rc(160,y,70,3,'#3a2412','opacity=".5"')).join('')+
+  '</svg>',
+ cover:'<div class="sc-mzg">'+Array.from({length:24},(_,i)=>'<i style="--i:'+((i%4)+(i/4|0))+'"></i>').join('')+'</div>'};
+SC.selaso={couple:'g3',vc:'melayu',fl:['#f6d36a','#fff4c8','#2f8f6a','#e8884a'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#f6d36a','#f9e9b4','#cfe8d8')+
+  '<g class="sc-sun"><circle cx="90" cy="150" r="52" fill="#fff6d0" opacity=".7"/></g>'+
+  Rc(0,640,390,160,'#3a8a74')+ripple(660,6,'#fff')+palm(34,690,1.1,'#2a6a4a')+palm(358,690,1.1,'#2a6a4a')+
+  [66,110,154,198,242,286].map(x=>Rc(x,610,11,90,'#6a4220')).join('')+Rc(44,598,302,13,'#8a5a2a')+
+  Rc(56,470,278,130,'#f2d27a')+[70,128,186,244].map(x=>Rc(x,490,46,100,'#6a4220')+Pa('M'+x+' 490a23 22 0 0 1 46 0','#6a4220')+Rc(x+6,496,34,90,'#ffe9a8','opacity=".9"')).join('')+
+  Pl('30,474 360,474 306,418 84,418','#2f7a5a')+Pl('30,474 360,474 352,484 38,484','#c4871f')+
+  Pl('100,420 290,420 258,366 132,366','#3a8a6a')+Pl('100,420 290,420 284,428 106,428','#c4871f')+
+  Pl('150,368 240,368 220,330 170,330','#46997a')+
+  Pa('M195 332L160 290Q156 283 163 283L195 310L227 283Q234 283 230 290Z','#c4871f')+Rc(193,270,4,64,'#c4871f')+
+  Pl('172,598 218,598 228,700 162,700','#8a5a2a')+[606,624,642,660,678].map(y=>Rc(164,y,60,3,'#4a2c12','opacity=".5"')).join('')+
+  '</svg>',
+ cover:'<div class="sc-fan"></div>'};
+SC.maimun={couple:'g9',vc:'melayu',fl:['#f6d44a','#fff7cf','#2f8f4f','#e0892a'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#7fb5dc','#cfe6f2','#fbeec0')+
+  '<g class="sc-cloud"><ellipse cx="80" cy="150" rx="70" ry="12" fill="#fff" opacity=".85"/><ellipse cx="300" cy="230" rx="80" ry="12" fill="#fff" opacity=".8"/></g>'+
+  Rc(0,660,390,140,'#7da86a')+Rc(0,660,390,10,'#5f8a50')+palm(30,690,1.1,'#2f6a3a')+palm(362,690,1.1,'#2f6a3a')+
+  Rc(36,470,318,196,'#f4d03f')+Rc(36,470,318,10,'#d9a520')+Rc(36,656,318,10,'#d9a520')+
+  [56,106,156,206,256,306].map(x=>Rc(x,506,28,150,'#fbe27a')+Pa('M'+x+' 506a14 14 0 0 1 28 0','#fbe27a')+Rc(x+5,512,18,140,'#2f6a3a')+Pa('M'+(x+5)+' 512a9 9 0 0 1 18 0','#2f6a3a')).join('')+
+  Rc(150,400,90,72,'#f4d03f')+Rc(150,400,90,8,'#d9a520')+Pa('M158 472V430a37 36 0 0 1 74 0V472','#2f6a3a')+Pa('M160 400Q195 330 230 400Z','#2f8f4f')+Pa('M170 340Q195 280 220 340Z','#2f8f4f')+Rc(193,262,4,34,'#d9a520')+'<circle cx="195" cy="258" r="6" fill="#d9a520"/>'+
+  Pl('30,470 360,470 340,436 50,436','#2f8f4f')+Pl('30,470 360,470 356,478 34,478','#d9a520')+
+  '</svg>',
+ cover:'<i class="sc-tiang" style="--i:0;left:0"></i><i class="sc-tiang" style="--i:1;left:16.7%"></i><i class="sc-tiang" style="--i:2;left:33.4%"></i><i class="sc-tiang" style="--i:3;left:50%"></i><i class="sc-tiang" style="--i:4;left:66.7%"></i><i class="sc-tiang" style="--i:5;left:83.4%"></i>'};
+SC.pendopo={couple:'g8',vc:'jawa',fl:['#d9a441','#fff0c2','#b8452f','#f4d58a'],
+ bg:id=>'<svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMax slice">'+sky(id,'#40507a','#d98a6a','#f6c98a')+
+  '<g class="sc-sun"><circle cx="195" cy="330" r="110" fill="#ffd59a" opacity=".35"/><circle cx="195" cy="330" r="40" fill="#ffe7bd"/></g>'+
+  '<g class="sc-sway"><ellipse cx="40" cy="450" rx="60" ry="100" fill="#2d4a35"/><ellipse cx="355" cy="440" rx="62" ry="106" fill="#2d4a35"/></g>'+
+  Rc(0,660,390,140,'#6a4a2a')+Rc(30,640,330,24,'#8a5a30')+
+  [60,150,240,330].map(x=>Rc(x-8,430,16,214,'#5a3418')+Rc(x-12,424,24,10,'#d9a441')).join('')+
+  Pl('14,432 376,432 310,368 80,368','#5a2e1a')+Pl('14,432 376,432 370,442 20,442','#d9a441')+
+  Pl('92,370 298,370 252,316 138,316','#6a3820')+Pl('92,370 298,370 292,378 98,378','#d9a441')+
+  Pl('142,318 248,318 222,282 168,282','#7a4326')+Rc(193,250,4,34,'#d9a441')+
+  '<g class="sc-cloud">'+[105,195,285].map(x=>Rc(x-1,444,2,24,'#d9a441')+'<ellipse cx="'+x+'" cy="480" rx="9" ry="13" fill="#ffd27a"/>').join('')+'</g>'+
+  '</svg>',
+ cover:'<div class="sc-gun"></div>'};
+Object.assign(THEMES,{
+ gadang:{theme:{primary:'#8a2a22',accent:'#c4871f',bg:'#f7ecd2',text:'#3a2418',soft:'#efdcb0'},font:'classic',style:'soft',flow:'scroll',anim:'rise',pat:'none',flora:false,mo:{sk:2,hv:0,fx:1,op:0,lt:3,bd:1,au:0}},
+ selaso:{theme:{primary:'#2f7a5a',accent:'#c4871f',bg:'#fff6d8',text:'#2e3a2a',soft:'#f6e6a8'},font:'script',style:'soft',flow:'auto',anim:'slide',pat:'none',flora:false,mo:{sk:1,hv:0,fx:5,op:0,lt:4,bd:3,au:0}},
+ maimun:{theme:{primary:'#2f6a3a',accent:'#d9a520',bg:'#eaf4fa',text:'#2a3a30',soft:'#fbf0c4'},font:'clean',style:'soft',flow:'scroll',anim:'zoom',pat:'none',flora:false,mo:{sk:4,hv:0,fx:4,op:0,lt:1,bd:2,au:0}},
+ pendopo:{theme:{primary:'#f4d58a',accent:'#d9a441',bg:'#2b2f4a',text:'#f8eed8',soft:'#3a3f62'},font:'luxe',style:'soft',flow:'auto',anim:'fade',pat:'none',flora:false,mo:{sk:6,hv:0,fx:8,op:0,lt:0,bd:3,au:0}}});
+Object.assign(NAMES,{gadang:'Rumah Gadang',selaso:'Selaso Jatuh Kembar',maimun:'Istana Maimun',pendopo:'Pendopo Jawa'});
 /* daftarkan ke galeri: tampil paling depan di kategori Pernikahan */
 if(Array.isArray(I.TEMPLATES)){const base=I.TEMPLATES.find(t=>t.cat==='wedding');
  if(base){const add=Object.keys(SC).map(k=>Object.assign({},base,THEMES[k],{id:'wedding-'+k,name:NAMES[k],scene:k,theme:Object.assign({},THEMES[k].theme),mo:Object.assign({},THEMES[k].mo),defaults:Object.assign({},base.defaults)}));
@@ -551,7 +606,7 @@ window.__invScene=function(wrap,data){
   else if(data.cv!=='none'){const ck=(data.cv&&(V[data.cv]||GP.test(data.cv)))?data.cv:S.couple,vk=V[ck]?ck:(V[S.vc]?S.vc:'jawa');
    const vec=()=>'<div class="sc-cp">'+couple(vk,id,{skin:+data.cs||0,hj:(data.ch===0||data.ch==='0')?0:1})+'</div>';
    if(GP.test(ck)){const n=+ck.slice(1),c=n%4,r=(n/4)|0;cp='<div class="sc-cp ph"><i style="background-position:'+(c*100/3)+'% '+(r*50)+'%"></i></div>'}else cp=vec();
-   if(GP.test(ck)){setTimeout(()=>{const im=new Image();im.onerror=()=>{const b=hero.querySelector('.sc-cp.ph');if(b)b.outerHTML=vec()};im.src='couples.webp'},0)}}
+   if(GP.test(ck)){setTimeout(()=>{const im=new Image();im.onerror=()=>{const b=hero.querySelector('.sc-cp.ph');if(b)b.outerHTML=vec()};im.src='couples.jpg'},0)}}
   fg.innerHTML=fb+cp+fl;hero.appendChild(fg)}
  const cover=wrap.querySelector('.cover');
  if(cover){const c=document.createElement('div');c.className='sc-cv';c.setAttribute('aria-hidden','true');c.innerHTML=S.cover;cover.insertBefore(c,cover.firstChild)}
