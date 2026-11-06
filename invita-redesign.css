@@ -1133,3 +1133,24 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 .fm-tx{padding-top:16%}
 .sh-names .fm-tx,.sh-closing .fm-tx,.sh-end .fm-tx{padding-top:18%}
 .inv-wrap>.bm,.bm{z-index:300}
+
+/* ===== v16: gaya undangan animasi premium (panel kertas, tulisan sambung, adegan tiap mempelai) ===== */
+.fm-soft .ft.nm .amv-t{font-family:'Great Vibes','Allura','Pinyon Script','Parisienne','Snell Roundhand',cursive;font-weight:400;letter-spacing:0;line-height:1.12;text-transform:none}
+.fm-soft .ft.pa .amv-t{font-family:'Cormorant Garamond','Lora',Georgia,serif;font-style:italic;font-weight:500;letter-spacing:.01em}
+.fm-soft .ft.sm .amv-t{letter-spacing:.2em;font-size:calc(var(--fs)*.8)}
+.fm-soft .ft.sm.nm .amv-t{letter-spacing:0;font-size:var(--fs)}
+.fm-paper{width:100%;max-width:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.5vh,14px);padding:15% 9% 9%;background:rgba(255,251,244,.86);color:var(--a2);border-radius:42% 42% 22px 22px/15% 15% 22px 22px;box-shadow:0 22px 50px -18px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.75);outline:1px solid color-mix(in srgb,var(--a3) 75%,transparent);outline-offset:-9px;animation:ppIn 1.2s cubic-bezier(.2,.8,.2,1) .2s both;overflow:hidden}
+[data-tone=dark] .fm-paper{background:rgba(24,14,16,.66);box-shadow:0 22px 50px -18px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,230,180,.28)}
+.sh-closing .fm-paper,.sh-quote .fm-paper{border-radius:36% 36% 22px 22px/12% 12% 22px 22px}
+@keyframes ppIn{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+.fm-paper .ft{width:100%}
+.sh-quote .fm-tx,.sh-closing .fm-tx,.sh-venue .fm-tx,.sh-date .fm-tx{justify-content:center;padding:12% 8% 14%}
+.sh-closing .fm-tx{justify-content:center}
+.fm-paper .ft .amv-t{text-shadow:none}
+/* adegan tiap mempelai: orang yang dipilih digeser ke tengah dan diperbesar sedikit, nama di atas */
+.sh-person .fm-cpl .sc-fg{height:58%}
+.sh-person .fm-cpi .sc-fg{scale:1.24;transform-origin:50% 100%}
+.sh-person .fm-cpi.pk0 .sc-fg{translate:15% 0}
+.sh-person .fm-cpi.pk1 .sc-fg{translate:-15% 0}
+.sh-person .fm-tx{justify-content:flex-start;padding:12% 7% 0}
+.fm-paper{animation-delay:0s}
