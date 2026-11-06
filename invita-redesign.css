@@ -1090,3 +1090,46 @@ details.grp[open]>summary::after{content:"+";transform:rotate(45deg);background:
 .fm-row{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;padding:10px;border:1px solid var(--line,#e6e1d6);border-radius:14px}
 .fm-row b{font-size:.85rem}.fm-row .sub{grid-column:1/-1;display:grid;grid-template-columns:70px 1fr 1fr;gap:6px}
 .fm-row input[type=number],.fm-row select{width:100%;padding:8px;border-radius:10px;border:1px solid var(--line,#ddd);background:var(--card,#fff);font:inherit;font-size:.82rem}
+
+/* ===== v15: teks film disusun otomatis (tanpa tumpang tindih), animasi lebih tenang, kontrol musik ===== */
+.fm-tx{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.8vh,18px);padding:13% 7% 15%;box-sizing:border-box;overflow:hidden;text-align:center}
+.sh-names .fm-tx,.sh-closing .fm-tx,.sh-end .fm-tx{justify-content:flex-start;padding-top:15%}
+.sh-story .fm-tx{justify-content:flex-end;padding-bottom:17%}
+.sh-venue .fm-tx,.sh-date .fm-tx{padding-top:14%}
+.fm-tx .ft{position:relative;left:auto;right:auto;top:auto;transform:none;width:100%;max-width:100%;padding:0;flex:0 0 auto;min-width:0;display:flex;justify-content:center}
+.fm-tx .ft[hidden]{display:flex;visibility:hidden}
+.fm-tx .ft .amv-t{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:none;text-wrap:balance;line-height:1.08;font-size:var(--fs)}
+.fm-tx .ft.pa .amv-t{line-height:1.22}
+.fm-tx .ft.sm .amv-t{max-width:100%}
+.ftg{display:grid;width:100%;flex:0 0 auto}
+.ftg>.ft{grid-area:1/1;align-self:center}
+.fm-tx .ft.off{animation:ftOut2 .7s ease-in forwards}
+@keyframes ftOut2{to{opacity:0;transform:translateY(-8px)}}
+.sh-interlude .fm-scrim,.sh-quote .fm-scrim{height:100%}
+.sh-interlude .fm-tx{padding:0 9%}
+.fm-back{opacity:.5}
+/* transisi lebih lambat dan lembut */
+.shot{--trd:1.15s}
+.shot.tr-zoom{animation:trZoom2 1.25s cubic-bezier(.2,.7,.2,1) both}
+@keyframes trZoom2{from{transform:scale(1.1);opacity:0}to{transform:none;opacity:1}}
+.shot.tr-slide{animation:trSlide 1.1s cubic-bezier(.45,0,.2,1) both}
+.shot.tr-blinds,.shot.tr-diag{animation:trFade var(--trd) ease both}
+.amv-flash{display:none}
+/* ikon jeda: muncul sebentar, tidak menutupi teks */
+.amv-pz{width:60px;height:60px;margin:-30px;background:rgba(0,0,0,.4)}
+.amv-pz svg{width:26px;height:26px}
+.amv.paused .amv-pz{opacity:0;animation:pzIn 1.1s ease both}
+@keyframes pzIn{0%{opacity:0;transform:scale(.7)}18%,55%{opacity:.9;transform:none}100%{opacity:0;transform:none}}
+/* kontrol musik */
+.bm{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:10px;z-index:40;display:flex;align-items:center;gap:2px;padding:3px 8px 3px 3px;border-radius:999px;background:rgba(0,0,0,.45);color:#fff;font:600 11px/1 Inter,system-ui,sans-serif}
+.bm button{all:unset;box-sizing:border-box;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:#fff}
+.bm button:active{background:rgba(255,255,255,.2)}
+.bm svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bm svg .f{fill:currentColor;stroke:none}
+.bm input[type=range]{width:58px;height:20px;margin:0 0 0 2px;accent-color:#fff;background:transparent}
+.bm .bm-n{display:none}
+.bm.off .bm-play{opacity:.85}
+.inv-wrap .bm{pointer-events:auto}
+.fm-tx{padding-top:16%}
+.sh-names .fm-tx,.sh-closing .fm-tx,.sh-end .fm-tx{padding-top:18%}
+.inv-wrap>.bm,.bm{z-index:300}
