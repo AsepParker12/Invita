@@ -9,7 +9,13 @@ const COPY={
  wedding:[
   ['Our Wedding',SALAM+'.\n“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan untukmu dari jenismu sendiri, agar kamu merasa tenteram kepadanya.” (QS. Ar-Rum: 21)','Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari pernikahan kami. Kehadiran dan doa restu Anda adalah kebahagiaan terbesar bagi kami.','Atas kehadiran dan doa restunya, kami ucapkan terima kasih yang sebesar-besarnya.\n'+WAS+'.'],
   ['Kami Menikah','Dari dua cerita yang berbeda, kini kami memilih untuk berjalan ke satu arah yang sama.','Tak lengkap rasanya tanpa orang-orang tersayang. Kami mengundang Anda untuk datang, berbagi tawa, dan menjadi saksi awal perjalanan baru kami.','Doa dan kehadiran Anda adalah hadiah terindah bagi kami. Sampai jumpa di hari bahagia!'],
-  ['The Wedding of','Ada cinta yang tumbuh pelan, lalu yakin pada satu nama. Hari ini, kami ingin merayakannya bersama Anda.','Dengan segenap kebahagiaan, kami mengundang Anda untuk hadir dan melengkapi hari istimewa ini dengan senyum dan doa terbaik.','Terima kasih telah menjadi bagian dari cerita kami. Sampai bertemu di hari yang kami nantikan.']
+  ['The Wedding of','Ada cinta yang tumbuh pelan, lalu yakin pada satu nama. Hari ini, kami ingin merayakannya bersama Anda.','Dengan segenap kebahagiaan, kami mengundang Anda untuk hadir dan melengkapi hari istimewa ini dengan senyum dan doa terbaik.','Terima kasih telah menjadi bagian dari cerita kami. Sampai bertemu di hari yang kami nantikan.'],
+  ['Hari Bahagia Kami','Dengan penuh rasa syukur, kami mengundang Anda untuk menjadi bagian dari hari bahagia kami.','Kami akan mengikat janji dalam acara sederhana yang hangat. Kehadiran Anda akan melengkapi kebahagiaan kami.','Terima kasih atas doa dan kehadiran Anda. Semoga kebaikan kembali kepada Anda.'],
+  ['Dua Hati Satu Tujuan','Dua hati, satu tujuan, dan sebuah perjalanan baru yang akan kami mulai bersama.','Kami mengundang Anda untuk menyaksikan awal perjalanan kami, berbagi doa, dan merayakannya bersama keluarga tercinta.','Doa restu Anda adalah bekal terbaik bagi langkah kami.'],
+  ['Merayakan Cinta','Dengan penuh kebahagiaan, kami ingin berbagi momen istimewa ini bersama orang-orang terkasih.','Acara akan berlangsung sederhana namun hangat. Semoga Anda berkenan hadir dan berbagi senyum bersama kami.','Sampai jumpa, dan terima kasih telah ikut berbahagia bersama kami.'],
+  ['Kisah Kami','Sebuah kisah cinta membawa kami menuju hari yang telah lama dinantikan.','Setelah perjalanan yang panjang, kini kami siap melangkah ke babak baru. Hadirlah dan saksikan awal kisah kami.','Terima kasih telah menjadi bagian dari kisah kami.'],
+  ['Menuju Selamanya','Cinta yang tumbuh perlahan kini bersiap menjadi rumah untuk selamanya.','Dengan kerendahan hati, kami mengharapkan kehadiran dan doa restu Anda pada hari pernikahan kami.','Kehadiran Anda adalah hadiah yang tak ternilai bagi kami.'],
+  ['Janji Setia','Hari ini kami mengikat janji, dan kami ingin Anda ada di sana.','Mohon kesediaan Anda hadir untuk memberi doa dan restu. Itu akan menjadi kenangan indah bagi kami.','Dengan penuh cinta, kami ucapkan terima kasih.']
  ],
  birthday:[
   ['Birthday Party','Bertambah usia, bertambah syukur, dan bertambah alasan untuk berkumpul bersama orang-orang tersayang.','Yuk, rayakan bersama kami! Ada makanan enak, permainan seru, dan banyak tawa yang menunggu. Kehadiranmu membuat hari ini jauh lebih spesial.','Ditunggu ya! Datang dengan senyum terbaik, sisanya biar kami yang siapkan.'],
@@ -76,8 +82,9 @@ const PALETTES=[
 const STYLES=['frame','arch','minimal','soft','bold','modern'];const FONTS=['romantic','signature','classic','luxe','parisienne','elegant','editorial','clean','modern','playful'];const ANIMS=['rise','fade','slide','zoom'];const PATS=['leaf','none','lines','dots','sparkle','star','confetti'];
 const HAS_TPL=Array.isArray(I.TEMPLATES);
 if(Array.isArray(I.FLOWS)&&!I.FLOWS.includes('auto'))I.FLOWS.push('auto');if(I.FLOW_LABEL)I.FLOW_LABEL.auto='Otomatis';
+window.__invCopy=COPY;
 const FXL={wedding:[0,1,6,5,11,9],keluarga:[0,6,4,7],pengajian:[2,8,11,5],aqiqah:[2,4,7,0],khitanan:[2,8,5],wisuda:[2,3,9,5],birthday:[3,4,6,9,5],opening:[3,9,5,10],reuni:[3,4,8,10],lainnya:[3,5,4,11]};
-const counters={};(I.TEMPLATES||[]).forEach(t=>{const i=counters[t.cat]||0;counters[t.cat]=i+1;const p=PALETTES[i%PALETTES.length];t.name=(NAMES[t.cat]||NAMES.lainnya)[i%10];t.style=STYLES[i%STYLES.length];t.font=FONTS[i%FONTS.length];t.anim=ANIMS[i%ANIMS.length];t.pat=PATS[(i+(t.cat==='birthday'?6:0))%PATS.length];t.flora=['wedding','aqiqah','keluarga','pengajian'].includes(t.cat)&&i%3!==2;t.theme={primary:p[0],accent:p[1],bg:p[2],text:p[3],soft:p[4]};const c=(COPY[t.cat]||COPY.lainnya)[0];t.defaults={title:c[0],opening:c[1],description:c[2],closing:c[3]};const fl=FXL[t.cat]||FXL.lainnya;t.mo={sk:(i*3+(t.cat==='wedding'?0:2))%7,hv:(i*5+1)%8,fx:fl[i%fl.length],op:(i*3+2)%8,lt:(i*2+1)%5,bd:(i+1)%4,au:(i*3)%4};});
+const counters={};(I.TEMPLATES||[]).forEach(t=>{const i=counters[t.cat]||0;counters[t.cat]=i+1;const p=PALETTES[i%PALETTES.length];t.name=(NAMES[t.cat]||NAMES.lainnya)[i%10];t.style=STYLES[i%STYLES.length];t.font=FONTS[i%FONTS.length];t.anim=ANIMS[i%ANIMS.length];t.pat=PATS[(i+(t.cat==='birthday'?6:0))%PATS.length];t.flora=['wedding','aqiqah','keluarga','pengajian'].includes(t.cat)&&i%3!==2;t.theme={primary:p[0],accent:p[1],bg:p[2],text:p[3],soft:p[4]};const cl=(COPY[t.cat]||COPY.lainnya),c=cl[i%cl.length];t.defaults={title:c[0],opening:c[1],description:c[2],closing:c[3]};const fl=FXL[t.cat]||FXL.lainnya;t.mo={sk:(i*3+(t.cat==='wedding'?0:2))%7,hv:(i*5+1)%8,fx:fl[i%fl.length],op:(i*3+2)%8,lt:(i*2+1)%5,bd:(i+1)%4,au:(i*3)%4};});
 if(HAS_TPL){I.textVariants=cat=>(COPY[cat]||COPY.lainnya).map(v=>({title:v[0],opening:v[1],description:v[2],closing:v[3]}));
 const dStory=()=>[{date:'2021',title:'Pertama Bertemu',text:'Sebuah pertemuan sederhana yang membuka halaman pertama cerita kami.',photo:''},{date:'2023',title:'Memilih Bersama',text:'Dua perjalanan sepakat untuk berjalan menuju rumah yang sama.',photo:''},{date:'2026',title:'Hari Bahagia',text:'Kini kami ingin berbagi kebahagiaan ini bersama Anda.',photo:''}];I.__defStory=dStory;
 const stamp=(d,t)=>{d.mo=Object.assign({},t.mo);d.scene=t.scene||'';delete d.cv;delete d.cs;delete d.ch;delete d.ci;if(t.cat==='wedding'&&!Array.isArray(d.story))d.story=dStory();return d};
@@ -94,7 +101,7 @@ function couple(wrap,d){const t=pair(d);if(!t||!wrap)return;const fs=t[1].length
 const RVL=['fade','left','right','zoom','flip','wipe','drop','pop'];
 function secFx(wrap){if(!wrap)return;const sk=+wrap.dataset.sk||0,lt=+wrap.dataset.lt||0;let n=0;wrap.querySelectorAll('.reveal').forEach(el=>{el.dataset.rv=RVL[(sk+lt+n*3)%8];n++})}
 const baseRender=I.renderInvitation;
-I.renderInvitation=function(root,inv,opts){const r=baseRender.apply(this,arguments);try{if(opts&&opts.mode==='preview'&&inv&&inv.id&&!/^(tpl|demo)-/.test(inv.id))I.__edit=inv.data;couple(r&&r.wrap,inv&&inv.data);secFx(r&&r.wrap)}catch(e){}try{if(window.__invScene)window.__invScene(r&&r.wrap,inv&&inv.data)}catch(e){}try{if(window.__invMotion)window.__invMotion(r&&r.wrap,opts||{},inv&&inv.data)}catch(e){}try{if(window.__invAmv)window.__invAmv(r&&r.wrap,inv&&inv.data,opts||{})}catch(e){}return r};
+I.renderInvitation=function(root,inv,opts){const r=baseRender.apply(this,arguments);try{if(opts&&opts.mode==='preview'&&inv&&inv.id&&!/^(tpl|demo)-/.test(inv.id))I.__edit=inv.data;couple(r&&r.wrap,inv&&inv.data);secFx(r&&r.wrap)}catch(e){}try{if(window.__invScene)window.__invScene(r&&r.wrap,inv&&inv.data)}catch(e){}try{if(window.__invMotion)window.__invMotion(r&&r.wrap,opts||{},inv&&inv.data)}catch(e){}try{if(window.__invAmv)window.__invAmv(r&&r.wrap,inv&&inv.data,opts||{});window.__invMusic&&window.__invMusic.attach(r&&r.wrap,inv&&inv.data,opts||{},inv&&inv.id)}catch(e){}return r};
 const esc=s=>I.esc(s);
 const fld=(l,id,v,type='text',ph='')=>'<label class="fld"><span>'+l+'</span><input id="'+id+'" type="'+type+'" value="'+esc(v||'')+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'></label>';
 async function imgData(file){if(!file||!file.type.startsWith('image/'))return'';const url=URL.createObjectURL(file);try{const im=await new Promise((r,j)=>{const x=new Image;x.onload=()=>r(x);x.onerror=j;x.src=url});const sc=Math.min(1,900/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);c.getContext('2d').drawImage(im,0,0,c.width,c.height);return c.toDataURL('image/jpeg',.76)}finally{URL.revokeObjectURL(url)}}
@@ -116,6 +123,8 @@ function installEditor(){const form=document.querySelector('#form');if(!form||fo
   const rebuild=()=>setTimeout(()=>{const f=document.querySelector('#form');if(f){f.dataset.v3='';f.querySelectorAll('.v3-amv-editor').forEach(x=>x.remove())}},0);
   const rows=()=>X.plan(Object.assign({},I.__edit,{flow:'amv'})).map(r=>{const ov=(C.shots&&C.shots[r.id])||{};return'<div class="fm-row" data-id="'+r.id+'"><label><input type="checkbox" class="on" checked> <b>'+esc(r.label)+'</b></label><span></span><div class="sub"><input type="number" class="du" min="1" max="20" step="0.5" value="'+r.dur+'" aria-label="Durasi detik"><select class="cm">'+opt(X.cams,ov.cam||'auto')+'</select><select class="tr">'+opt(X.trs,ov.tr||'auto')+'</select></div></div>'}).join('');
   pa.innerHTML='<summary>Film (adegan, kamera, animasi)</summary><div class="grp-body"><p class="mini-note">Film jalan sendiri. Ketuk layar sekali untuk jeda, ketuk lagi untuk lanjut. Nama, tanggal, tempat, cerita, dan foto diambil dari isian lain. Kalau mau tanpa film, ubah Alur ke Gulir.</p>'+
+   '<label class="fld"><span>Kalimat sambutan (kosongkan untuk kalimat bawaan template)</span><textarea id="amvo" rows="3" maxlength="260">'+esc((E0.film||{}).open||'')+'</textarea></label>'+
+   '<label class="fld"><span>Kalimat penutup (kosongkan untuk bawaan)</span><textarea id="amvc" rows="2" maxlength="200">'+esc((E0.film||{}).close||'')+'</textarea></label>'+
    '<label class="fld"><span>Kata pembuka (satu baris satu kata atau kalimat pendek)</span><textarea id="amvl" rows="3" maxlength="400" placeholder="Contoh:&#10;Kami&#10;Mengundang&#10;Anda">'+esc((C.lines||[]).join('\n'))+'</textarea></label>'+
    (isA?'<label class="fld"><span>Gaya AMV</span><select id="amvk">'+opt(X.looks,String(E0.scene).replace(/^amv-?/,''))+'</select></label><label class="fld"><span>Font film</span><select id="amvf">'+opt(X.fonts,C.f)+'</select></label><label class="fld"><span>Efek teks</span><select id="amvx">'+opt(X.fx,C.fx)+'</select></label><label class="fld"><span>Dekorasi kilatan</span><select id="amvd">'+opt(X.dc,C.dc)+'</select></label>':'<label class="fld"><span>Efek teks</span><select id="amvx">'+opt(X.fx,C.fx)+'</select></label>')+
    '<label class="fld"><span>Gerak kamera (semua adegan)</span><select id="amvc">'+opt(X.cams,C.cam)+'</select></label>'+
@@ -132,8 +141,9 @@ function installEditor(){const form=document.querySelector('#form');if(!form||fo
   form.insertBefore(pa,form.querySelectorAll('.grp')[1]||null);
   pa.querySelectorAll('.fm-row').forEach(r=>{const ov=(C.shots&&C.shots[r.dataset.id])||{};r.querySelector('.on').checked=ov.on!==false});
   const go=()=>{host.dispatchEvent(new Event('input',{bubbles:true}))};
+  pa.querySelector('#amvo').oninput=e=>{F().open=e.target.value;go()};pa.querySelector('#amvc').oninput=e=>{F().close=e.target.value;go()};
   pa.querySelector('#amvl').oninput=e=>{F().lines=e.target.value.split('\n').map(x=>x.trim()).filter(Boolean).slice(0,12);go()};
-  const k=pa.querySelector('#amvk');if(k)k.onchange=e=>{const E=I.__edit,f=F();E.scene='amv-'+e.target.value;E.film={lines:f.lines,sp:f.sp,shots:f.shots,cam:f.cam,tr:f.tr,orn:f.orn,cs:f.cs,cx:f.cx,bg:f.bg};go();rebuild()};
+  const k=pa.querySelector('#amvk');if(k)k.onchange=e=>{const E=I.__edit,f=F();E.scene='amv-'+e.target.value;E.film={lines:f.lines,open:f.open,close:f.close,sp:f.sp,shots:f.shots,cam:f.cam,tr:f.tr,orn:f.orn,cs:f.cs,cx:f.cx,bg:f.bg};go();rebuild()};
   const on=(id,key,ev)=>{const el=pa.querySelector(id);if(el)el[ev||'onchange']=e=>{F()[key]=e.target.value;go()}};
   on('#amvf','f');on('#amvx','fx');on('#amvd','dc');on('#amvc','cam');on('#amvt','tr');on('#amvo','orn');
   pa.querySelector('#amvs').oninput=e=>{F().sp=+e.target.value/100;pa.querySelector('#amvsv').textContent=e.target.value+'%';go()};
@@ -660,13 +670,13 @@ const MON=['JANUARI','FEBRUARI','MARET','APRIL','MEI','JUNI','JULI','AGUSTUS','S
 const FONTS={anton:"'Anton','Bebas Neue','Impact','Arial Narrow',sans-serif",bebas:"'Bebas Neue','Anton','Impact','Arial Narrow',sans-serif",archivo:"'Archivo Black','Anton','Impact',sans-serif",syne:"'Syne','Archivo Black','Impact',sans-serif"};
 const FNAME={anton:'Anton (tebal dan rapat)',bebas:'Bebas Neue (ramping)',archivo:'Archivo Black (lebar)',syne:'Syne (modern)'};
 const LOOKS={
- neon:{n:'Neon Beat',base:'ballroom',c:['#07060d','#16072a','#ffffff','#ff2e93','#19f0ff'],f:'anton',fx:['glitch','slam','split','zoom'],dc:['grid','rings','stripes']},
- poster:{n:'Poster Merah',base:'limas',c:['#f3ead7','#e63a2e','#111111','#e63a2e','#1a4fd6'],f:'archivo',fx:['wipe','slam','stack','spin','split'],dc:['bars','dots','cross']},
- cinema:{n:'Sinema Emas',base:'krong',c:['#0b0906','#1a1409','#f3e4bd','#d4a84a','#8a6a2a'],f:'bebas',fx:['zoom','wipe','slam','split'],dc:['rings','bars','stripes']},
- pop:{n:'Pop Warna',base:'taman',c:['#c9b8ff','#ffe66d','#1c1530','#ff6b9d','#3ddc97'],f:'syne',fx:['spin','split','slam','stack','wipe'],dc:['dots','cross','rings']}};
+ neon:{n:'Neon Beat',base:'ballroom',c:['#07060d','#16072a','#ffffff','#ff2e93','#19f0ff'],f:'anton',fx:['glitch','slam','split','zoom'],calm:['wipe','rise'],dc:['grid','rings','stripes']},
+ poster:{n:'Poster Merah',base:'limas',c:['#f3ead7','#e63a2e','#111111','#e63a2e','#1a4fd6'],f:'archivo',fx:['wipe','slam','stack','spin','split'],calm:['wipe','stack','rise'],dc:['bars','dots','cross']},
+ cinema:{n:'Sinema Emas',base:'krong',c:['#0b0906','#1a1409','#f3e4bd','#d4a84a','#8a6a2a'],f:'bebas',fx:['zoom','wipe','slam','split'],calm:['rise','wipe'],dc:['rings','bars','stripes']},
+ pop:{n:'Pop Warna',base:'taman',c:['#c9b8ff','#ffe66d','#1c1530','#ff6b9d','#3ddc97'],f:'syne',fx:['spin','split','slam','stack','wipe'],calm:['rise','split','wipe'],dc:['dots','cross','rings']}};
 const FXL={auto:'Otomatis (campur)',slam:'Hantam',split:'Huruf berhamburan',wipe:'Sapuan',zoom:'Zoom menembus',spin:'Putar',glitch:'Glitch',stack:'Tumpuk'};
 const DCL={auto:'Otomatis',none:'Tanpa dekorasi',rings:'Lingkaran',bars:'Garis',grid:'Kisi plus',dots:'Titik',stripes:'Diagonal',cross:'Silang'};
-const CAMS={auto:{n:'Otomatis (campur)'},zin:{n:'Zoom mendekat',x:[0,0],y:[0,0],s:[1.02,1.24]},zout:{n:'Zoom menjauh',x:[0,0],y:[0,0],s:[1.26,1.02]},panl:{n:'Geser ke kiri',x:[5,-5],y:[0,0],s:[1.14,1.14]},panr:{n:'Geser ke kanan',x:[-5,5],y:[0,0],s:[1.14,1.14]},tup:{n:'Kamera naik',x:[0,0],y:[5,-5],s:[1.14,1.14]},tdn:{n:'Kamera turun',x:[0,0],y:[-5,5],s:[1.14,1.14]},push:{n:'Dorong mendekat',x:[0,0],y:[0,-3],s:[1,1.42]}};
+const CAMS={auto:{n:'Otomatis (campur)'},zin:{n:'Zoom mendekat',x:[0,0],y:[0,0],s:[1.02,1.15]},zout:{n:'Zoom menjauh',x:[0,0],y:[0,0],s:[1.17,1.02]},panl:{n:'Geser ke kiri',x:[4,-4],y:[0,0],s:[1.12,1.12]},panr:{n:'Geser ke kanan',x:[-4,4],y:[0,0],s:[1.12,1.12]},tup:{n:'Kamera naik',x:[0,0],y:[5,-5],s:[1.14,1.14]},tdn:{n:'Kamera turun',x:[0,0],y:[-5,5],s:[1.14,1.14]},push:{n:'Dorong mendekat',x:[0,0],y:[0,-2],s:[1,1.24]}};
 const TRL={auto:'Otomatis (campur)',fade:'Memudar',wipe:'Sapuan',circle:'Lingkaran membuka',slide:'Geser',zoom:'Zoom halus',diag:'Diagonal',blinds:'Jalusi'};
 const ORNL={auto:'Sesuai tema',none:'Tanpa ornamen',kelopak:'Kelopak bunga',daun:'Daun berjatuhan',bintang:'Bintang berkelip',kupu:'Kupu-kupu'};
 const DARK=s=>{const A=window.__invAssets;if(!A||!A.THEMES[s])return false;return lum(A.THEMES[s].theme.bg)<.4};
@@ -682,41 +692,83 @@ function cfg(d){const sc=String(d.scene||''),amv=/^amv/.test(sc),k=sc.replace(/^
 function names(d){const h=String(d.host||'').trim();if(d.n1&&d.n2)return[String(d.n1),String(d.sep||'&'),String(d.n2)];const m=h.split(/\s+(&|dan|and|x|\+)\s+/i);if(m.length===3)return[m[0].trim(),/^(dan|and)$/i.test(m[1])?'&':m[1].trim(),m[2].trim()];return h?[h,'','']:['','','']}
 function words(t,n){return String(t||'').replace(/\s+/g,' ').trim().split(' ').filter(Boolean).slice(0,n)}
 const chunk=(w,n)=>{const o=[];for(let i=0;i<w.length;i+=n)o.push(w.slice(i,i+n).join(' '));return o};
+
+/* ---------- teks: kalimat per tema, pemecah frasa, sinkron ketukan musik ---------- */
+const FC={
+ neon:'Dua hati, satu tujuan, dan sebuah perjalanan baru yang akan kami mulai bersama.',
+ poster:'Dengan penuh kebahagiaan, kami ingin berbagi momen istimewa ini bersama orang-orang terkasih.',
+ cinema:'Sebuah kisah cinta membawa kami menuju hari yang telah lama dinantikan.',
+ pop:'Dari tawa yang sederhana, tumbuh janji untuk saling menjaga selamanya.',
+ joglo:'Dengan memohon restu dan doa, kami menanti kehadiran Anda di hari pernikahan kami.',
+ beludru:'Dengan penuh rasa syukur, kami mengundang Anda untuk menjadi bagian dari hari bahagia kami.',
+ candi:'Seperti candi yang berdiri tenang, cinta kami tumbuh sabar dan kokoh bersama waktu.',
+ ulos:'Seperti helai ulos yang saling menghangatkan, kami memulai hidup baru dalam doa dan restu.',
+ songket:'Benang demi benang kami rajut, hingga menjadi kisah indah yang ingin kami rayakan bersama Anda.',
+ senja:'Di bawah langit senja, kami berjanji menjaga cinta ini sepanjang hari.',
+ buku:'Setiap kisah punya halaman terbaik, dan hari ini kami menuliskannya bersama Anda.',
+ tiket:'Perjalanan panjang kami tiba di satu tujuan, dan Anda kami undang untuk menyambutnya.',
+ polaroid:'Kenangan kecil kami menjadi kisah besar, mari abadikan hari bahagia ini bersama.',
+ bioskop:'Kisah kami sampai pada adegan terindah, dan kami ingin Anda ada di dalamnya.',
+ balon:'Seperti balon yang terbang tinggi, kebahagiaan kami ingin kami bagi bersama Anda.',
+ lampion:'Seperti cahaya lampion di malam hari, semoga restu Anda menerangi langkah kami.',
+ limas:'Dengan rasa syukur dan adat yang kami junjung, kami menanti restu dan kehadiran Anda.',
+ krong:'Dengan mengharap ridha Allah, kami mengundang Anda berbagi doa di hari bahagia kami.',
+ melayu:'Dengan adat dan budi bahasa, kami menjemput kehadiran Anda di majlis pernikahan kami.',
+ ballroom:'Malam yang elegan, cinta yang abadi. Mari merayakannya bersama kami.',
+ taman:'Di antara bunga yang mekar, kami ingin berbagi hari bahagia ini bersama Anda.',
+ gadang:'Dengan mohon doa restu keluarga besar, kami menanti kehadiran Anda di hari pernikahan kami.',
+ selaso:'Dengan hormat dan penuh kebahagiaan, kami mengundang Anda ke majlis pernikahan kami.',
+ maimun:'Dalam kemegahan adat Melayu Deli, kami mengundang Anda untuk hadir dan mendoakan kami.',
+ pendopo:'Dengan segala kerendahan hati, kami mohon doa restu dan kehadiran Anda di hari bahagia kami.'};
+const FE=['Terima kasih telah menjadi bagian dari cerita kami.','Kehadiran dan doa Anda adalah hadiah terindah bagi kami.','Sampai jumpa di hari yang kami nantikan.','Atas doa dan restunya, kami ucapkan terima kasih.'];
+const hsh=t=>{let h=0;for(const c of String(t))h=(h*31+c.charCodeAt(0))>>>0;return h};
+const allCopy=k=>{const cp=window.__invCopy,o=[];if(cp)Object.values(cp).forEach(l=>l.forEach(v=>o.push(String(v[k]||'').trim())));return o};
+function sceneKey(d,C){return C.amv?C.k:C.base}
+function openText(d,C){const A=Object.assign({},d.amv,d.film);if(A.open&&String(A.open).trim())return String(A.open).trim().slice(0,260);
+ const op=String(d.opening||'').trim();if(op&&!/QS\.|INVITA_STORY|^assalam|^bismillah/i.test(op)&&allCopy(1).indexOf(op)<0)return op.slice(0,260);return FC[sceneKey(d,C)]||FC.beludru}
+function closeText(d,C){const A=Object.assign({},d.amv,d.film);if(A.close&&String(A.close).trim())return String(A.close).trim().slice(0,200);
+ const cl=String(d.closing||'').trim();if(cl&&!/wassalam|insya|^\s*$/i.test(cl)&&allCopy(3).indexOf(cl)<0)return cl.slice(0,200);return FE[hsh(sceneKey(d,C))%FE.length]}
+/* pecah kalimat di tanda baca, gabungkan potongan pendek, belah yang terlalu panjang secara seimbang */
+function phrases(t,maxW){t=String(t||'').replace(/\s+/g,' ').trim();if(!t)return[];let ws=t.split(' ');if(ws.length>maxW){t=ws.slice(0,maxW).join(' ');const cut=Math.max(t.lastIndexOf(','),t.lastIndexOf('.'),t.lastIndexOf(';'));if(cut>t.length*.55)t=t.slice(0,cut);t=t.replace(/[,;:]$/,'')}
+ let parts=t.split(/(?<=[,.;:!?])\s+/).filter(Boolean);const out=[];parts.forEach(p=>{const n=p.split(' ').length;if(out.length&&(out[out.length-1].split(' ').length<3||n<3)&&out[out.length-1].split(' ').length+n<=8)out[out.length-1]+=' '+p;else out.push(p)});
+ const fin=[];out.forEach(p=>{const w=p.split(' ');if(w.length>8){const m=Math.ceil(w.length/2);fin.push(w.slice(0,m).join(' '),w.slice(m).join(' '))}else fin.push(p)});return fin.slice(0,5)}
+function beatSnap(S,d){const M=window.__invMusic;const b=M&&M.beatMs?M.beatMs(d):0;if(!b)return;const q=(v,m)=>Math.max(m,Math.round(v/b)*b);
+ S.forEach(sh=>{if(sh.ms>1e8)return;let last=0;sh.items.forEach(it=>{it.at=q(it.at,b);if(it.out){it.out=Math.max(q(it.out,b),it.at+b*1.5);last=Math.max(last,it.out)}else last=Math.max(last,it.at)});sh.ms=Math.max(q(sh.ms,b*2),last+b*3)})}
 /* ---------- rencana adegan ---------- */
-function plan(d,C){const S=[];const nm=names(d),[n1,sep,n2]=nm;const sp=C.sp;const amv=C.amv;const fxs=C.fx==='auto'?(amv?C.L.fx:['wipe','rise','split']):[C.fx];let fi=0;const nx=()=>fxs[(fi++)%fxs.length];
+function plan(d,C){const S=[];const nm=names(d),[n1,sep,n2]=nm;const sp=C.sp;const amv=C.amv;const fxs=C.fx==='auto'?(amv?C.L.calm:['rise','wipe']):[C.fx];let fi=0;const nx=()=>fxs[(fi++)%fxs.length];
  const T=(t,o)=>Object.assign({t:String(t||'').trim(),k:nx(),at:0,out:0,y:50},o||{});
  const sh=(id,label,kind,dur,o)=>{const ov=C.shots[id]||{};if(ov.on===false)return;const ms=(+ov.dur>0?ov.dur*1000:dur)/sp;S.push(Object.assign({id,label,kind,ms,cam:CAMS[ov.cam]&&ov.cam!=='auto'?ov.cam:null,tr:TRL[ov.tr]&&ov.tr!=='auto'?ov.tr:null,items:[]},o||{}))};
- const D=amv?.78:1;
+ const D=1.1;
  const kick=String(d.kicker||'Undangan').trim(),title=String(d.title||'').trim();
   /* pembuka */
  sh('open','Pembuka','open',4300*D,{cam:'zin'});let s=S[S.length-1];
  if(s){let at=500;const ls=C.lines?C.lines:[kick,title];ls.filter(Boolean).forEach((l,i)=>{s.items.push(T(l,{at:at/sp,y:i?46:30,fs:i?1:.34,k:i?nx():'rise',small:!i}));at+=900})}
  if(amv)burst(S,d,C,['Kami','Mengundang','Anda'],T,sp,fxs);
  if(n1){sh('names','Nama pasangan','names',4800*D,{cam:'panl',couple:1,en:'r'});s=S[S.length-1];
-  if(s){s.items.push(T(n1,{k:amv?'slam':'wipe',at:500/sp,y:16,fs:1.05}));if(sep)s.items.push(T(sep,{k:'rise',at:1050/sp,y:27,fs:.5,small:1}));if(n2)s.items.push(T(n2,{k:amv?'slam':'wipe',at:1500/sp,y:36,fs:1.05}));
-   if(amv){s.back=T((n1+' '+(sep||'&')+' '+n2).trim(),{k:'back',at:200/sp,y:56,fs:1.25})}}}
+  if(s){s.items.push(T(n1,{k:'wipe',at:500/sp,y:16,fs:1.05}));if(sep)s.items.push(T(sep,{k:'rise',at:1050/sp,y:27,fs:.5,small:1}));if(n2)s.items.push(T(n2,{k:'wipe',at:1500/sp,y:36,fs:1.05}));
+   }}
  const dt=String(d.date||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
  if(amv&&dt)burst(S,d,C,['Simpan','Tanggalnya'],T,sp,fxs);
  if(dt){const Dd=new Date(+dt[1],+dt[2]-1,+dt[3]);sh('date','Tanggal','date',4300*D,{cam:'tup',land:1});s=S[S.length-1];
-  if(s){s.items.push(T(DAY[Dd.getDay()],{k:'wipe',at:350/sp,y:15,fs:.5}),T(String(+dt[3]),{k:'count',at:900/sp,y:37,fs:1.45,num:+dt[3]}),T(MON[+dt[2]-1],{k:amv?'zoom':'wipe',at:1500/sp,y:63,fs:.62}),T(dt[1],{k:amv?'split':'rise',at:2100/sp,y:76,fs:.4}))}}
+  if(s){s.items.push(T(DAY[Dd.getDay()],{k:'wipe',at:350/sp,y:15,fs:.5}),T(String(+dt[3]),{k:'count',at:900/sp,y:37,fs:1.45,num:+dt[3]}),T(MON[+dt[2]-1],{k:'wipe',at:1500/sp,y:63,fs:.62}),T(dt[1],{k:'rise',at:2100/sp,y:76,fs:.4}))}}
  if(d.venue||d.start){sh('venue','Waktu dan tempat','venue',4600*D,{cam:'push',land:0});s=S[S.length-1];
   if(s){let at=400;if(d.venue){s.items.push(T('Bertempat di',{k:'rise',at:at/sp,y:9,fs:.3,small:1}));at+=500;s.items.push(T(d.venue,{k:'wipe',at:at/sp,y:21,fs:.5}));at+=900}
    if(d.address)s.items.push(T(String(d.address).slice(0,60),{k:'rise',at:at/sp,y:40,fs:.3,small:1,sentence:1}));at+=700;
    if(d.start)s.items.push(T('Pukul '+d.start+' '+(d.tz||'WIB'),{k:'wipe',at:at/sp,y:50,fs:.4}))}}
- const ow=words(d.opening||d.description,18);
- if(ow.length>3){const cs=chunk(ow,3);sh('quote','Kata sambutan','quote',Math.max(3600,cs.length*820+600)*D,{cam:'panr',land:2});s=S[S.length-1];if(s){cs.forEach((c,i)=>s.items.push(T(c,{at:(300+i*820*D)/sp,out:(300+(i+1)*820*D-60)/sp,y:48,fs:.62,k:nx()})))}}
+ const ph0=phrases(openText(d,C),30);
+ if(ph0.length){const per=ph0.map(p=>Math.max(2500,p.split(' ').length*400));let at=600;sh('quote','Kata sambutan','quote',per.reduce((a,b)=>a+b,0)+1500,{cam:'panr',land:2});s=S[S.length-1];if(s){ph0.forEach((p,k)=>{s.items.push(T(p,{at:at/sp,out:(at+per[k]-300)/sp,fs:1,para:1,k:nx()}));at+=per[k]})}}
  (d.story||[]).slice(0,5).forEach((x,i)=>{sh('story'+i,'Cerita: '+(x.title||x.date||i+1),'story',4400*D,{cam:['zin','panl','tdn','panr','zout'][i%5],land:i%3,card:x,idx:i});s=S[S.length-1];
   if(s){if(x.date)s.back=T(x.date,{k:'back',at:300/sp,y:30,fs:1.5});if(x.title)s.items.push(T(x.title,{k:'wipe',at:900/sp,y:74,fs:.5}));if(x.text)s.items.push(T(String(x.text).slice(0,110),{k:'rise',at:1700/sp,y:85,fs:.26,small:1,sentence:1}))}});
  const ph=[d.cover].concat(d.gallery||[]).filter(Boolean).slice(0,4);
  ph.forEach((u,i)=>{sh('photo'+i,'Foto '+(i+1),'photo',2800*D,{cam:['zin','panl','zout','panr'][i%4],img:u})});
  if(amv)burst(S,d,C,['Dengan','Penuh','Cinta'],T,sp,fxs);
- const cw=words(d.closing,12),cc=cw.length>2?chunk(cw,3):['Merupakan kehormatan','bagi kami','atas kehadiran','Anda'];
- sh('closing','Penutup','closing',Math.max(3800,cc.length*800+700)*D,{cam:'zout',couple:1,en:'z'});s=S[S.length-1];
- if(s)cc.forEach((c,i)=>s.items.push(T(c,{at:(400+i*800*D)/sp,out:(400+(i+1)*800*D-60)/sp,y:20,fs:.55,k:nx()})));
+ const cc=phrases(closeText(d,C),14);if(!cc.length)cc.push('Merupakan kehormatan bagi kami atas kehadiran Anda');
+ {const per=cc.map(p=>Math.max(2600,p.split(' ').length*420));let at=600;sh('closing','Penutup','closing',per.reduce((a,b)=>a+b,0)+1400,{cam:'zout',couple:1,en:'z'});s=S[S.length-1];
+ if(s)cc.forEach((c,k)=>{s.items.push(T(c,{at:at/sp,out:(at+per[k]-300)/sp,fs:.8,para:1,k:nx()}));at+=per[k]})}
  sh('end','Akhir','end',1e9,{cam:'zin',couple:1,en:'b'});s=S[S.length-1];
- if(s){s.ms=1e9;s.fin=1;s.items.push(T('Sampai jumpa',{k:amv?'zoom':'rise',at:300/sp,y:12,fs:.5,small:1}));if(n1){s.items.push(T(n1,{k:amv?'slam':'wipe',at:900/sp,y:21,fs:.95}));if(sep)s.items.push(T(sep,{k:'rise',at:1300/sp,y:31,fs:.4,small:1}));if(n2)s.items.push(T(n2,{k:amv?'slam':'wipe',at:1600/sp,y:38,fs:.95}))}}
- return S}
-function burst(S,d,C,ws,T,sp,fxs){const s={id:'b'+S.length,label:'',kind:'burst',ms:(ws.length*430+250)/sp,items:[],hid:1};ws.forEach((w,i)=>s.items.push(T(w,{k:fxs[i%fxs.length],at:(i*430)/sp,out:((i+1)*430-30)/sp,y:50,fs:1.15,flash:1})));S.push(s)}
+ if(s){s.ms=1e9;s.fin=1;s.items.push(T('Sampai jumpa',{k:'rise',at:300/sp,y:12,fs:.5,small:1}));if(n1){s.items.push(T(n1,{k:'wipe',at:900/sp,y:21,fs:.95}));if(sep)s.items.push(T(sep,{k:'rise',at:1300/sp,y:31,fs:.4,small:1}));if(n2)s.items.push(T(n2,{k:'wipe',at:1600/sp,y:38,fs:.95}))}}
+ beatSnap(S,d);S.forEach(sh=>{let po=0;sh.items.forEach(it=>{if(!it.out)return;if(it.at<po+780){const w=it.out-it.at;it.at=po+780;it.out=it.at+w}po=it.out;if(sh.ms<1e8)sh.ms=Math.max(sh.ms,po+1500)})});return S}
+function burst(S,d,C,ws,T,sp,fxs){const k=S.length;S.push({id:'b'+k,label:'',kind:'interlude',ms:3300/sp,hid:1,land:k%3,cam:['zin','zout','panl'][k%3],items:[T(ws.join(' '),{k:'rise',at:700/sp,fs:1,para:1})]})}
 /* ---------- latar buatan (parallax) ---------- */
 function land(kind,id,dark,pal){const W=390,H=800;const sky=dark?['#14112e','#4a2a5a','#d9705a']:['#9fd0ea','#fde1bd','#ffe9cf'];const mt=dark?['#3a2f5e','#241c42','#120d28']:['#b6cfdc','#86ad9f','#5b8a6a'];
  const g='<defs><linearGradient id="lg'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+sky[0]+'"/><stop offset=".55" stop-color="'+sky[1]+'"/><stop offset="1" stop-color="'+sky[2]+'"/></linearGradient></defs>';
@@ -728,7 +780,7 @@ function land(kind,id,dark,pal){const W=390,H=800;const sky=dark?['#14112e','#4a
  if(kind==='sky')return[svg(g+'<rect width="390" height="800" fill="url(#lg'+id+')"/>'+star+'<circle cx="290" cy="170" r="34" fill="#fff6dc"/><circle cx="302" cy="162" r="30" fill="'+sky[0]+'"/>','ly-far'),svg(mts(mt[1],700,170,4,0),'ly-mid'),svg(mts(mt[2],790,130,3,40),'ly-near')];
  return[svg(g+'<rect width="390" height="800" fill="url(#lg'+id+')"/>'+star+sun,'ly-far'),svg(mts(mt[0],650,210,4,0),'ly-mid'),svg(mts(mt[1],720,190,3,30)+mts(mt[2],800,150,2,60),'ly-near')]}
 /* ---------- bangun satu adegan ---------- */
-const TRK=['wipe','circle','slide','zoom','diag','blinds','fade'];
+const TRK=['fade','slide','fade','zoom','circle','fade','wipe'];
 function filmShotHtml(sh,env){const{C,d,S,A,id,dark,W}=env;const k=C.base;const sc=sh.cam||(C.cam!=='auto'?C.cam:null)||'zin';const cam=CAMS[sc]||CAMS.zin;const dur=Math.round(Math.min(sh.ms,60000)+900);
  const cv=(f)=>{const x=cam.x||[0,0],y=cam.y||[0,0],s=cam.s||[1,1];return'--x0:'+(x[0]*f).toFixed(2)+'%;--x1:'+(x[1]*f).toFixed(2)+'%;--y0:'+(y[0]*f).toFixed(2)+'%;--y1:'+(y[1]*f).toFixed(2)+'%;--s0:'+(1+(s[0]-1)*f).toFixed(3)+';--s1:'+(1+(s[1]-1)*f).toFixed(3)+';--cd:'+dur+'ms'};
  let layers='';
@@ -751,11 +803,12 @@ function filmShotHtml(sh,env){const{C,d,S,A,id,dark,W}=env;const k=C.base;const 
 function orn(kind,S,dark){const cols=kind==='bintang'?['#fff3b0','#ffe27a','#fff']:kind==='daun'?['#5f8a4a','#7aa65a','#3f6a3a']:(S.fl||['#f7b6c2','#fff','#f4d58a']);const sh={kelopak:'p',daun:'l',bintang:'s',kupu:'b'}[kind]||'p';let h='';for(let i=0;i<(kind==='bintang'?16:10);i++){const l=(i*83+11)%100,dl=(i%7)*.9,du=7+(i%5)*1.6;h+='<i class="o-'+sh+'" style="left:'+l+'%;top:'+((i*37)%90)+'%;--c:'+cols[i%cols.length]+';animation-delay:-'+dl+'s;animation-duration:'+du+'s"></i>'}return'<div class="fm-orn" aria-hidden="true">'+h+'</div>'}
 const DEC={rings:()=>'<div class="dc dc-rings">'+[0,1,2,3].map(i=>'<i style="--i:'+i+'"></i>').join('')+'</div>',bars:()=>'<div class="dc dc-bars">'+[0,1,2,3,4].map(i=>'<i style="--i:'+i+'"></i>').join('')+'</div>',grid:()=>'<div class="dc dc-grid"></div>',dots:()=>'<div class="dc dc-dots"></div>',stripes:()=>'<div class="dc dc-stripes"><i></i><i></i><i></i></div>',cross:()=>'<div class="dc dc-cross"><i></i><i></i></div>'};
 function letters(t){let n=0;return String(t).split('\n').map(l=>l.split(' ').map(w=>'<b class="aw">'+[...w].map(ch=>{const i=n++,a=(i*97)%360,r=(i*53)%90-45;return'<i style="--i:'+i+';--x:'+Math.round(Math.cos(a)*140)+'px;--y:'+Math.round(Math.sin(a)*190)+'px;--r:'+r+'deg">'+esc(ch)+'</i>'}).join('')+'</b>').join(' ')).join('<br>')}
-function itemHtml(it,W,H,C){let t=it.small&&!it.sentence?it.t.toUpperCase():(C.amv||it.back?it.t.toUpperCase():it.t);if(it.k==='count')t=String(it.num);
- const ls=t.split('\n');const mx=Math.max(...ls.map(l=>Math.max(...l.split(' ').map(w=>w.length),3)));let fs=Math.min(W*.46,(W*.88)/(mx*(C.amv?.5:.55)));fs=Math.max(18,fs*(it.fs||1));if(!C.amv&&it.k!=='back'&&it.k!=='count')fs=Math.min(fs,W*(it.small?.06:.17));if(it.sentence)fs=Math.min(fs,W*.05+4);if(it.small)fs=Math.min(fs,W*.07+4);
+function itemHtml(it,W,H,C){let t=it.small&&!it.sentence?it.t.toUpperCase():(C.amv&&!it.para||it.back?it.t.toUpperCase():it.t);if(it.k==='count')t=String(it.num);
+ const ls=t.split('\n');const mx=Math.max(...ls.map(l=>Math.max(...l.split(' ').map(w=>w.length),3)));let fs=Math.min(W*(C.amv?.34:.46),(W*.84)/(mx*(C.amv?.5:.55)));fs=Math.max(16,fs*(it.fs||1));if(!C.amv&&it.k!=='back'&&it.k!=='count')fs=Math.min(fs,W*(it.small?.06:.15));if(it.sentence)fs=Math.min(fs,W*.05+4);if(it.small)fs=Math.min(fs,W*.07+4);
+ if(it.para){fs=W*(C.amv?.088:.066)*(it.fs||1);if(C.amv&&it.t.length>46)fs*=.88}
  const tx=esc(t).replace(/\n/g,'<br>');const body=it.k==='split'?letters(t):it.k==='stack'?'':tx;
  const kk=it.k==='stack'?'k-stack':'k-'+it.k;const inner=it.k==='stack'?[0,1,2,3,4].map(i=>'<span class="sr s'+i+'" style="--i:'+i+'">'+tx+'</span>').join(''):it.k==='count'?'<span class="cn" data-to="'+it.num+'">0</span>':body;
- return'<div class="ft'+(it.small?' sm':'')+'" style="top:'+it.y+'%;--fs:'+fs.toFixed(1)+'px"><div class="amv-t '+kk+'"'+(it.k==='glitch'?' data-t="'+esc(t)+'"':'')+'>'+inner+'</div></div>'}
+ return'<div class="ft'+(it.small?' sm':'')+(it.para?' pa':'')+'" data-fs="'+fs.toFixed(1)+'" style="--fs:'+fs.toFixed(1)+'px"><div class="amv-t '+kk+'"'+(it.k==='glitch'?' data-t="'+esc(t)+'"':'')+'>'+inner+'</div></div>'}
 window.__invAmv=function(wrap,data,opts){
  if(!wrap||wrap.dataset.amv)return;const d=data||{};if(!isFilm(d))return;opts=opts||{};const AS=window.__invAssets;if(!AS)return;
  loadFonts();const C=cfg(d),S=AS.SC[C.base]||AS.SC.limas;const mode=opts.mode||'public',loopMode=/^(mini|static)$/.test(mode);
@@ -768,15 +821,23 @@ window.__invAmv=function(wrap,data,opts){
  const SH=plan(d,C),id=(Math.random()*1e5|0)+'';
  const st=document.createElement('div');st.className='amv';
  st.innerHTML='<div class="amv-flat"></div><div class="amv-shots"></div><div class="amv-dcl"></div><div class="amv-flash"></div><div class="amv-fx"></div><div class="amv-pg"><i></i></div><div class="amv-pz" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4.2" height="14" rx="1"/><rect x="13.8" y="5" width="4.2" height="14" rx="1"/></svg></div><div class="amv-hint"></div><div class="amv-end" hidden><button type="button" class="amv-go">Buka detail undangan</button><button type="button" class="amv-re">Putar ulang</button></div>';
- wrap.appendChild(st);const re=document.createElement('button');re.type='button';re.className='amv-again';re.textContent='Putar film';re.hidden=true;wrap.appendChild(re);
+ st.style.visibility='hidden';wrap.appendChild(st);const re=document.createElement('button');re.type='button';re.className='amv-again';re.textContent='Putar film';re.hidden=true;wrap.appendChild(re);
  const q=s=>st.querySelector(s),shots=q('.amv-shots'),flat=q('.amv-flat'),flash=q('.amv-flash'),dcl=q('.amv-dcl'),pg=q('.amv-pg i'),hint=q('.amv-hint'),end=q('.amv-end');
  const ornK=C.orn==='auto'?(C.amv?'none':'kelopak'):C.orn;
  const bgs=[[C.c[0],C.c[2]],[C.c[1],C.c[2]],[C.c[3],C.c[0]],[C.c[2],C.c[0]],[C.c[4],C.c[0]]];
  let i=-1,acc=0,last=0,paused=false,running=false,vis=true,done=false,cur=null,prev=null,trEnd=0,bi=0,dcn=0,trn=0;
  const dcs=()=>C.dc==='none'?[]:C.dc==='auto'?(C.L?C.L.dc:[]):[C.dc];
+ function fitShot(el){const box=el.querySelector('.fm-tx');if(!box)return;const sh=el._sh||{};
+  const run=()=>{const cs=getComputedStyle(box),pt=parseFloat(cs.paddingTop)||0,pb=parseFloat(cs.paddingBottom)||0,gap=parseFloat(cs.rowGap)||0;const H=box.clientHeight;
+   let budget=H-pt-pb;if(/names|closing|end/.test(sh.kind))budget=Math.min(budget,H*(sh.kind==='end'?.42:.38)-pt*.3);if(sh.kind==='story')budget=Math.min(budget,H*.30);
+   const its=[...box.querySelectorAll('.ft')];its.forEach(f=>f.style.setProperty('--fs',(f.dataset.fs||40)+'px'));
+   its.forEach(f=>{const tt=f.querySelector('.amv-t');if(!tt)return;let fs=parseFloat(f.dataset.fs)||40,n=0;while(n++<22&&fs>13&&tt.scrollWidth>tt.clientWidth+1){fs*=.92;f.style.setProperty('--fs',fs+'px')}});
+   let k=0;const tot=()=>{let t=0,c=0;[...box.children].forEach(x=>{t+=x.offsetHeight;c++});return t+gap*Math.max(0,c-1)};
+   while(k++<26&&tot()>budget){its.forEach(f=>{const v=parseFloat(f.style.getPropertyValue('--fs'))||40;f.style.setProperty('--fs',Math.max(12,v*.93)+'px')})}};
+  run();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(el.isConnected)run()}).catch(()=>{})}
  function mk(n){const sh=SH[n];const W=wrap.clientWidth||390,H=wrap.clientHeight||760;const env={C,d:Object.assign({},d,{theme:th}),S,A:AS,id,dark,W};
   const el=document.createElement('div');const tr=sh.tr||(C.tr!=='auto'?C.tr:null)||(n===0?'fade':TRK[(trn++)%TRK.length]);
-  el.className='shot sh-'+sh.kind+' tr-'+tr+(C.amv?' fast':'');el.style.setProperty('--dur',Math.round(Math.min(sh.ms,60000))+'ms');
+  el.className='shot sh-'+sh.kind+' tr-'+tr;el.style.setProperty('--dur',Math.round(Math.min(sh.ms,60000))+'ms');
   if(sh.kind==='burst'){const r0=filmShotHtml(sh,env);el.innerHTML=r0.layers+'<div class="fm-tint"></div>';const fl=document.createElement('div');fl.className='fm-flatb';el.appendChild(fl);sh.flat=fl}
   else{const r=filmShotHtml(sh,env);let h=r.layers;
    if(C.amv&&sh.kind!=='photo')h+='<div class="fm-tint"></div>';
@@ -784,15 +845,14 @@ window.__invAmv=function(wrap,data,opts){
    if(sh.back)h+='<div class="fm-back">'+itemHtml(Object.assign({},sh.back,{k:'back'}),W,H,C).replace('class="ft','class="ft back')+'</div>';
    h+=r.cpl+r.card+'<div class="fm-scrim"></div>';el.innerHTML=h;
    if(sh.back){const b=el.querySelector('.fm-back .ft');sh.backEl=b}}
-  const box=document.createElement('div');box.className='fm-tx';sh.items.forEach(it=>{const w=document.createElement('div');w.innerHTML=itemHtml(it,W,H,C);const e=w.firstChild;e.hidden=true;it.el=e;it.on=false;it.off=false;box.appendChild(e)});el.appendChild(box);
+  const box=document.createElement('div');box.className='fm-tx';let grp=null;sh.items.forEach(it=>{const w=document.createElement('div');w.innerHTML=itemHtml(it,W,H,C);const e=w.firstChild;e.hidden=true;it.el=e;it.on=false;it.off=false;if(it.out){if(!grp){grp=document.createElement('div');grp.className='ftg';box.appendChild(grp)}grp.appendChild(e)}else{grp=null;box.appendChild(e)}});el.appendChild(box);
   if(sh.backEl){sh.backEl.hidden=true;sh.back.el=sh.backEl;sh.back.on=false}
   return el}
  function turn(it,sh){it.on=true;it.el.hidden=false;
-  const tt=it.el.querySelector('.amv-t');let fs=parseFloat(it.el.style.getPropertyValue('--fs'))||60,n=0;const W=wrap.clientWidth||390;while(n++<14&&fs>16&&tt.scrollWidth>tt.clientWidth+1){fs*=.9;it.el.style.setProperty('--fs',fs+'px')}
+  
   const cn=it.el.querySelector('.cn');if(cn){const to=+cn.dataset.to,s=performance.now();const tk=t=>{if(!cn.isConnected)return;const k=Math.min(1,(t-s)/460);cn.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(tk)};requestAnimationFrame(tk)}
-  if(it.flash){const cl=bgs[(bi++)%bgs.length];sh.flat.style.background='color-mix(in srgb,'+cl[0]+' 84%,transparent)';st.style.setProperty('--fg',cl[1]);it.el.style.color=cl[1];flash.classList.remove('on');void flash.offsetWidth;flash.classList.add('on');const ds=dcs();sh.flat.innerHTML=ds.length?DEC[ds[(dcn++)%ds.length]]():''}
-  else if(C.amv&&it.k!=='back'&&sh.kind!=='burst'){flash.classList.remove('on');void flash.offsetWidth;flash.classList.add('on')}}
- function show(n){const sh=SH[n];if(!sh)return;const el=mk(n);if(prev&&prev.parentNode)prev.remove();prev=cur;cur=el;cur._sh=sh;shots.appendChild(el);trEnd=n===0||/^fade/.test(el.className.match(/tr-(\w+)/)[0])?900:(C.amv?520:1000);
+  }
+ function show(n){const sh=SH[n];if(!sh)return;const el=mk(n);if(prev&&prev.parentNode)prev.remove();prev=cur;cur=el;cur._sh=sh;shots.appendChild(el);fitShot(el);trEnd=1100;
   if(sh.kind!=='burst'){dcl.innerHTML=''}
   if(sh.kind==='burst'){cur.querySelector('.fm-flatb').style.background='color-mix(in srgb,'+bgs[bi%bgs.length][0]+' 84%,transparent)'}
   if(sh.back){sh.back.on=true;sh.backEl.hidden=false}
@@ -807,8 +867,8 @@ window.__invAmv=function(wrap,data,opts){
    if(sh.fin===undefined&&0){}
    const pgv=(i+Math.min(1,acc/Math.max(1,sh.ms>1e8?3000:sh.ms)))/Math.max(1,SH.length-1);pg.style.transform='scaleX('+Math.min(1,pgv)+')'}
   requestAnimationFrame(frame)}
- function setPause(v){paused=v;st.classList.toggle('paused',v);hint.textContent=v?'Dijeda, ketuk untuk lanjut':'Ketuk di mana saja untuk jeda';hint.classList.add('on');clearTimeout(setPause.t);if(!v)setPause.t=setTimeout(()=>hint.classList.remove('on'),2600)}
- function start(){if(running)return;running=true;i=-1;acc=0;done=false;end.hidden=true;wrap.classList.remove('amv-fin');shots.innerHTML='';cur=prev=null;next();setPause(false);requestAnimationFrame(frame)}
+ function setPause(v){paused=v;st.classList.toggle('paused',v);wrap.classList.toggle('amv-paused',v);try{window.__invMusic&&window.__invMusic.hold(v)}catch(e){}hint.textContent=v?'Dijeda, ketuk untuk lanjut':'Ketuk di mana saja untuk jeda';clearTimeout(setPause.t);if(v)hint.classList.add('on');else hint.classList.add('on');if(!v)setPause.t=setTimeout(()=>hint.classList.remove('on'),2600)}
+ function start(){if(running)return;running=true;st.style.visibility='';try{window.__invMusic&&window.__invMusic.begin(wrap,d,!!start.again)}catch(e){}start.again=1;wrap._fmToggle=()=>setPause(!paused);i=-1;acc=0;done=false;end.hidden=true;wrap.classList.remove('amv-fin');shots.innerHTML='';cur=prev=null;next();setPause(false);requestAnimationFrame(frame)}
  let dn=null;const SKIP='button,a,input,select,textarea,label';
  st.addEventListener('pointerdown',e=>{dn={x:e.clientX,y:e.clientY,t:performance.now(),ok:!(e.target.closest&&e.target.closest(SKIP))}});
  st.addEventListener('pointerup',e=>{const p=dn;dn=null;if(!p||!p.ok||!running)return;if(Math.hypot(e.clientX-p.x,e.clientY-p.y)<12&&performance.now()-p.t<600)setPause(!paused)});
@@ -831,4 +891,112 @@ if(Array.isArray(I.TEMPLATES)){const b=I.TEMPLATES.find(t=>t.cat==='wedding');
  if(b&&!I.TEMPLATES.some(t=>/^wedding-amv/.test(t.id))){const names={neon:'AMV Neon Beat',poster:'AMV Poster Merah',cinema:'AMV Sinema Emas',pop:'AMV Pop Warna'};const mo={neon:{sk:3,hv:0,fx:11,op:0,lt:0,bd:3,au:0},poster:{sk:2,hv:0,fx:0,op:0,lt:2,bd:3,au:0},cinema:{sk:6,hv:0,fx:8,op:0,lt:0,bd:3,au:0},pop:{sk:1,hv:0,fx:6,op:0,lt:4,bd:3,au:0}};
   const add=Object.keys(TH).map(k=>Object.assign({},b,TH[k],{id:'wedding-amv-'+k,name:names[k],scene:'amv-'+k,flow:'amv',style:'modern',pat:'none',flora:false,theme:Object.assign({},TH[k].theme),mo:mo[k],defaults:Object.assign({},b.defaults)}));
   I.TEMPLATES.splice(I.TEMPLATES.indexOf(b),0,...add)}}
+})();
+
+/* ===== MUSIK BAWAAN: dibuat langsung di browser (WebAudio), jadi bebas hak cipta dan tanpa file audio ===== */
+(function(){
+const I=window.Invita;if(!I)return;
+const AC=window.AudioContext||window.webkitAudioContext;
+const SC={maj:[0,2,4,5,7,9,11],min:[0,2,3,5,7,8,10],pent:[0,2,4,7,9],mpent:[0,3,5,7,10],slen:[0,2,5,7,9],pelog:[0,1,3,7,8],hij:[0,1,4,5,7,8,10],lyd:[0,2,4,6,7,9,11]};
+/* cs: tangga untuk akor, ls: tangga melodi, prog: urutan akor (derajat), pat: ketukan melodi tiap 1/8 */
+const P={
+ piano:{n:'Piano romantis',bpm:66,root:60,cs:'maj',ls:'maj',prog:[0,4,5,3],pad:'str',lead:'piano',mode:'arp',rev:.4,bass:1},
+ harp:{n:'Harpa lembut',bpm:72,root:62,cs:'maj',ls:'maj',prog:[0,5,3,4],pad:'str',lead:'harp',mode:'arp',rev:.5,bass:1},
+ lullaby:{n:'Kotak musik',bpm:76,root:67,cs:'maj',ls:'maj',prog:[0,3,0,4],pad:'soft',lead:'box',mode:'walk',pat:[1,0,1,0,1,0,0,0],rev:.4},
+ guitar:{n:'Gitar akustik',bpm:78,root:57,cs:'maj',ls:'pent',prog:[0,4,5,3],pad:'soft',lead:'gtr',mode:'arp',rev:.3,bass:1},
+ ukulele:{n:'Ukulele ceria',bpm:96,root:60,cs:'maj',ls:'pent',prog:[0,3,4,0],pad:'none',lead:'uku',mode:'arp',rev:.25,bass:1,shk:1},
+ kalimba:{n:'Kalimba manis',bpm:84,root:64,cs:'maj',ls:'pent',prog:[0,5,3,4],pad:'soft',lead:'kal',mode:'walk',pat:[1,0,1,1,0,1,0,1],rev:.45},
+ strings:{n:'Orkestra sinematik',bpm:58,root:57,cs:'min',ls:'min',prog:[0,5,2,6],pad:'str',lead:'bell',mode:'walk',pat:[1,0,0,0,0,0,1,0],rev:.7,bass:1,kick:1},
+ modern:{n:'Modern elegan',bpm:88,root:60,cs:'maj',ls:'pent',prog:[0,5,3,4],sev:1,pad:'syn',lead:'piano',mode:'arp',rev:.35,bass:1,kick:1,shk:1},
+ neon:{n:'Synth malam',bpm:92,root:57,cs:'min',ls:'mpent',prog:[0,5,2,6],pad:'syn',lead:'pluck',mode:'arp',rev:.5,bass:1,kick:1,shk:1},
+ gamelan:{n:'Gamelan Jawa',bpm:58,root:50,cs:'slen',ls:'slen',prog:[0,2,1,3],pad:'none',lead:'gam',mode:'walk',pat:[1,0,1,0,1,0,1,1],rev:.6,gong:1,tri:1},
+ pelog:{n:'Gamelan pelog',bpm:52,root:53,cs:'pelog',ls:'pelog',prog:[0,2,3,1],pad:'none',lead:'gam',mode:'walk',pat:[1,0,0,1,0,1,0,0],rev:.65,gong:1,tri:1},
+ candi:{n:'Lonceng candi',bpm:50,root:55,cs:'pelog',ls:'pelog',prog:[0,1,3,2],pad:'soft',lead:'bell',mode:'walk',pat:[1,0,0,0,1,0,0,1],rev:.8,gong:1,tri:1},
+ pent:{n:'Lentera pentatonik',bpm:62,root:62,cs:'pent',ls:'pent',prog:[0,2,1,3],tri:1,pad:'soft',lead:'bell',mode:'walk',pat:[1,0,1,0,0,1,0,0],rev:.7},
+ batak:{n:'Gondang Batak',bpm:80,root:55,cs:'mpent',ls:'mpent',prog:[0,2,0,3],tri:1,pad:'soft',lead:'wood',mode:'walk',pat:[1,1,0,1,1,0,1,0],rev:.4,drum:1},
+ songket:{n:'Rebana Palembang',bpm:84,root:60,cs:'maj',ls:'pent',prog:[0,3,4,0],pad:'soft',lead:'flute',mode:'walk',pat:[1,0,1,1,0,1,0,0],rev:.45,drum:1,bass:1},
+ melayu:{n:'Gambus Melayu',bpm:72,root:57,cs:'hij',ls:'hij',prog:[0,3,4,0],tri:1,pad:'soft',lead:'flute',mode:'walk',pat:[1,0,1,0,1,1,0,0],rev:.5,drum:1,bass:1},
+ riau:{n:'Selaso Riau',bpm:66,root:52,cs:'hij',ls:'hij',prog:[0,6,3,4],tri:1,pad:'str',lead:'pluck',mode:'walk',pat:[1,0,1,1,0,1,0,1],rev:.5,drum:1},
+ deli:{n:'Melayu Deli',bpm:76,root:59,cs:'maj',ls:'maj',prog:[0,3,4,0],pad:'str',lead:'harp',mode:'arp',rev:.5,drum:1,bass:1},
+ aceh:{n:'Seudati Aceh',bpm:70,root:55,cs:'hij',ls:'hij',prog:[0,4,0,3],tri:1,pad:'soft',lead:'flute',mode:'walk',pat:[1,0,0,1,1,0,1,0],rev:.5,drum:1},
+ minang:{n:'Saluang Minang',bpm:68,root:57,cs:'pent',ls:'pent',prog:[0,2,1,3],tri:1,pad:'soft',lead:'flute',mode:'walk',pat:[1,0,1,0,0,1,1,0],rev:.55,drum:1},
+ party:{n:'Marimba pesta',bpm:108,root:60,cs:'maj',ls:'maj',prog:[0,3,4,0],pad:'none',lead:'wood',mode:'arp',rev:.25,bass:1,shk:1,kick:1}};
+const BY={neon:'neon',poster:'modern',cinema:'strings',pop:'kalimba',joglo:'gamelan',pendopo:'pelog',candi:'candi',beludru:'piano',senja:'guitar',buku:'harp',tiket:'modern',polaroid:'ukulele',bioskop:'strings',balon:'lullaby',lampion:'pent',ulos:'batak',songket:'songket',limas:'songket',melayu:'melayu',selaso:'riau',maimun:'deli',krong:'aceh',gadang:'minang',ballroom:'modern',taman:'harp'};
+const CAT={wedding:['piano','harp','guitar','strings','modern','lullaby','ukulele'],birthday:['party','ukulele','kalimba'],aqiqah:['lullaby','kalimba','harp'],khitanan:['kalimba','guitar'],wisuda:['modern','strings','piano'],keluarga:['guitar','piano','harp'],pengajian:['pent','strings'],reuni:['ukulele','guitar'],opening:['modern','neon'],lainnya:['harp','modern']};
+const hsh=t=>{let h=0;for(const c of String(t))h=(h*31+c.charCodeAt(0))>>>0;return h};
+function keyFor(d,id){if(!d)return'piano';const b=d.bgm;if(b==='off')return null;if(b&&P[b])return b;
+ const sc=String(d.scene||'').replace(/^amv-?/,'');if(BY[sc])return BY[sc];
+ const m=String(id||'').match(/^(\w+)-(\w+)/);if(m&&BY[m[2]])return BY[m[2]];
+ const l=CAT[d.art]||CAT[m&&m[1]]||CAT.lainnya;return l[hsh(id||d.title||'')%l.length]}
+const mf=m=>440*Math.pow(2,(m-69)/12);
+const sm=(sc,deg,root)=>{const n=sc.length,o=Math.floor(deg/n);return root+o*12+sc[((deg%n)+n)%n]};
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+const BM={ctx:null,master:null,rev:null,noise:null,cur:null,vol:.7,muted:false,userPaused:false,held:false,wraps:new Set(),key:null};
+function ensure(){if(BM.ctx||!AC)return BM.ctx;try{const c=BM.ctx=new AC();BM.master=c.createGain();BM.master.gain.value=BM.muted?0:BM.vol*.6;const cp=c.createDynamicsCompressor();cp.threshold.value=-18;cp.ratio.value=3;BM.master.connect(cp);cp.connect(c.destination);
+ const n=Math.floor(c.sampleRate*2.4),b=c.createBuffer(2,n,c.sampleRate);for(let ch=0;ch<2;ch++){const x=b.getChannelData(ch);for(let i=0;i<n;i++)x[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.6)}
+ BM.rev=c.createConvolver();BM.rev.buffer=b;const rg=c.createGain();rg.gain.value=.55;BM.rev.connect(rg);rg.connect(BM.master);
+ const nb=c.createBuffer(1,c.sampleRate,c.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;BM.noise=nb}catch(e){BM.ctx=null}return BM.ctx}
+/* satu mesin per lagu: penjadwal melihat ke depan, nada dibuat per not */
+function Eng(key){const p=P[key],c=BM.ctx,bus=c.createGain();bus.gain.value=0;bus.connect(BM.master);const send=c.createGain();send.gain.value=p.rev;bus.connect(send);send.connect(BM.rev);
+ const cs=SC[p.cs],ls=SC[p.ls],step=60/p.bpm/2;let n=0,t=c.currentTime+.12,pos=7,timer=null;const R=rng(hsh(key));
+ bus.gain.setTargetAtTime(1,c.currentTime,.9);
+ function osc(type,f,t0,t1,pk,a,dest,det){const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=f;if(det)o.detune.value=det;g.gain.setValueAtTime(.0001,t0);g.gain.linearRampToValueAtTime(pk,t0+a);g.gain.exponentialRampToValueAtTime(.0001,t1);o.connect(g);g.connect(dest||bus);o.start(t0);o.stop(t1+.05);return g}
+ function flt(f,q){const x=c.createBiquadFilter();x.type='lowpass';x.frequency.value=f;if(q)x.Q.value=q;x.connect(bus);return x}
+ function noise(t0,dur,pk,type,fq){const s=c.createBufferSource();s.buffer=BM.noise;const f=c.createBiquadFilter();f.type=type;f.frequency.value=fq;const g=c.createGain();g.gain.setValueAtTime(pk,t0);g.gain.exponentialRampToValueAtTime(.0001,t0+dur);s.connect(f);f.connect(g);g.connect(bus);s.start(t0);s.stop(t0+dur+.05)}
+ function note(inst,m,t0,len,v){const f=mf(m);v=v||1;switch(inst){
+  case'piano':osc('triangle',f,t0,t0+1.9,.17*v,.006);osc('sine',f*2,t0,t0+1.0,.05*v,.004);break;
+  case'harp':osc('triangle',f,t0,t0+1.5,.16*v,.003);osc('sine',f*2,t0,t0+.7,.04*v,.003);break;
+  case'box':osc('sine',f*2,t0,t0+1.2,.12*v,.002);osc('sine',f*5.4,t0,t0+.25,.03*v,.002);break;
+  case'kal':osc('sine',f,t0,t0+1.0,.17*v,.003);osc('sine',f*4,t0,t0+.18,.04*v,.002);break;
+  case'bell':osc('sine',f,t0,t0+2.6,.12*v,.004);osc('sine',f*2.76,t0,t0+1.4,.05*v,.003);osc('sine',f*5.4,t0,t0+.6,.02*v,.003);break;
+  case'gam':osc('sine',f,t0,t0+2.2,.14*v,.003);osc('sine',f*2.32,t0,t0+1.1,.06*v,.003);osc('sine',f*3.97,t0,t0+.5,.025*v,.003);break;
+  case'gtr':{const x=flt(2600,1);osc('sawtooth',f,t0,t0+1.2,.09*v,.003,x);x.frequency.setValueAtTime(2600,t0);x.frequency.exponentialRampToValueAtTime(500,t0+.5);break}
+  case'uku':{const x=flt(3000,1);osc('triangle',f,t0,t0+.55,.16*v,.003,x);break}
+  case'pluck':{const x=flt(2200,3);osc('sawtooth',f,t0,t0+.7,.08*v,.003,x);x.frequency.setValueAtTime(2200,t0);x.frequency.exponentialRampToValueAtTime(380,t0+.4);break}
+  case'wood':osc('sine',f,t0,t0+.5,.17*v,.002);osc('sine',f*3.9,t0,t0+.09,.05*v,.002);break;
+  case'flute':{const g=osc('sine',f,t0,t0+len+.4,.12*v,.09);const l=c.createOscillator(),lg=c.createGain();l.frequency.value=5;lg.gain.value=f*.008;l.connect(lg);const o2=c.createOscillator();o2.type='sine';o2.frequency.value=f;lg.connect(o2.frequency);const g2=c.createGain();g2.gain.setValueAtTime(.0001,t0);g2.gain.linearRampToValueAtTime(.04*v,t0+.1);g2.gain.exponentialRampToValueAtTime(.0001,t0+len+.4);o2.connect(g2);g2.connect(bus);l.start(t0);o2.start(t0);l.stop(t0+len+.5);o2.stop(t0+len+.5);noise(t0,.25,.012*v,'bandpass',f*2);break}
+ }}
+ function padNote(m,t0,len,kind){const f=mf(m);if(kind==='str'){const x=flt(1100,.5);[-8,0,8].forEach(d=>osc('sawtooth',f,t0,t0+len,.028,len*.35,x,d))}else if(kind==='syn'){const x=flt(1500,2);[-6,6].forEach(d=>osc('square',f,t0,t0+len,.018,len*.3,x,d))}else if(kind==='soft'){[0,5].forEach(d=>osc('sine',f,t0,t0+len,.05,len*.35,bus,d))}}
+ function chordMidi(bar){const d=p.prog[bar%p.prog.length];const a=[sm(cs,d,p.root),sm(cs,d+2,p.root),sm(cs,d+4,p.root)];if(p.sev)a.push(sm(cs,d+6,p.root));return a}
+ function sched(s,t0){const bar=Math.floor(s/8),st=s%8,ch=chordMidi(bar),root=ch[0];
+  if(st===0){if(p.pad!=='none')ch.forEach((m,i)=>padNote(m-(i?0:12)+(p.pad==='str'?0:0),t0,step*8*1.05,p.pad));if(p.gong&&bar%2===0)osc('sine',mf(root-24),t0,t0+6,.16,.01);}
+  if(p.bass&&(st===0||st===4))osc('sine',mf(root-24),t0,t0+step*3.5,.2,.02);
+  if(p.kick&&(st===0||st===4)){const o=c.createOscillator(),g=c.createGain();o.frequency.setValueAtTime(115,t0);o.frequency.exponentialRampToValueAtTime(42,t0+.22);g.gain.setValueAtTime(.3,t0);g.gain.exponentialRampToValueAtTime(.0001,t0+.3);o.connect(g);g.connect(bus);o.start(t0);o.stop(t0+.35)}
+  if(p.shk&&st%2===1)noise(t0,.05,.035,'highpass',7000);
+  if(p.drum){if(st===0){const o=c.createOscillator(),g=c.createGain();o.frequency.setValueAtTime(150,t0);o.frequency.exponentialRampToValueAtTime(70,t0+.18);g.gain.setValueAtTime(.2,t0);g.gain.exponentialRampToValueAtTime(.0001,t0+.28);o.connect(g);g.connect(bus);o.start(t0);o.stop(t0+.3)}if(st===3||st===6)noise(t0,.07,.07,'bandpass',2200)}
+  if(p.mode==='arp'){const seq=[0,1,2,1,3,2,1,2];const i=seq[st]%ch.length;note(p.lead,ch[i]+12+(st%4===0?0:0),t0,step,st%2?.7:1)}
+  else if(p.pat&&p.pat[st]){const mv=[-1,-1,0,1,1,2,-2][Math.floor(R()*7)];pos=Math.max(4,Math.min(13,pos+mv));if(st===0){pos=Math.round((pos+ls.length+ch[1]-root>0?pos:pos))}note(p.lead,sm(ls,pos,p.root),t0,step*(p.lead==='flute'?2.2:1),st===0?1.1:.85)}}
+ function tick(){if(BM.ctx.state!=='running')return;while(t<c.currentTime+.45){sched(n,t);n++;t+=step}}
+ timer=setInterval(tick,90);tick();
+ return{beatMs:60000/p.bpm,stop(){clearInterval(timer);try{bus.gain.cancelScheduledValues(c.currentTime);bus.gain.setTargetAtTime(0,c.currentTime,.35)}catch(e){}setTimeout(()=>{try{bus.disconnect()}catch(e){}},2200)}}}
+function status(){const on=!!(BM.cur&&BM.ctx&&BM.ctx.state==='running'&&!BM.held&&!BM.userPaused);BM.wraps.forEach(w=>{if(!w.isConnected){BM.wraps.delete(w);return}const b=w.querySelector('.bm');if(!b)return;b.classList.toggle('off',!on);const pl=b.querySelector('.bm-play');pl.innerHTML=on?SVG.pause:SVG.play;pl.setAttribute('aria-label',on?'Jeda musik':'Putar musik');const mu=b.querySelector('.bm-mute');mu.innerHTML=BM.muted?SVG.mute:SVG.vol;mu.setAttribute('aria-label',BM.muted?'Suarakan musik':'Bisukan musik');const r=b.querySelector('input');if(r)r.value=Math.round(BM.vol*100)})}
+const SVG={play:'<svg viewBox="0 0 24 24"><path class="f" d="M8 5v14l11-7z"/></svg>',pause:'<svg viewBox="0 0 24 24"><rect class="f" x="6" y="5" width="4" height="14" rx="1"/><rect class="f" x="14" y="5" width="4" height="14" rx="1"/></svg>',vol:'<svg viewBox="0 0 24 24"><path class="f" d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.500a8 8 0 010 11"/></svg>',mute:'<svg viewBox="0 0 24 24"><path class="f" d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>'};
+function setMaster(){if(BM.master)BM.master.gain.setTargetAtTime(BM.muted?0:BM.vol*.6,BM.ctx.currentTime,.05)}
+function tryResume(){const c=ensure();if(!c)return;if(c.state!=='running')c.resume().then(status).catch(()=>{});
+ if(c.state!=='running'&&!tryResume.l){tryResume.l=1;const go=()=>{tryResume.l=0;['pointerdown','touchend','keydown'].forEach(e=>document.removeEventListener(e,go,true));if(BM.cur&&!BM.userPaused&&!BM.held)c.resume().then(status).catch(()=>{})};['pointerdown','touchend','keydown'].forEach(e=>document.addEventListener(e,go,true))}}
+function play(key,force){if(!P[key])return;const c=ensure();if(!c)return;if(BM.userPaused&&!force)return;
+ if(force)BM.userPaused=false;
+ if(!BM.cur||BM.key!==key||force&&BM.restartOk){if(BM.cur)BM.cur.stop();BM.cur=Eng(key);BM.key=key}
+ tryResume();status()}
+function stop(){if(BM.cur){BM.cur.stop();BM.cur=null;BM.key=null}status()}
+function hold(v){BM.held=v;if(!BM.ctx)return;if(v){BM.ctx.suspend().then(status).catch(()=>{})}else if(!BM.userPaused&&BM.cur)BM.ctx.resume().then(status).catch(()=>{});status()}
+function toggle(){if(!BM.ctx)return;if(BM.userPaused||BM.ctx.state!=='running'){BM.userPaused=false;BM.held=false;if(!BM.cur&&BM.pendKey)play(BM.pendKey,true);BM.ctx.resume().then(status).catch(()=>{})}else{BM.userPaused=true;BM.ctx.suspend().then(status).catch(()=>{})}status()}
+document.addEventListener('visibilitychange',()=>{if(!BM.ctx||!BM.cur)return;if(document.hidden)BM.ctx.suspend();else if(!BM.userPaused&&!BM.held)BM.ctx.resume().then(status).catch(()=>{})});
+function bar(wrap){let b=wrap.querySelector('.bm');if(b)return b;b=document.createElement('div');b.className='bm off';b.innerHTML='<button type="button" class="bm-play"></button><button type="button" class="bm-mute"></button><input type="range" min="0" max="100" step="1" aria-label="Volume musik">';wrap.appendChild(b);
+ ['pointerdown','pointerup','click'].forEach(e=>b.addEventListener(e,x=>x.stopPropagation()));
+ b.querySelector('.bm-play').onclick=()=>{BM.pendKey=BM.pendKey||BM.key;if(!BM.ctx)ensure();if(!BM.cur&&BM.pendKey){BM.userPaused=false;play(BM.pendKey,true);return}if(wrap._fmToggle&&BM.cur&&!BM.userPaused&&BM.ctx.state==='running'){wrap._fmToggle();BM.userPaused=false}else{if(wrap._fmToggle&&wrap.classList.contains('amv-paused'))wrap._fmToggle();toggle()}};
+ b.querySelector('.bm-mute').onclick=()=>{BM.muted=!BM.muted;ensure();setMaster();status()};
+ const r=b.querySelector('input');r.oninput=()=>{BM.vol=r.value/100;if(BM.vol>0)BM.muted=false;ensure();setMaster();status()};return b}
+function attach(wrap,d,opts,id){if(!wrap||!d||!AC)return;opts=opts||{};if(!/^(public|preview)$/.test(opts.mode||'public'))return;
+ if(d.music&&d.music.src)return;const key=keyFor(d,id);if(!key){if(BM.cur)stop();return}
+ BM.pendKey=key;BM.wraps.add(wrap);bar(wrap);status();
+ if(BM.cur&&BM.key!==key){play(key)}
+ const film=wrap.classList.contains('has-amv');if(film)return;
+ const go=()=>play(key);
+ if(wrap.classList.contains('opened')||!wrap.querySelector('.cover')||opts.cover===false)setTimeout(go,200);
+ else new MutationObserver((m,o)=>{if(wrap.classList.contains('opened')){o.disconnect();go()}}).observe(wrap,{attributes:true,attributeFilter:['class']})}
+function begin(wrap,d,again){if(!d||(d.music&&d.music.src))return;const key=BM.pendKey||keyFor(d);if(!key)return;BM.wraps.add(wrap);
+ if(again){if(BM.cur)BM.cur.stop();BM.cur=null}play(key);status()}
+window.__invMusic={attach,begin,hold,list:()=>Object.keys(P).map(k=>[k,P[k].n]),keyFor,beatMs:d=>{const k=keyFor(d,d&&d.__id);return k&&P[k]&&AC?60000/P[k].bpm:0},stop};
 })();
