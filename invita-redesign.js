@@ -156,7 +156,7 @@ function installEditor(){const form=document.querySelector('#form');if(!form||fo
   pa.querySelector('#fmr').addEventListener('change',e=>{const r=e.target.closest('.fm-row');if(!r)return;const f=F();f.shots=Object.assign({},f.shots);const o=Object.assign({},f.shots[r.dataset.id]);o.on=r.querySelector('.on').checked;const du=parseFloat(r.querySelector('.du').value);if(du>0)o.dur=du;o.cam=r.querySelector('.cm').value;o.tr=r.querySelector('.tr').value;f.shots[r.dataset.id]=o;go()});
   pa.querySelector('#amvr').onclick=()=>{const E=I.__edit;E.film={lines:F().lines};go();rebuild()};
  }
- if(ed&&ed.scene&&!/^amv/.test(ed.scene)&&window.__invCouple){
+ if(ed&&ed.scene&&!/^(amv|aw-)/.test(ed.scene)&&window.__invCouple){
   const VL={jawa:'Jawa: beskap dan kebaya batik',jawa2:'Jawa: marun dan emas',gaun:'Jas hitam dan gaun burgundy',champagne:'Jas navy dan gaun champagne',tuxIvory:'Tuksedo dan gaun putih',tuxRed:'Tuksedo dan gaun merah',melayu:'Melayu: baju melayu dan songket',ulos:'Batak: jas dan ulos',pastel:'Setelan krem dan gaun pastel',pastelBlue:'Setelan biru dan gaun peach',sage:'Baju koko dan gaun hijau',sky:'Baju koko dan gaun biru'};
   const SKT=window.__invCouple.skins,cur=ed.cv||window.__invCouple.def(ed.scene),sk=+ed.cs||0,hjOn=!(ed.ch===0||ed.ch==='0');
   const pc=document.createElement('details');pc.className='grp v3-cpl-editor';pc.open=true;
@@ -282,7 +282,7 @@ function autoplay(wrap){
     else{sc.scrollTop=np;last=sc.scrollTop;endAt=0}}}
   else if(playing){t0=t;p0=sc.scrollTop;last=p0}
   requestAnimationFrame(step)}
- function start(){if(live)return;live=true;setTimeout(()=>{setPlay(true,false);wrap.classList.add('auto-on');requestAnimationFrame(step)},2300)}
+ function start(){if(live)return;live=true;setTimeout(()=>{setPlay(true,false);wrap.classList.add('auto-on');requestAnimationFrame(step)},(parseFloat(wrap.dataset.awd)||2.3)*1000)}
  if(wrap.classList.contains('opened'))start();else new MutationObserver((m,o)=>{if(wrap.classList.contains('opened')){o.disconnect();start()}}).observe(wrap,{attributes:true,attributeFilter:['class']});
 }
 
@@ -927,6 +927,7 @@ const BY={neon:'neon',poster:'modern',cinema:'strings',pop:'kalimba',joglo:'game
 const CAT={wedding:['piano','harp','guitar','strings','modern','lullaby','ukulele'],birthday:['party','ukulele','kalimba'],aqiqah:['lullaby','kalimba','harp'],khitanan:['kalimba','guitar'],wisuda:['modern','strings','piano'],keluarga:['guitar','piano','harp'],pengajian:['pent','strings'],reuni:['ukulele','guitar'],opening:['modern','neon'],lainnya:['harp','modern']};
 const hsh=t=>{let h=0;for(const c of String(t))h=(h*31+c.charCodeAt(0))>>>0;return h};
 function keyFor(d,id){if(!d)return'piano';const b=d.bgm;if(b==='off')return null;if(b&&P[b])return b;
+ if(window.__awMusic){const w=window.__awMusic(d);if(w&&P[w])return w}
  const sc=String(d.scene||'').replace(/^amv-?/,'');if(BY[sc])return BY[sc];
  const m=String(id||'').match(/^(\w+)-(\w+)/);if(m&&BY[m[2]])return BY[m[2]];
  const l=CAT[d.art]||CAT[m&&m[1]]||CAT.lainnya;return l[hsh(id||d.title||'')%l.length]}

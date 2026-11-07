@@ -515,4 +515,3 @@
 
   Object.assign(Invita, { PATS, POS, FLOWS, ANIMS, FONTS, STYLES, BASE_THEME, esc, safeUrl, normPhone, baseData, withDefaults, parseDate, dateLong, mapUrls, qrSvg, renderInvitation });
 })(window);
- 

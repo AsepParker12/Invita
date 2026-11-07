@@ -10,7 +10,7 @@ function addMotion(wrap){if(wrap.querySelector('.v4-motion'))return;const sc=wra
  const stop=()=>{active=false;clearInterval(timer);timer=null;ui.classList.remove('on')};
  const start=()=>{stop();active=true;ui.classList.add('on');if(wrap.classList.contains('flow-tap')){timer=setInterval(()=>{const n=wrap.querySelector('[data-a="next"]');if(n&&!wrap.classList.contains('at-end'))n.click();else stop()},5200)}else{timer=setInterval(()=>{if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-8){stop();return}sc.scrollBy({top:2,behavior:'auto'})},35)}};
  ui.querySelector('[data-v4="auto"]').onclick=start;ui.querySelector('[data-v4="stop"]').onclick=stop;['touchstart','wheel','pointerdown'].forEach(e=>sc.addEventListener(e,stop,{passive:true}));
- const open=wrap.querySelector('[data-a="open"]');if(open)open.addEventListener('click',()=>setTimeout(start,1500),{once:true});else setTimeout(start,1800)}
+ const open=wrap.querySelector('[data-a="open"]');if(open)open.addEventListener('click',()=>setTimeout(start,(parseFloat(wrap.dataset.awd)||1.5)*1000),{once:true});else setTimeout(start,1800)}
 function ensureMusic(wrap){const btn=wrap.querySelector('.inv-music');if(btn){btn.title='Putar / jeda musik';btn.setAttribute('aria-label','Putar atau jeda musik')}}
 function enhance(){document.querySelectorAll('.inv-wrap').forEach(wrap=>{if(wrap.dataset.v4)return;wrap.dataset.v4='1';const inv=wrap.querySelector('.inv');if(inv)installStory(inv);safeQr(wrap);addMotion(wrap);ensureMusic(wrap)})}
 let queued=false;new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;enhance()})}).observe(document.documentElement,{subtree:true,childList:true});document.addEventListener('DOMContentLoaded',enhance);
